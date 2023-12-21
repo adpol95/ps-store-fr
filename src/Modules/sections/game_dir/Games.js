@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import dataReader from "../../dataReader";
+import {useContext, useEffect, useState} from "react";
+import dataReader from "../dataReader";
+import DataContext from "../../context";
 
 function Games() {
 
@@ -14,17 +14,9 @@ function Games() {
     //         setTest(sortGames);
     //     }
     // });
-    const [gamesData, setGamesData] = useState([]);
+    const gamesData = useContext(DataContext);
+    console.log(gamesData)
     const [currentPage, setCurrentPage] = useState(0);
-    useEffect(() => {
-        fetch('http://localhost:5000/products')
-            .then((res) => res.json())
-            .then((data) => {
-                // setGamesData({...gamesData, ...data[0].games});
-                setGamesData(data);
-            })
-    }, [])
-
 
     return (
         <div>
@@ -42,7 +34,7 @@ function Games() {
                 <button>4</button>
             </div>
             <ul>
-                {dataReader(gamesData[currentPage])}
+                {dataReader(gamesData.games[currentPage])}
             </ul>
         </div>
     );

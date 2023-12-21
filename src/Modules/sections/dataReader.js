@@ -1,8 +1,7 @@
 import {Link} from "react-router-dom";
 
 
-const dataReader =  (typeOfData) => {
-
+const dataReader = (typeOfData) => {
     let arr = [];
 
     for (let titleOf in typeOfData) {

@@ -1,6 +1,7 @@
-import dataReader from "../../dataReader";
+import dataReader from "../dataReader";
 
 function Console() {
+
     return (
         <div>
             {/*{dataReader("consoles")}*/}

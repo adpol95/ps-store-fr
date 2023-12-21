@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
-    createBrowserRouter,
+    createBrowserRouter, Link,
     RouterProvider,
 } from "react-router-dom";
 import Games from "./Modules/sections/game_dir/Games";
@@ -18,8 +18,8 @@ import GamesMain from "./Modules/sections/game_dir/GamesMain";
 import ConsolesMain from "./Modules/sections/consl_dir/ConsolesMain";
 import ConsolePage from "./Modules/sections/consl_dir/ConsolePage";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
     {

@@ -2,15 +2,27 @@ import './App.css';
 import Header from "./Modules/Header";
 import Footer from "./Modules/Footer";
 import {Outlet} from "react-router-dom";
+import {useEffect, useState} from "react";
+import DataContext from "./Modules/context";
 
 function App() {
-
+    const [gamesData, setGamesData] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/products')
+            .then((res) => res.json())
+            .then((data) => {
+                // setGamesData({...gamesData, ...data[0].games});
+                setGamesData(data);
+            })
+    }, [])
 
     return (
         <div className="App">
-            <Header/>
-            <Outlet/>
-            <Footer/>
+            <DataContext.Provider value={gamesData}>
+                <Header/>
+                <Outlet/>
+                <Footer/>
+            </DataContext.Provider>
         </div>
     );
 }
