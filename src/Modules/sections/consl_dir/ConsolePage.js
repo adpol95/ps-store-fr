@@ -3,7 +3,6 @@ import {useState} from "react";
 
 function ConsolePage() {
     let {state} = useLocation();
-    let titles = Object.keys(state.dataAboutGame[1]);
     let datas = Object.values(state.dataAboutGame[1]);
     let [currentPage, setCurrentPage] = useState(0);
     return (
