@@ -1,10 +1,14 @@
 import dataReader from "../dataReader";
+import {useContext} from "react";
+import DataContext from "../../context";
 
 function Console() {
-
+    const gamesData = useContext(DataContext);
     return (
         <div>
-            {/*{dataReader("consoles")}*/}
+            <ul>
+                {dataReader(gamesData.consoles)}
+            </ul>
         </div>
     );
 }

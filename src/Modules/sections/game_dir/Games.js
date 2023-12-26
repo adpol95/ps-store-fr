@@ -15,7 +15,6 @@ function Games() {
     //     }
     // });
     const gamesData = useContext(DataContext);
-    console.log(gamesData)
     const [currentPage, setCurrentPage] = useState(0);
 
     return (
