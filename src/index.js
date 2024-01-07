@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Games from "./Modules/sections/game_dir/Games";
 import Consoles from "./Modules/sections/consl_dir/Consoles";
-import Accessories from "./Modules/sections/Accessories";
+import Accessories from "./Modules/sections/acces_dir/Accessories";
 import Home from "./Modules/Home";
 import PsnMain from "./Modules/network/PsnMain";
 import News from "./Modules/sections/News";
@@ -17,6 +17,8 @@ import GamePage from "./Modules/sections/game_dir/GamePage";
 import GamesMain from "./Modules/sections/game_dir/GamesMain";
 import ConsolesMain from "./Modules/sections/consl_dir/ConsolesMain";
 import ConsolePage from "./Modules/sections/consl_dir/ConsolePage";
+import AccessoriesMain from "./Modules/sections/acces_dir/AccessoriesMain";
+import AccessoriesPage from "./Modules/sections/acces_dir/AccessoriesPage";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -59,8 +61,19 @@ const router = createBrowserRouter([
                 ]
             },
             {
+
                 path: "accessories",
-                element: <Accessories/>,
+                element: <AccessoriesMain/>,
+                children: [
+                    {
+                        path: "",
+                        element: <Accessories/>
+                    },
+                    {
+                        path: ":id",
+                        element: <AccessoriesPage/>
+                    },
+                ]
             },
             {
                 path: "news",

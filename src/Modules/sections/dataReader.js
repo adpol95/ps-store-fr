@@ -7,7 +7,6 @@ const dataReader = (typeOfData) => {
     for (let titleOf in typeOfData) {
         arr.push([titleOf, typeOfData[titleOf]])
     }
-
     return arr.map((el, i) => {
 
         const mainId = i + 1;
@@ -20,17 +19,16 @@ const dataReader = (typeOfData) => {
             </li>
         } else {
             let arr1 = [];
-            for (let key1 in el[1].allImgsAndTitles) {
-                const mainId2 = (mainId) * Math.floor((Math.random() * 100000) - 1);
-                arr1.push(
-                    <li key={mainId2}>
-                        <Link to={mainId2 + ""} state={{dataAboutGame: el}}>
-                            {el[0] + ' ' + key1}
-                            <img src={el[1].allImgsAndTitles[key1][0]} alt="" style={{width: "100px"}}/>
-                        </Link>
-                    </li>
-                )
-            }
+            const mainId2 = (mainId) * Math.floor((Math.random() * 100000) - 1);
+            const mainCovers = Object.keys(el[1].allImgsAndTitles)[0];
+            arr1.push(
+                <li key={mainId2}>
+                    <Link to={mainId2 + ""} state={{dataAboutGame: el}}>
+                        {el[0]}
+                        <img src={el[1].allImgsAndTitles[mainCovers][1]} alt="" style={{width: "100px"}}/>
+                    </Link>
+                </li>
+            )
             return arr1;
         }
     })
