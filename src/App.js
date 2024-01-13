@@ -8,7 +8,7 @@ import DataContext from "./Modules/context";
 function App() {
     const [gamesData, setGamesData] = useState([]);
     useEffect(() => {
-        fetch('https://psstorebackend-wsg33p63.b4a.run/products')
+        fetch('http://localhost:5000/products')
             .then((res) => res.json())
             .then((data) => {
                 // setGamesData({...gamesData, ...data[0].games});
