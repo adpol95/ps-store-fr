@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import dataReader from "../dataReader";
 import DataContext from "../../context";
 
@@ -14,7 +14,7 @@ function Games() {
     //         setTest(sortGames);
     //     }
     // });
-    const gamesData = useContext(DataContext);
+    const mainData = useContext(DataContext);
     const [currentPage, setCurrentPage] = useState(0);
 
     return (
@@ -33,7 +33,7 @@ function Games() {
                 <button>4</button>
             </div>
             <ul>
-                {dataReader(gamesData.games[currentPage])}
+                {dataReader(mainData.gData.games[currentPage])}
             </ul>
         </div>
     );

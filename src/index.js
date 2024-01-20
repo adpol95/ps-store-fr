@@ -1,27 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-    createBrowserRouter, Link,
-    RouterProvider,
-} from "react-router-dom";
+import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import Games from "./Modules/sections/game_dir/Games";
 import Consoles from "./Modules/sections/consl_dir/Consoles";
 import Accessories from "./Modules/sections/acces_dir/Accessories";
 import Home from "./Modules/Home";
 import PsnMain from "./Modules/network/PsnMain";
-import News from "./Modules/sections/News";
+import News from "./Modules/sections/news_dir/News";
 import GamePage from "./Modules/sections/game_dir/GamePage";
 import GamesMain from "./Modules/sections/game_dir/GamesMain";
 import ConsolesMain from "./Modules/sections/consl_dir/ConsolesMain";
 import ConsolePage from "./Modules/sections/consl_dir/ConsolePage";
 import AccessoriesMain from "./Modules/sections/acces_dir/AccessoriesMain";
 import AccessoriesPage from "./Modules/sections/acces_dir/AccessoriesPage";
+import NewsPage from "./Modules/sections/news_dir/NewsPage";
+import NewsMain from "./Modules/sections/news_dir/NewsMain";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 
 const router = createBrowserRouter([
     {
@@ -77,7 +77,17 @@ const router = createBrowserRouter([
             },
             {
                 path: "news",
-                element: <News/>,
+                element: <NewsMain/>,
+                children: [
+                    {
+                        path: "",
+                        element: <News/>
+                    },
+                    {
+                        path: ":id",
+                        element: <NewsPage/>
+                    },
+                ]
             },
             {
                 path: "psn",

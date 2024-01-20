@@ -3,11 +3,11 @@ import {useContext} from "react";
 import DataContext from "../../context";
 
 function Console() {
-    const gamesData = useContext(DataContext);
+    const mainData = useContext(DataContext);
     return (
         <div>
             <ul>
-                {dataReader(gamesData.consoles)}
+                {dataReader(mainData.gData.consoles)}
             </ul>
         </div>
     );

@@ -7,6 +7,7 @@ import DataContext from "./Modules/context";
 
 function App() {
     const [gamesData, setGamesData] = useState([]);
+    const [newsData, setNewsData] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/products')
             .then((res) => res.json())
@@ -14,11 +15,17 @@ function App() {
                 // setGamesData({...gamesData, ...data[0].games});
                 setGamesData(data);
             })
+        fetch('http://localhost:5000/news')
+            .then((resp) => resp.json())
+            .then((datasa) => {
+                // setGamesData({...gamesData, ...data[0].games});
+                setNewsData(datasa);
+            })
     }, [])
 
     return (
         <div className="App">
-            <DataContext.Provider value={gamesData}>
+            <DataContext.Provider value={{gData: gamesData, nData: newsData}}>
                 <Header/>
                 <Outlet/>
                 <Footer/>

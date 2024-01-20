@@ -3,11 +3,11 @@ import DataContext from "../../context";
 import dataReader from "../dataReader";
 
 function Accessories() {
-    const gamesData = useContext(DataContext);
+    const mainData = useContext(DataContext);
     return (
         <div>
             <ul>
-                {dataReader(gamesData.accessories)}
+                {dataReader(mainData.gData.accessories)}
             </ul>
         </div>
     );
