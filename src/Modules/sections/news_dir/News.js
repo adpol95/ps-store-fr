@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 function News() {
     const mainData = useContext(DataContext);
     const [currentPage, setCurrentPage] = useState(0);
+    const [typeOfPage, setTypeOfPage] = useState("ps5");
     // const devList = [];
     // mainData.games.forEach((el, i) => {
     //     const step = Object.values(el);
@@ -16,6 +17,15 @@ function News() {
         <div>
             <h1>Latest Posts</h1>
             <div onClick={(event) => {
+                setTypeOfPage(event.target.innerText.toLowerCase().replace(/\s/gi,""))
+            }}>
+                <button>PS5</button>
+                <button>PS VR2</button>
+                <button>PS4</button>
+                <button>PS Store</button>
+                <button>PS Plus</button>
+            </div>
+            <div onClick={(event) => {
                 setCurrentPage(event.target.innerText * 1 - 1)
             }}>
                 <button>1</button>
@@ -24,7 +34,7 @@ function News() {
                 <button>4</button>
             </div>
             <ul>
-                {mainData.nData.news[currentPage].map((el, i) => <li key={i * 54}>
+                {mainData.nData[typeOfPage][currentPage].map((el, i) => <li key={i * 54}>
                     <Link to={i + 1 + ""} state={el}>
                         <img src={el.topImg} alt=""/>
                         <p>{el.titleTop}</p>

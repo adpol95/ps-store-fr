@@ -22,6 +22,7 @@ function Header() {
             <Link to="accessories"> Accessories </Link>
             <Link to="news"> News </Link>
             <Link to="psn"> PSN </Link>
+            <Link to="authorization"> Authorization </Link>
         </div>
     )
 }

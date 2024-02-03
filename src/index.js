@@ -11,13 +11,11 @@ import Home from "./Modules/Home";
 import PsnMain from "./Modules/network/PsnMain";
 import News from "./Modules/sections/news_dir/News";
 import GamePage from "./Modules/sections/game_dir/GamePage";
-import GamesMain from "./Modules/sections/game_dir/GamesMain";
-import ConsolesMain from "./Modules/sections/consl_dir/ConsolesMain";
 import ConsolePage from "./Modules/sections/consl_dir/ConsolePage";
-import AccessoriesMain from "./Modules/sections/acces_dir/AccessoriesMain";
 import AccessoriesPage from "./Modules/sections/acces_dir/AccessoriesPage";
 import NewsPage from "./Modules/sections/news_dir/NewsPage";
-import NewsMain from "./Modules/sections/news_dir/NewsMain";
+import Authorization from "./Modules/sections/authorization_dir/Authorization";
+import Registration from "./Modules/sections/authorization_dir/Registration";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -34,7 +32,6 @@ const router = createBrowserRouter([
             },
             {
                 path: "games",
-                element: <GamesMain/>,
                 children: [
                     {
                         path: "",
@@ -48,7 +45,6 @@ const router = createBrowserRouter([
             },
             {
                 path: "consoles",
-                element: <ConsolesMain/>,
                 children: [
                     {
                         path: "",
@@ -63,7 +59,6 @@ const router = createBrowserRouter([
             {
 
                 path: "accessories",
-                element: <AccessoriesMain/>,
                 children: [
                     {
                         path: "",
@@ -77,7 +72,6 @@ const router = createBrowserRouter([
             },
             {
                 path: "news",
-                element: <NewsMain/>,
                 children: [
                     {
                         path: "",
@@ -92,6 +86,19 @@ const router = createBrowserRouter([
             {
                 path: "psn",
                 element: <PsnMain/>,
+            },
+            {
+                path: "authorization",
+                children: [
+                    {
+                        path: "",
+                        element: <Authorization/>
+                    },
+                    {
+                        path: "registration",
+                        element: <Registration/>
+                    },
+                ]
             },
         ],
     },
