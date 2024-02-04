@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
 
 function Authorization() {
@@ -10,7 +10,7 @@ function Authorization() {
 
     const submiter = (event) => {
         event.preventDefault();
-        fetch("http://localhost:5000/authorization/login", {
+        fetch("https://psstorebackend-wsg33p63.b4a.run/authorization/login", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",

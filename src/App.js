@@ -10,13 +10,13 @@ function App() {
     const [gamesData, setGamesData] = useState([]);
     const [newsData, setNewsData] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://psstorebackend-wsg33p63.b4a.run/products')
             .then((res) => res.json())
             .then((data) => {
                 // setGamesData({...gamesData, ...data[0].games});
                 setGamesData(data);
             })
-        fetch('http://localhost:5000/news')
+        fetch('https://psstorebackend-wsg33p63.b4a.run/news')
             .then((resp) => resp.json())
             .then((datasa) => {
                 // setGamesData({...gamesData, ...data[0].games});
