@@ -5,6 +5,7 @@ import {Outlet} from "react-router-dom";
 import {useEffect, useState} from "react";
 import DataContext from "./Modules/context";
 
+
 function App() {
     const [gamesData, setGamesData] = useState([]);
     const [newsData, setNewsData] = useState([]);
@@ -25,11 +26,13 @@ function App() {
 
     return (
         <div className="App">
+
             <DataContext.Provider value={{gData: gamesData, nData: newsData}}>
                 <Header/>
                 <Outlet/>
                 <Footer/>
             </DataContext.Provider>
+
         </div>
     );
 }

@@ -16,9 +16,18 @@ import AccessoriesPage from "./Modules/sections/acces_dir/AccessoriesPage";
 import NewsPage from "./Modules/sections/news_dir/NewsPage";
 import Authorization from "./Modules/sections/authorization_dir/Authorization";
 import Registration from "./Modules/sections/authorization_dir/Registration";
+import createStore from "react-auth-kit/createStore";
+import AuthProvider from "react-auth-kit";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const store2 = createStore({
+    authName: '_auth',
+    authType: 'cookie',
+    cookieDomain: window.location.hostname,
+    cookieSecure: false
+});
 
 
 const router = createBrowserRouter([
@@ -103,9 +112,10 @@ const router = createBrowserRouter([
         ],
     },
 ]);
-
 root.render(
-    <RouterProvider router={router}/>
+    <AuthProvider store={store2}>
+        <RouterProvider router={router}/>
+    </AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
