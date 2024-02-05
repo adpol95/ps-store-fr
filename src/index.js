@@ -14,10 +14,12 @@ import GamePage from "./Modules/sections/game_dir/GamePage";
 import ConsolePage from "./Modules/sections/consl_dir/ConsolePage";
 import AccessoriesPage from "./Modules/sections/acces_dir/AccessoriesPage";
 import NewsPage from "./Modules/sections/news_dir/NewsPage";
-import Authorization from "./Modules/sections/authorization_dir/Authorization";
+import Login from "./Modules/sections/authorization_dir/Login";
 import Registration from "./Modules/sections/authorization_dir/Registration";
 import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit";
+import RequireAuth from "@auth-kit/react-router/RequireAuth";
+import Logout from "./Modules/sections/authorization_dir/Logout";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,7 +28,7 @@ const store2 = createStore({
     authName: '_auth',
     authType: 'cookie',
     cookieDomain: window.location.hostname,
-    cookieSecure: false
+    cookieSecure: false,
 });
 
 
@@ -93,21 +95,27 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path: "psn",
-                element: <PsnMain/>,
-            },
-            {
                 path: "authorization",
                 children: [
                     {
                         path: "",
-                        element: <Authorization/>
+                        element: <Login/>
+                    },
+                    {
+                        path: "logout",
+                        element: <Logout/>
                     },
                     {
                         path: "registration",
                         element: <Registration/>
                     },
                 ]
+            },
+            {
+                path: "psn",
+                element: <RequireAuth fallbackPath={'/authorization'}>
+                    <PsnMain/>
+                </RequireAuth>,
             },
         ],
     },

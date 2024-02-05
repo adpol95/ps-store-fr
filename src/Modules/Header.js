@@ -1,6 +1,8 @@
 import {Link} from "react-router-dom";
+import {useState} from "react";
 
 function Header() {
+    const [stateTest, setStateTest] = useState(!!window.document.cookie);
 
     return (
         <div>
@@ -22,7 +24,7 @@ function Header() {
             <Link to="accessories"> Accessories </Link>
             <Link to="news"> News </Link>
             <Link to="psn"> PSN </Link>
-            <Link to="authorization"> Authorization </Link>
+            <Link to={stateTest ? "authorization/logout" : "authorization"} onClick={() => setStateTest(!stateTest)}> {stateTest ? "SignOut" : "SignIn"} </Link>
         </div>
     )
 }

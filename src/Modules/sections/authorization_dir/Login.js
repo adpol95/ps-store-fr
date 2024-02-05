@@ -1,16 +1,17 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
 
-function Authorization() {
+function Login() {
 
     const [loginIn, setLoginIn] = useState('');
     const [passwordIn, setPasswordIn] = useState('');
     const signIn = useSignIn()
+    const navigate = useNavigate();
 
     const submiter = (event) => {
         event.preventDefault();
-        fetch("https://psstorebackend-wsg33p63.b4a.run/authorization/login", {
+        fetch("http://localhost:5000/authorization/login", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
@@ -20,15 +21,14 @@ function Authorization() {
         })
             .then(res => res.json())
             .then(response => {
-                signIn({
+                if (signIn({
                     auth: {
                         token: response.token,
-                        type: 'Bearer'
+                        type: 'Bearer',
                     },
-                    userState: {
-                        name: loginIn,
-                    }
-                })
+                    userState: { name: loginIn }
+                })) navigate("/psn")
+
             })
             .catch(err => console.log(err))
     }
@@ -76,4 +76,4 @@ function Authorization() {
     )
 }
 
-export default Authorization;
+export default Login;
