@@ -3,7 +3,7 @@ import {useState} from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 function Header() {
-    const [stateTest, setStateTest] = useState(!!window.document.cookie);
+    const [stateTest] = useState(!!window.document.cookie);
     const auth = useAuthUser();
     const [profileClickState, setProfileClickState] = useState(false);
 

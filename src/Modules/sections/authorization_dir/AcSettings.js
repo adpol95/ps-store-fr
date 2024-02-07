@@ -54,6 +54,7 @@ function AcSettings() {
                     navigate("/");
                     window.location.reload();
                     alert("Your account has been chanced");
+                    console.log(res)
                 })
                 .catch(err => console.log(err))
         }

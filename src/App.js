@@ -2,7 +2,7 @@ import './App.css';
 import Header from "./Modules/Header";
 import Footer from "./Modules/Footer";
 import {Outlet} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import DataContext from "./Modules/sections/tools_dir/context";
 
 
