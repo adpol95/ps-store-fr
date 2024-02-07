@@ -1,6 +1,6 @@
-import dataReader from "../dataReader";
+import dataReader from "../tools_dir/dataReader";
 import {useContext} from "react";
-import DataContext from "../../context";
+import DataContext from "../tools_dir/context";
 
 function Console() {
     const mainData = useContext(DataContext);

@@ -9,6 +9,7 @@ function Logout() {
         <button onClick={() => {
             signOut();
             navigate("/");
+            window.location.reload();
         }}>Sign Out</button>
     )
 }

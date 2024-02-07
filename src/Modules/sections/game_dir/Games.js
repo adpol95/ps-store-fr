@@ -1,6 +1,6 @@
 import {useContext, useState} from "react";
-import dataReader from "../dataReader";
-import DataContext from "../../context";
+import dataReader from "../tools_dir/dataReader";
+import DataContext from "../tools_dir/context";
 
 function Games() {
 

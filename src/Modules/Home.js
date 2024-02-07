@@ -1,9 +1,5 @@
-import {useEffect} from "react";
-
 function Home() {
-    useEffect(() => {
 
-    }, []);
     return (
         <div>
             <img

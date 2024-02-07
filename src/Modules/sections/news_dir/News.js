@@ -1,4 +1,4 @@
-import DataContext from "../../context";
+import DataContext from "../tools_dir/context";
 import {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 

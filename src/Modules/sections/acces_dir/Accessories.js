@@ -1,6 +1,6 @@
 import {useContext} from "react";
-import DataContext from "../../context";
-import dataReader from "../dataReader";
+import DataContext from "../tools_dir/context";
+import dataReader from "../tools_dir/dataReader";
 
 function Accessories() {
     const mainData = useContext(DataContext);

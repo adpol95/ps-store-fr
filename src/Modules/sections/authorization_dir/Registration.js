@@ -1,6 +1,10 @@
 import {useState} from "react";
+import useSignOut from "react-auth-kit/hooks/useSignOut";
+import {useNavigate} from "react-router-dom";
 
 function Registration() {
+    const signOut = useSignOut()
+    const navigate = useNavigate();
     const [input, setInput] = useState({
         userName: "",
         password: "",
@@ -17,7 +21,11 @@ function Registration() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(input)
-        }).then((res) => res.json()).catch((err) => alert(err));
+        }).then((res) => {
+            console.log(res);
+            navigate("/");
+            alert("Congratulations!");
+        }).catch((err) => alert(err));
     }
 
 return (

@@ -26,11 +26,19 @@ function Login() {
                         token: response.token,
                         type: 'Bearer',
                     },
-                    userState: { name: loginIn }
-                })) navigate("/psn")
+                    // refresh: response.refToken,
+                    userState: {currentProfile: response.profile}
+                })) {
+                    navigate("/psn");
+                    window.location.reload();
+                    alert(response.message)
+                }
 
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                alert("Something goes wrong. Try again later")
+            })
     }
 
 
@@ -61,15 +69,6 @@ function Login() {
                 <button type="submit">
                     Submit
                 </button>
-                {/*      <p>Don't have an account? <br/>*/}
-                {/*          <span className="to-do-list__register"*/}
-                {/*                onClick={(event) => {*/}
-                {/*                    event.preventDefault();*/}
-                {/*                    navigate('/login')*/}
-                {/*                }}>*/}
-                {/*  Register!*/}
-                {/*</span>*/}
-                {/*      </p>*/}
                 <h2>Dont have account ? <Link to="registration"> Register!</Link></h2>
             </form>
         </div>
