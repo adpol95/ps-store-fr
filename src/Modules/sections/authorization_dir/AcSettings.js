@@ -12,7 +12,7 @@ function AcSettings() {
     const submiter = (event) => {
         event.preventDefault();
         if (event.target.innerText === "Delete account") {
-            fetch("http://localhost:5000/authorization/" + auth["_id"], {
+            fetch("https://psstorebackend-wsg33p63.b4a.run/authorization/" + auth["_id"], {
                 method: "DELETE", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -36,7 +36,7 @@ function AcSettings() {
                     alert("Something goes wrong. Try again later")
                 })
         } else {
-            fetch("http://localhost:5000/authorization/" + auth["_id"], {
+            fetch("https://psstorebackend-wsg33p63.b4a.run/authorization/" + auth["_id"], {
                 method: "PATCH", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

@@ -14,7 +14,7 @@ function Registration() {
 
     const submiter = (e) => {
         e.preventDefault();
-        fetch("http://localhost:5000/authorization", {
+        fetch("https://psstorebackend-wsg33p63.b4a.run/authorization", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
