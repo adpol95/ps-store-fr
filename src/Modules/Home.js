@@ -3,7 +3,7 @@ function Home() {
     return (
         <div>
             <img
-                src="https://image.api.playstation.com/pr/bam-art/167/359/cd34c89c-10ce-4ae1-a068-6fda440caed9.jpg?w=1920&thumb=false"
+                src="https://gmedia.playstation.com/is/image/SIEPDC/ps-plus-season-of-play-games-hero-banner-desktop-02-14dec23$en?$3200px$"
                 alt=""
                 style={{width: "50%"}}/>
         </div>
