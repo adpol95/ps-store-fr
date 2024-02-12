@@ -3,9 +3,9 @@ function Home() {
     return (
         <div>
             <img
-                src="https://gmedia.playstation.com/is/image/SIEPDC/ps-plus-season-of-play-games-hero-banner-desktop-02-14dec23$en?$3200px$"
+                src="https://gmedia.playstation.com/is/image/SIEPDC/ps-plus-game-cat-hero-banner-desktop-01-15jan24$en?$4000px$"
                 alt=""
-                style={{width: "50%"}}/>
+                style={{width: "100%"}}/>
         </div>
     )
 }

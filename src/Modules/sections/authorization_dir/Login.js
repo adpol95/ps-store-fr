@@ -69,7 +69,7 @@ function Login() {
                 <button type="submit">
                     Submit
                 </button>
-                <h2>Dont have account ? <Link to="registration"> Register!</Link></h2>
+                <h2>Don't have an a account ? <Link to="registration"> Register!</Link></h2>
             </form>
         </div>
     )

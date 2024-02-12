@@ -440,8 +440,8 @@ function Registration() {
                         <div>Create your password</div>
                         <input type="text" title="password"/>
                     </div>
-                    <div onClick={(event) => setInput({...input, avatar: event.target.src})}>
-                        <div>Choose your avatar</div>
+                    <div>Choose your avatar</div>
+                    <div onClick={(event) => setInput({...input, avatar: event.target.src})} className="registration--avatars">
                         <img
                             src="https://image.api.playstation.com/cdn/UP1018/CUSA00133_00/XlkEcZSBzuJPIJo8BI7l0KuY0hBYrO8c.png?w=440&thumb=false"
                             alt="" title="avatar"/>
