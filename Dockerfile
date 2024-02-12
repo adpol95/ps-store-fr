@@ -1,27 +1,31 @@
-# Stage 1: Build the React application
-FROM node:18 as build
-
+FROM node:14
 WORKDIR /app
-
 COPY package*.json ./
-
-RUN npm install
-
+RUN npm ci
 COPY . .
-
 RUN npm run build
+RUN npm install -g serve
+EXPOSE 5000
+CMD ["serve", "-s", "build", "-l", "5000"]
 
-# Stage 2: Serve the React application using Nginx
-FROM nginx:stable-alpine
+# # Base image
+# FROM node:14
 
-COPY --from=build /app/build /usr/share/nginx/html
+# # Working directory
+# WORKDIR /app
 
-## Copy the default nginx.conf provided by the docker image
-#COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# # Copy package.json and package-lock.json and install dependencies
+# COPY package*.json ./
+# RUN npm ci
 
-EXPOSE 80
+# # Copy the rest of the project files
+# COPY . .
 
-CMD ["nginx", "-g", "daemon off;"]
+# # Expose the server port
+# EXPOSE 8000
+
+# # Command to start the server
+# CMD ["npm", "run", "server"]
 
 
 
