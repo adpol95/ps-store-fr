@@ -18,7 +18,7 @@ function App() {
                 setDataIsReady(true)
                 setGamesData(data);
             })
-        fetch(rocess.env.REACT_APP_STATE1 + '/news')
+        fetch(process.env.REACT_APP_STATE1 + '/news')
             .then((resp) => resp.json())
             .then((datasa) => {
                 // setGamesData({...gamesData, ...data[0].games});
