@@ -11,14 +11,14 @@ function App() {
     const [newsData, setNewsData] = useState([]);
     const [dataIsReady, setDataIsReady] = useState(false);
     useEffect(() => {
-        fetch('http://192.168.31.34:5000/products')
+        fetch(process.env.REACT_APP_STATE1 + '/products')
             .then((res) => res.json())
             .then((data) => {
                 // setGamesData({...gamesData, ...data[0].games});
                 setDataIsReady(true)
                 setGamesData(data);
             })
-        fetch('http://192.168.31.34:5000/news')
+        fetch(rocess.env.REACT_APP_STATE1 + '/news')
             .then((resp) => resp.json())
             .then((datasa) => {
                 // setGamesData({...gamesData, ...data[0].games});
