@@ -31,7 +31,6 @@ function Login() {
                 })) {
                     navigate("/psn");
                     window.location.reload();
-                    alert(response.message)
                 }
 
             })
