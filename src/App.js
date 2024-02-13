@@ -18,7 +18,7 @@ function App() {
                 setDataIsReady(true)
                 setGamesData(data);
             })
-        fetch(https://192.168.31.34:5000/news')
+        fetch('https://192.168.31.34:5000/news')
             .then((resp) => resp.json())
             .then((datasa) => {
                 // setGamesData({...gamesData, ...data[0].games});
