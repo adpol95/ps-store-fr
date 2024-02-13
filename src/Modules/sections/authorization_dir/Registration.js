@@ -14,7 +14,7 @@ function Registration() {
 
     const submiter = (e) => {
         e.preventDefault();
-        fetch("https://psstorebackend-wsg33p63.b4a.run/authorization", {
+        fetch(process.env.REACT_APP_STATE1 + "/authorization", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

@@ -11,14 +11,14 @@ function App() {
     const [newsData, setNewsData] = useState([]);
     const [dataIsReady, setDataIsReady] = useState(false);
     useEffect(() => {
-        fetch('https://psstorebackend-wsg33p63.b4a.run/products')
+        fetch(process.env.REACT_APP_STATE1 + '/products')
             .then((res) => res.json())
             .then((data) => {
                 // setGamesData({...gamesData, ...data[0].games});
                 setDataIsReady(true)
                 setGamesData(data);
             })
-        fetch('https://psstorebackend-wsg33p63.b4a.run/news')
+        fetch(process.env.REACT_APP_STATE1 + '/news')
             .then((resp) => resp.json())
             .then((datasa) => {
                 // setGamesData({...gamesData, ...data[0].games});

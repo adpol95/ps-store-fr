@@ -11,7 +11,7 @@ function Login() {
 
     const submiter = (event) => {
         event.preventDefault();
-        fetch("https://psstorebackend-wsg33p63.b4a.run/authorization/login", {
+        fetch(process.env.REACT_APP_STATE1 + "/authorization/login", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
