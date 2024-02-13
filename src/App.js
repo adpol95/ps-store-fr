@@ -11,14 +11,14 @@ function App() {
     const [newsData, setNewsData] = useState([]);
     const [dataIsReady, setDataIsReady] = useState(false);
     useEffect(() => {
-        fetch('https://192.168.31.34:5000/products')
+        fetch('http://192.168.31.34:5000/products')
             .then((res) => res.json())
             .then((data) => {
                 // setGamesData({...gamesData, ...data[0].games});
                 setDataIsReady(true)
                 setGamesData(data);
             })
-        fetch('https://192.168.31.34:5000/news')
+        fetch('http://192.168.31.34:5000/news')
             .then((resp) => resp.json())
             .then((datasa) => {
                 // setGamesData({...gamesData, ...data[0].games});
