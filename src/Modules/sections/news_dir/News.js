@@ -1,11 +1,30 @@
-import DataContext from "../tools_dir/context";
-import {useContext, useState} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 function News() {
-    const mainData = useContext(DataContext);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState("1");
     const [typeOfPage, setTypeOfPage] = useState("ps5");
+    const [mainData, setMainData] = useState("");
+    const [dataIsReady, setDataIsReady] = useState(false);
+    useEffect(() => {
+        fetch(process.env.REACT_APP_STATE1 + "/news/overall", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({value: typeOfPage, index: currentPage})
+        })
+            .then(r => r.json())
+            .then(resp => {
+                setMainData(resp.value);
+                setDataIsReady(true);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }, [currentPage, typeOfPage])
     // const devList = [];
     // mainData.games.forEach((el, i) => {
     //     const step = Object.values(el);
@@ -14,36 +33,50 @@ function News() {
     //     })
     // })
     return (
-        <div>
-            <h1>Latest Posts</h1>
-            <div onClick={(event) => {
-                setTypeOfPage(event.target.innerText.toLowerCase().replace(/\s/gi,""))
-            }}>
-                <button>PS5</button>
-                <button>PS VR2</button>
-                <button>PS4</button>
-                <button>PS Store</button>
-                <button>PS Plus</button>
-            </div>
-            <div onClick={(event) => {
-                setCurrentPage(event.target.innerText * 1 - 1)
-            }}>
-                <button>1</button>
-            </div>
-            <ul>
-                {mainData.nData[typeOfPage][currentPage].map((el, i) => <li key={i * 54}>
-                    <Link to={i + 1 + ""} state={el}>
-                        <img src={el.topImg} alt=""/>
-                        <p>{el.titleTop}</p>
-                        <p>{el.dataTime}</p>
-                    </Link>
-                </li>)}
-            </ul>
-            {/*<ul>*/}
-            {/*    {devList.map((el, i) => <li key={i * 83}>*/}
-            {/*        {el}*/}
-            {/*    </li>)}*/}
-            {/*</ul>*/}
+        <div className={!dataIsReady ? "loader" : ""}>
+            {
+                dataIsReady ?
+                    <div>
+                        <h1>Latest Posts</h1>
+                        <div onClick={(event) => {
+                            setDataIsReady(false);
+                            setTypeOfPage(event.target.innerText.toLowerCase().replace(/\s/gi, "-"));
+                        }}>
+                            <button>PS5</button>
+                            <button>PS VR2</button>
+                            <button>PS4</button>
+                            <button>PS Store</button>
+                            <button>PS Plus</button>
+                        </div>
+                        <div onClick={(event) => {
+                            setDataIsReady(false);
+                            setCurrentPage(event.target.innerText);
+                        }}>
+                            <button>1</button>
+                            <button>2</button>
+                        </div>
+                        <ul>
+                            {mainData.map((el, i) => <li key={i * 54}>
+                                <Link to={i + 1 + ""} state={el}>
+                                    <img src={el.topImg} alt=""/>
+                                    <p>{el.titleTop}</p>
+                                    <p>{el.dataTime}</p>
+                                </Link>
+                            </li>)}
+                        </ul>
+                        {/*<ul>*/}
+                        {/*    {devList.map((el, i) => <li key={i * 83}>*/}
+                        {/*        {el}*/}
+                        {/*    </li>)}*/}
+                        {/*</ul>*/}
+                    </div> :
+                    <div className="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+            }
         </div>
     );
 }

@@ -4,6 +4,13 @@
     justify-content: center;
     align-items: center;
 }
+.loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
 
 .registration--avatars {
     display: grid;
