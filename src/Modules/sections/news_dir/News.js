@@ -7,17 +7,17 @@ function News() {
     const [mainData, setMainData] = useState("");
     const [dataIsReady, setDataIsReady] = useState(false);
     useEffect(() => {
-        fetch(process.env.REACT_APP_STATE1 + "/news/overall", {
+        fetch(process.env.REACT_APP_STATE1 + "/news/listofnews", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify({value: typeOfPage, index: currentPage})
+            body: JSON.stringify({type: typeOfPage, index: currentPage})
         })
             .then(r => r.json())
             .then(resp => {
-                setMainData(resp.value);
+                setMainData(resp);
                 setDataIsReady(true);
             })
             .catch(err => {
@@ -43,10 +43,10 @@ function News() {
                             setTypeOfPage(event.target.innerText.toLowerCase().replace(/\s/gi, "-"));
                         }}>
                             <button>PS5</button>
-                            <button>PS VR2</button>
+                            <button>PS-VR2</button>
                             <button>PS4</button>
-                            <button>PS Store</button>
-                            <button>PS Plus</button>
+                            <button>PS-Store</button>
+                            <button>PS-Plus</button>
                         </div>
                         <div onClick={(event) => {
                             setDataIsReady(false);
@@ -57,10 +57,9 @@ function News() {
                         </div>
                         <ul>
                             {mainData.map((el, i) => <li key={i * 54}>
-                                <Link to={i + 1 + ""} state={el}>
-                                    <img src={el.topImg} alt=""/>
-                                    <p>{el.titleTop}</p>
-                                    <p>{el.dataTime}</p>
+                                <Link to={i + 1 + ""} state={{typePage: typeOfPage, curTitle: el.title}}>
+                                    <img src={el.img} alt=""/>
+                                    <p>{el.title}</p>
                                 </Link>
                             </li>)}
                         </ul>
