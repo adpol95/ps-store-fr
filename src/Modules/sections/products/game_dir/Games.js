@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import dataReader from "../../tools_dir/dataReader";
+import {Link} from "react-router-dom";
 
 function Games() {
 
@@ -17,7 +17,7 @@ function Games() {
     const [currentPage, setCurrentPage] = useState("1");
     const [dataIsReady, setDataIsReady] = useState(false);
     useEffect(() => {
-        fetch(process.env.REACT_APP_STATE1 + "/products/games", {
+        fetch(process.env.REACT_APP_STATE1 + "/products/listofgames", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +27,7 @@ function Games() {
         })
             .then(r => r.json())
             .then(resp => {
-                setMainData(resp.value);
+                setMainData(resp);
                 setDataIsReady(true);
             })
             .catch(err => {
@@ -54,7 +54,16 @@ function Games() {
                             <button>2</button>
                         </div>
                         <ul>
-                            {dataReader(mainData)}
+                            {mainData.map((el, i) => {
+                                const mainId = i + 1;
+                                const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
+                                return <li key={mainId}>
+                                    <Link to={mainId + ""} state={{curTitle: readyTitle}}>
+                                        {readyTitle}
+                                        <img src={el.img} alt="" style={{width: "100px"}}/>
+                                    </Link>
+                                </li>
+                            })}
                         </ul>
                     </div> :
                     <div className="lds-ring">

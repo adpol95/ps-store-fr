@@ -1,10 +1,32 @@
 import {useLocation} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function ConsolePage() {
-    let {state} = useLocation();
-    let datas = Object.values(state.dataAboutGame[1]);
     let [currentPage, setCurrentPage] = useState(0);
+    const {state} = useLocation();
+    const [datsAboutGame, setDatsAboutGame] = useState("");
+    const [datas, setDatas] = useState([]);
+    const [dataIsReady, setDataIsReady] = useState(false);
+    useEffect(() => {
+        fetch(process.env.REACT_APP_STATE1 + "/products/console", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({name: state.curTitle})
+        })
+            .then(r => r.json())
+            .then(resp => {
+                setDatsAboutGame(resp[0].value);
+                setDatas(Object.values(resp[0].value))
+                setDataIsReady(true);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }, [])
     return (
         <div onClick={(event) => {
             if (event.target.innerText === '<' && currentPage > 0) {
@@ -12,49 +34,59 @@ function ConsolePage() {
             } else if (event.target.innerText === '>' && currentPage !== datas[1].length - 1) {
                 setCurrentPage(currentPage + 1)
             }
-        }}>
-            <h1>
-                {state.dataAboutGame[0]}
-            </h1>
-            <button>
-                &lt;
-            </button>
-            <img src={datas[1][currentPage]} alt="" style={{width: "300px"}}/>
-            <button>
-                &gt;
-            </button>
-            <div>{datas[3]}</div>
-            <div>Realise date: {datas[2]}</div>
-            <hr/>
-            <div>
-                <h3>Tearms</h3>
-                <ul>
-                    {datas[4].map((el, i) => <li key={i * 14}>{el}</li>)}
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    {state.dataAboutGame[1].mainText ? datas[5].map((el, i) => <li key={i * 114}>
-                            <img src={datas[1][i + 1]} alt="console img error"/>
+        }} className={!dataIsReady ? "loader" : ""}>
+            {dataIsReady ?
+                <div>
+                    <h1>
+                        {state.curTitle}
+                    </h1>
+                    <button>
+                        &lt;
+                    </button>
+                    <img src={datas[1][currentPage]} alt="" style={{width: "300px"}}/>
+                    <button>
+                        &gt;
+                    </button>
+                    <div>{datas[3]}</div>
+                    <div>Realise date: {datas[2]}</div>
+                    <hr/>
+                    <div>
+                        <h3>Tearms</h3>
+                        <ul>
+                            {datas[4].map((el, i) => <li key={i * 14}>{el}</li>)}
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            {datsAboutGame.mainText ? datas[5].map((el, i) => <li key={i * 114}>
+                                    <img src={datas[1][i + 1]} alt="console img error"/>
+                                    <h3>
+                                        {el.title}
+                                    </h3>
+                                    <ul>
+                                        {el.descript.map((el, il) => <li key={il * 221}>{el}</li>)}
+                                    </ul>
+                                </li>
+                            ) : ""}
+                        </ul>
+                    </div>
+                    <div>
+
                         <h3>
-                            {el.title}
+                            {datsAboutGame.whatInTheBox ? 'What in the box' : ''}
                         </h3>
                         <ul>
-                            {el.descript.map((el, il) => <li key={il * 221}>{el}</li>)}
+                            {datsAboutGame.whatInTheBox ? datas[6].map((el, i) => <li key={i * 25}> {el}</li>) : ""}
                         </ul>
-                    </li>
-                    ) : ""}
-                </ul>
-            </div>
-            <div>
-
-                <h3>
-                    {state.dataAboutGame[1].whatInTheBox ? 'What in the box' : ''}
-                </h3>
-                <ul>
-                    {state.dataAboutGame[1].whatInTheBox ? datas[6].map((el, i) => <li key={i * 25}> {el}</li>) : ""}
-                </ul>
-            </div>
+                    </div>
+                </div> :
+                <div className="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            }
         </div>
     )
 }
