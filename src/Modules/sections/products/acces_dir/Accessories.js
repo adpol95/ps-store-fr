@@ -5,7 +5,14 @@ function Accessories() {
     const [mainData, setMainData] = useState("");
     const [dataIsReady, setDataIsReady] = useState(false);
     useEffect(() => {
-        fetch(process.env.REACT_APP_STATE1 + "/products/listofaccessories")
+        fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/listofnewsOrProducts", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({type: "accessories", index: "1"})
+        })
             .then(r => r.json())
             .then(resp => {
                 setMainData(resp);

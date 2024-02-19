@@ -6,17 +6,17 @@ function GamePage() {
     const [gameData, setGameData] = useState("");
     const [dataIsReady, setDataIsReady] = useState(false);
     useEffect(() => {
-        fetch(process.env.REACT_APP_STATE1 + "/products/game", {
+        fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/page", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify({name: state.curTitle})
+            body: JSON.stringify({type: "games", name: state.curTitle})
         })
             .then(r => r.json())
             .then(resp => {
-                setGameData(resp[0].value);
+                setGameData(resp[0]);
                 setDataIsReady(true);
             })
             .catch(err => {

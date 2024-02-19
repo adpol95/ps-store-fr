@@ -7,7 +7,7 @@ function News() {
     const [mainData, setMainData] = useState("");
     const [dataIsReady, setDataIsReady] = useState(false);
     useEffect(() => {
-        fetch(process.env.REACT_APP_STATE1 + "/news/listofnews", {
+        fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/listofnewsOrProducts", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
