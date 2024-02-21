@@ -11,13 +11,13 @@ function Games() {
     const [filterOnRating, setFilterOnRating] = useState(false);
     const [filterOnPlatform, setFilterOnPlatform] = useState(false);
     const [filterOnGenre, setFilterOnGenre] = useState(false);
-    const [categoryBox, setCategoryBox] = useState("");
+    const [categoryBox, setCategoryBox] = useState([]);
     const [currentFilter, setCurrentFilter] = useState([]);
     const [reestr, setReestr] = useState({});
-    const [checkBoxName, setCheckBoxName] = useState("");
+    const [checkBoxName, setCheckBoxName] = useState("default");
     const [checkBoxCounter, setCheckBoxCounter] = useState(-1);
     useEffect(() => {
-        if (checkBoxCounter !== currentFilter.length) {
+        if (checkBoxCounter < currentFilter.length) {
             fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/listofnewsOrProducts", {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 headers: {
@@ -27,21 +27,32 @@ function Games() {
                 body: !currentFilter.length ? JSON.stringify({type: "games", index: currentPage}) : JSON.stringify({
                     type: "games",
                     filter: {
-                        vary: categoryBox,
+                        vary: categoryBox[categoryBox.length - 1],
                         value: currentFilter[currentFilter.length - 1]
                     }
                 })
             })
                 .then(r => r.json())
                 .then(resp => {
-                    setMainData(currentFilter.length <= 1 ? resp : [...mainData, ...resp]);
-                    if (currentFilter.length > 0) setReestr({...reestr, [checkBoxName]: resp})
+                    if (categoryBox.length > 1) {
+                        setMainData(mainData.filter(el => resp.find(el1 => el1["_id"] === el["_id"])));
+                        console.log("CurrLength")
+                    } else {
+                        if (currentFilter.length <= 1) {
+                            setMainData(resp)
+                            setReestr({...reestr, [checkBoxName]: resp})
+                        } else setMainData([...mainData, ...resp])
+                    }
+                    if (currentFilter.length > 0) {
+                        setReestr({...reestr, [checkBoxName]: resp})
+                    }
                     setDataIsReady(true);
                 })
                 .catch(err => {
                     console.log(err)
                 })
         } else {
+            setCheckBoxCounter(checkBoxCounter - 1);
             setDataIsReady(true);
         }
     }, [currentPage, currentFilter])
@@ -55,9 +66,8 @@ function Games() {
                     <li key={Math.random() * 100 - 1}>
                         <div onClick={() => {
                             setFilterOnPrice(!filterOnPrice)
-                            setCategoryBox("Price");
-                        }}
-                             style={{border: "2px blue solid", borderRadius: "10px"}}>
+                            setCategoryBox([...categoryBox, "Price"]);
+                        }} style={{border: "2px blue solid", borderRadius: "10px"}}>
                             <p>Price</p>
                             <img
                                 src={filterOnPrice ? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAALxJREFUSEvtlNENgzAMRI9NyiZlk7IJm9BNugqblJwUS5YbYvsDqRJYigghuedcHAacHMPJ+rge4FEt3aLWZiyi+AqAzwlACBIFiPhT7SAEiQCsuLjDHbgQD6DFKajPgH0X0gNY8RHAt6bP/qcCu5AjQEuc2gLgOs5xIUeAV60YZsdsJTSAYxoyl/e3Ld+eRUuZzKbDAgTC6voR50fvkG1CLUD3zt0A95f0dxa5GWfKNC3WWpC1KA29Aa5lO8NvJxkxC+GFAAAAAElFTkSuQmCC" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAALlJREFUSEvtk9ENgzAMRI9N6CYwCpO0m5RNYJOyCe1JjmSBExupkfhIfgDp8p6xkw6VV1eZjyZwO3y7Fu1ScriwcFDATeAeir+26AVgBrAprSXoAQySPVWYGzLhT4GPSnIUEP4WwWRJcgJuXH4b+OQfJIkWaDgzD6vBpWNqST4CISxVnoUz692Do4TfXKu0pQiPCJjREt0FFx4VWJIQ/IpAS/huDvTqkK18OlXujUwBb8hhUC7YBG4LvwncJBla0VEbAAAAAElFTkSuQmCC"}/>
@@ -75,15 +85,11 @@ function Games() {
                                         if (currentFilter.length > 0) {
                                             delete reestr[event.target.name];
                                             let arr = [];
-                                            Object.values(reestr).forEach(el => {
-                                                el.forEach(ol => {
-                                                    arr.push(ol)
-                                                })
-                                            })
+                                            if (currentFilter.length >= 2) arr = [...reestr[currentFilter[currentFilter.length - 2]]]
+                                            else arr = [...reestr.default]
                                             setMainData(arr)
                                             setCurrentFilter(currentFilter.filter(el => el !== event.target.name));
                                         }
-
                                     }
                                 }}>
                                     <li key={Math.random() * 100 - 1}>
@@ -122,7 +128,7 @@ function Games() {
                     <li key={Math.random() * 100 - 1}>
                         <div onClick={() => {
                             setFilterOnDev(!filterOnDev)
-                            setCategoryBox("Developer");
+                            setCategoryBox([...categoryBox, "Developer"]);
                         }}
                              style={{border: "2px blue solid", borderRadius: "10px"}}>
                             <p>Developer</p>
@@ -142,15 +148,11 @@ function Games() {
                                         if (currentFilter.length > 0) {
                                             delete reestr[event.target.name];
                                             let arr = [];
-                                            Object.values(reestr).forEach(el => {
-                                                el.forEach(ol => {
-                                                    arr.push(ol)
-                                                })
-                                            })
+                                            if (currentFilter.length >= 2) arr = [...reestr[currentFilter[currentFilter.length - 2]]]
+                                            else arr = [...reestr.default]
                                             setMainData(arr)
                                             setCurrentFilter(currentFilter.filter(el => el !== event.target.name));
                                         }
-
                                     }
                                 }}>
                                     <li key={Math.random() * 100 - 1}>
@@ -207,7 +209,7 @@ function Games() {
                     <li key={Math.random() * 100 - 1}>
                         <div onClick={() => {
                             setFilterOnRating(!filterOnRating);
-                            setCategoryBox("Rating");
+                            setCategoryBox([...categoryBox, "Rating"]);
                         }}
                              style={{border: "2px blue solid", borderRadius: "10px"}}>
                             <p>Rating</p>
@@ -227,11 +229,8 @@ function Games() {
                                         if (currentFilter.length > 0) {
                                             delete reestr[event.target.name];
                                             let arr = [];
-                                            Object.values(reestr).forEach(el => {
-                                                el.forEach(ol => {
-                                                    arr.push(ol)
-                                                })
-                                            })
+                                            if (currentFilter.length >= 2) arr = [...reestr[currentFilter[currentFilter.length - 2]]]
+                                            else arr = [...reestr.default]
                                             setMainData(arr)
                                             setCurrentFilter(currentFilter.filter(el => el !== event.target.name));
                                         }
@@ -268,7 +267,7 @@ function Games() {
                     <li key={Math.random() * 100 - 1}>
                         <div onClick={() => {
                             setFilterOnPlatform(!filterOnPlatform);
-                            setCategoryBox("Platform");
+                            setCategoryBox([...categoryBox, "Platform"]);
                         }}
                              style={{border: "2px blue solid", borderRadius: "10px"}}>
                             <p>Platform</p>
@@ -288,11 +287,8 @@ function Games() {
                                         if (currentFilter.length > 0) {
                                             delete reestr[event.target.name];
                                             let arr = [];
-                                            Object.values(reestr).forEach(el => {
-                                                el.forEach(ol => {
-                                                    arr.push(ol)
-                                                })
-                                            })
+                                            if (currentFilter.length >= 2) arr = [...reestr[currentFilter[currentFilter.length - 2]]]
+                                            else arr = [...reestr.default]
                                             setMainData(arr)
                                             setCurrentFilter(currentFilter.filter(el => el !== event.target.name));
                                         }
@@ -315,7 +311,7 @@ function Games() {
                     <li key={Math.random() * 100 - 1}>
                         <div onClick={() => {
                             setFilterOnGenre(!filterOnGenre);
-                            setCategoryBox("Genre");
+                            setCategoryBox([...categoryBox, "Genre"]);
                         }}
                              style={{border: "2px blue solid", borderRadius: "10px"}}>
                             <p>Genre</p>
@@ -335,11 +331,8 @@ function Games() {
                                         if (currentFilter.length > 0) {
                                             delete reestr[event.target.name];
                                             let arr = [];
-                                            Object.values(reestr).forEach(el => {
-                                                el.forEach(ol => {
-                                                    arr.push(ol)
-                                                })
-                                            })
+                                            if (currentFilter.length >= 2) arr = [...reestr[currentFilter[currentFilter.length - 2]]]
+                                            else arr = [...reestr.default]
                                             setMainData(arr)
                                             setCurrentFilter(currentFilter.filter(el => el !== event.target.name));
                                         }
