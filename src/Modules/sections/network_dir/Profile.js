@@ -1,9 +1,8 @@
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import Friends from "./Friends";
 import {useEffect, useState} from "react";
+import ProfileMainPage from "./ProfileMainPage";
 
 function Profile() {
-    const auth = useAuthUser().currentProfile;
 
     const [mainData, setMainData] = useState([]);
     const [dataIsReady, setDataIsReady] = useState(false);
@@ -29,24 +28,14 @@ function Profile() {
     }, [])
     return (
         <div>
-            <img src={auth.avatar} alt="Profile pic"/>
-            <div>
-                <h2>{auth.userName}</h2>
-                <p>{auth.country}</p>
-                <p>Birthday: <i>{auth.birthDay.trimEnd().replace(/\s/gi, ".")}</i></p>
-                <p>Amount of friends: {auth.friends.length}</p>
-                <p>Wallet: {}</p>
-            </div>
-            <div>
-                Favorite studios:
-            </div>
+            <ProfileMainPage/>
             {dataIsReady ?
                 <div>
                     Most selling games
                     <ol>
                         {mainData.map((el, i) => {
                             const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
-                            return <li key={i * 54}>
+                            return <li key={(i + 1) * 54}>
                                 <img src={el.img} alt="" width="50px"/>
                                 {readyTitle}
                             </li>

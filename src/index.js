@@ -25,6 +25,7 @@ import AcSettings from "./Modules/sections/authorization_dir/AcSettings";
 import Friends from "./Modules/sections/network_dir/Friends";
 import AddNewFriend from "./Modules/sections/network_dir/AddNewFriend";
 import MainNet from "./Modules/sections/network_dir/MainNet";
+import ProfileMainPage from "./Modules/sections/network_dir/ProfileMainPage";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -149,7 +150,9 @@ const router = createBrowserRouter([
             },
             {
                 path: "psn",
-                element: <MainNet/>,
+                element: <RequireAuth fallbackPath={'/authorization'}>
+                    <MainNet/>
+                </RequireAuth>,
                 children: [
                     {
                         path: "",
@@ -170,6 +173,12 @@ const router = createBrowserRouter([
                                 path: "add",
                                 element: <RequireAuth fallbackPath={'/authorization'}>
                                     <AddNewFriend/>
+                                </RequireAuth>,
+                            },
+                            {
+                                path: ":id",
+                                element: <RequireAuth fallbackPath={'/authorization'}>
+                                    <ProfileMainPage/>
                                 </RequireAuth>,
                             }
                         ]

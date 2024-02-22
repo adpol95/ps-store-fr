@@ -3,43 +3,51 @@ import {useState} from "react";
 
 function Notification() {
     const auth = useAuthUser().currentProfile;
-    const [notifState, setNotifState] = useState(auth.reqForFriends.name);
+    const [notifState, setNotifState] = useState(auth.reqForFriends.userName);
     const [clickState, setClickState] = useState(false);
     const [stateTest] = useState(!!window.document.cookie);
 
     const senders = (event) => {
         event.preventDefault();
-
-
-        fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
-            method: "PATCH", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, *cors, same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, *same-origin, omit
-            headers: {
-                "Content-Type": "application/json",
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: "follow", // manual, *follow, error
-            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: (event.target.innerText === "Accept") ?
-                JSON.stringify({friends: [auth.reqForFriends], reqForFriends: {none: ""}}) :
-                JSON.stringify({reqForFriends: {none: ""}})
-        })
-            .then(res => {
-                console.log(event.target.innerText === "Accept" ? res : "You deny invite from " + auth.reqForFriends.name)
-                document.cookie = "_auth_state=" + JSON.stringify({
-                    currentProfile: {
-                        ...auth,
-                        friends: [...auth.friends, auth.reqForFriends],
-                        reqForFriends: {none: ""}
-                    }
-                })
-                window.location.reload();
-            })
-            .catch(err => console.log(err))
         if (event.target.innerText === "Accept") {
-            fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.reqForFriends.id, {
+            fetch(process.env.REACT_APP_STATE1 + "/authorization/search", {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, *same-origin, omit
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify({name: auth.reqForFriends.userName})
+            })
+                .then(r => r.json())
+                .then(response => {
+                    const actualFriends = response[0].friends
+                    fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.reqForFriends["_id"], {
+                        method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+                        mode: "cors", // no-cors, *cors, same-origin
+                        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                        credentials: "same-origin", // include, *same-origin, omit
+                        headers: {
+                            "Content-Type": "application/json",
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        redirect: "follow", // manual, *follow, error
+                        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                        body: JSON.stringify({friends: [...actualFriends, {...auth}]})
+                    })
+                        .then(res => {
+                            alert("Friend has been added");
+                            console.log(res)
+
+                        })
+                        .catch(err => console.log(err))
+                })
+                .catch(err => console.log(err))
+            fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                 method: "PATCH", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -50,11 +58,20 @@ function Notification() {
                 },
                 redirect: "follow", // manual, *follow, error
                 referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                body: JSON.stringify({friends: [{id: auth["_id"], name: auth.userName, img: auth.avatar}]})
+                body: (event.target.innerText === "Accept") ?
+                    JSON.stringify({friends: [...auth.friends, auth.reqForFriends], reqForFriends: {none: ""}}) :
+                    JSON.stringify({reqForFriends: {none: ""}})
             })
                 .then(res => {
-                    alert("Friend has been added");
                     console.log(res)
+                    if (event.target.innerText === "Deny") alert("You deny invite from " + auth.reqForFriends.userName)
+                    document.cookie = "_auth_state=" + JSON.stringify({
+                        currentProfile: {
+                            ...auth,
+                            friends: [...auth.friends, auth.reqForFriends],
+                            reqForFriends: {none: ""}
+                        }
+                    })
                     window.location.reload();
                 })
                 .catch(err => console.log(err))
@@ -78,11 +95,11 @@ function Notification() {
                             <ul>
                                 {notifState ?
                                     <li key={2342}>
-                                        <p>{auth.reqForFriends.name} invite you to be friends.</p>
-                                        <form onSubmit={senders}>
-                                            <button type="submit">Accept</button>
-                                            <button type="submit">Deny</button>
-                                        </form>
+                                        <p>{auth.reqForFriends.userName} invite you to be friends.</p>
+                                        <div onClick={senders}>
+                                            <button>Accept</button>
+                                            <button>Deny</button>
+                                        </div>
                                     </li> : ""
                                 }
                             </ul>
