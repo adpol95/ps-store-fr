@@ -91,6 +91,21 @@ function ProfileMainPage() {
             </div>
             <div>
                 Favorite studios:
+                <ul>
+                    {
+                        auth.favorite.studios.map(el => <li key={Math.random() * 100 - 1}>
+                            {el}
+                        </li>)
+                    }
+                </ul>
+                Favorite games:
+                <ul>
+                    {
+                        auth.favorite.games.map(el => <li key={Math.random() * 100 - 1}>
+                            <img src={el.img} alt="" width="50px"/>
+                        </li>)
+                    }
+                </ul>
             </div>
             {state !== null ?
                 <div>

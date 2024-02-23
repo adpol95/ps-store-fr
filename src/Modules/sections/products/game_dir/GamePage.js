@@ -1,10 +1,44 @@
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 function GamePage() {
     const {state} = useLocation();
     const [gameData, setGameData] = useState("");
     const [dataIsReady, setDataIsReady] = useState(false);
+    const [favGame, setFavGame] = useState({});
+    const auth = useAuthUser().currentProfile;
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (Object.values(favGame).length) {
+            if (auth.favorite.games.every(el => el.title !== favGame.title)) {
+                fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
+                    method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+                    headers: {
+                        "Content-Type": "application/json",
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify({favorite: {...auth.favorite, games: [...auth.favorite.games, favGame]}})
+                })
+                    .then(resp => {
+                        document.cookie = "_auth_state=" + JSON.stringify({
+                            currentProfile: {
+                                ...auth,
+                                favorite: {...auth.favorite, games: [...auth.favorite.games, favGame]}
+                            }
+                        })
+                        alert(favGame.title + " has been added to your list of favorite studios");
+                        console.log(resp);
+                        navigate("/psn");
+                        window.location.reload();
+
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            } else alert(favGame.title + " was already added to your list of favorite studios")
+        }
+    }, [favGame])
     useEffect(() => {
         fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/page", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -77,6 +111,16 @@ function GamePage() {
                                 </tr>)
                             }
                         </table>
+                    </div>
+                    <div>
+                        <p>Add this game to your favorite</p>
+                        <button onClick={() => setFavGame({
+                            "_id": gameData["_id"],
+                            img: gameData.img,
+                            title: state.curTitle
+                        })}>
+                            Add
+                        </button>
                     </div>
                 </div> :
                 <div className="lds-ring">

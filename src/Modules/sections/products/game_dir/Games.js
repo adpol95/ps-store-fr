@@ -36,7 +36,6 @@ function Games() {
                 .then(resp => {
                     if (categoryBox.length > 1) {
                         setMainData(mainData.filter(el => resp.find(el1 => el1["_id"] === el["_id"])));
-                        console.log("CurrLength")
                     } else {
                         if (currentFilter.length <= 1) {
                             setMainData(resp)
@@ -392,7 +391,7 @@ function Games() {
                             const mainId = i + 1;
                             const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
                             return <li key={mainId}>
-                                <Link to={mainId + ""} state={{curTitle: readyTitle}}>
+                                <Link to={el["_id"]} state={{curTitle: readyTitle}}>
                                     {readyTitle}
                                     <img src={el.img} alt="" style={{width: "100px"}}/>
                                 </Link>
