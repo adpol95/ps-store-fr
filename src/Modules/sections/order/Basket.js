@@ -365,7 +365,7 @@ function Basket() {
                 <br/>
                 <b>Total: {(calculProduct.shipPrice + calculProduct.taxPrice + calculProduct.prodPrice).toFixed(2)}</b>
                 {<Link to="payment"
-                       state={{cost: (calculProduct.shipPrice + calculProduct.taxPrice + calculProduct.prodPrice).toFixed(2)}}>
+                       state={{cost: (calculProduct.shipPrice + calculProduct.taxPrice + calculProduct.prodPrice).toFixed(2), prod: dataCart.map(el => el.title)}}>
                     <button>Checkout</button>
                 </Link>
                 }

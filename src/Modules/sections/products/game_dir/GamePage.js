@@ -91,7 +91,7 @@ function GamePage() {
                             {gameData.Price}
                         </div>
                         <div onClick={() => {
-                            localStorage.setItem(state.curTitle, JSON.stringify({...gameData, amount: 1}));
+                            localStorage.setItem(state.curTitle, JSON.stringify({...gameData, amount: 1, type: "Games"}));
                             if (isAuth()) {
                                 // document.cookie = "_auth_state=" + JSON.stringify({
                                 //     ...auth,
