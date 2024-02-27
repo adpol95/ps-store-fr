@@ -9,7 +9,7 @@ function Registration() {
         password: "",
         country: "",
         avatar: "",
-        birthDay: ""
+        birthDay: "",
     });
 
     const submiter = (e) => {
@@ -23,7 +23,7 @@ function Registration() {
         }).then((res) => {
             console.log(res);
             navigate("/");
-            alert("Congratulations!");
+            alert("Congratulations!")
         }).catch((err) => alert(err));
     }
 
@@ -54,7 +54,7 @@ function Registration() {
                                 Belgium
                             </option>
                             <option id="country__BO">
-                                Bolivia, Plurinational State of
+                                Bolivia Plurinational State of
                             </option>
                             <option id="country__BR">
                                 Brazil

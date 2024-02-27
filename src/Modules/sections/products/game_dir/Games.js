@@ -24,7 +24,7 @@ function Games() {
                     "Content-Type": "application/json",
                     // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: !currentFilter.length ? JSON.stringify({type: "games", index: currentPage}) : JSON.stringify({
+                body: currentFilter.length < 1 ? JSON.stringify({type: "games", index: currentPage}) : JSON.stringify({
                     type: "games",
                     filter: {
                         vary: categoryBox[categoryBox.length - 1],
@@ -393,7 +393,12 @@ function Games() {
                             return <li key={mainId}>
                                 <Link to={el["_id"]} state={{curTitle: readyTitle}}>
                                     {readyTitle}
-                                    <img src={el.img} alt="" style={{width: "100px"}}/>
+                                    <div style={{position: "relative"}}>
+                                        <img
+                                            src="https://preview.redd.it/tb0anht7pw6a1.png?width=640&crop=smart&auto=webp&s=81e586eee29442018675844ebb6d2216ac78df55"
+                                            alt="" style={{width: "100px"}}/>
+                                        <img src={el.img} alt="" style={{width: "98px", height: "81.5%", position: "absolute", left: "0", top: "13.3%", objectFit: "cover"}}/>
+                                    </div>
                                 </Link>
                             </li>
                         })}

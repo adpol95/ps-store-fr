@@ -10,6 +10,7 @@ function Logout() {
     return (
         <button onClick={() => {
             signOut();
+            localStorage.clear();
             fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                 method: "PATCH", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin

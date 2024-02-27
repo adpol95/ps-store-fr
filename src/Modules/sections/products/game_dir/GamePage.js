@@ -1,30 +1,41 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
 
 function GamePage() {
+    const auth = useAuthUser();
+    const isAuth = useIsAuthenticated();
     const {state} = useLocation();
     const [gameData, setGameData] = useState("");
     const [dataIsReady, setDataIsReady] = useState(false);
+    const [cartIsReady, setCartIsReady] = useState(!JSON.parse(localStorage.getItem(state.curTitle)));
     const [favGame, setFavGame] = useState({});
-    const auth = useAuthUser().currentProfile;
     const navigate = useNavigate();
     useEffect(() => {
         if (Object.values(favGame).length) {
-            if (auth.favorite.games.every(el => el.title !== favGame.title)) {
-                fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
+            if (auth.currentProfile.favorite.games.every(el => el.title !== favGame.title)) {
+                fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.currentProfile["_id"], {
                     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
                     headers: {
                         "Content-Type": "application/json",
                         // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: JSON.stringify({favorite: {...auth.favorite, games: [...auth.favorite.games, favGame]}})
+                    body: JSON.stringify({
+                        favorite: {
+                            ...auth.currentProfile.favorite,
+                            games: [...auth.currentProfile.favorite.games, favGame]
+                        }
+                    })
                 })
                     .then(resp => {
                         document.cookie = "_auth_state=" + JSON.stringify({
                             currentProfile: {
-                                ...auth,
-                                favorite: {...auth.favorite, games: [...auth.favorite.games, favGame]}
+                                ...auth.currentProfile,
+                                favorite: {
+                                    ...auth.currentProfile.favorite,
+                                    games: [...auth.currentProfile.favorite.games, favGame]
+                                }
                             }
                         })
                         alert(favGame.title + " has been added to your list of favorite studios");
@@ -78,6 +89,45 @@ function GamePage() {
                         </div>
                         <div>
                             {gameData.Price}
+                        </div>
+                        <div onClick={() => {
+                            localStorage.setItem(state.curTitle, JSON.stringify({...gameData, amount: 1}));
+                            if (isAuth()) {
+                                // document.cookie = "_auth_state=" + JSON.stringify({
+                                //     ...auth,
+                                //     activeGoods: {
+                                //         ...auth.currentProfile.activeGoods,
+                                //         [state.curTitle]: {...gameData, amount: 1}
+                                //     }
+                                // })
+                                // fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.currentProfile["_id"], {
+                                //     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+                                //     mode: "cors", // no-cors, *cors, same-origin
+                                //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                                //     credentials: "same-origin", // include, *same-origin, omit
+                                //     headers: {
+                                //         "Content-Type": "application/json",
+                                //         // 'Content-Type': 'application/x-www-form-urlencoded',
+                                //     },
+                                //     redirect: "follow", // manual, *follow, error
+                                //     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                                //     body: JSON.stringify({
+                                //         activeGoods: {
+                                //             ...auth.currentProfile.activeGoods,
+                                //             [state.curTitle]: {...gameData, amount: 1}
+                                //         }
+                                //     })
+                                // })
+                                //     .then(res => {
+                                //         console.log(res)
+                                //     })
+                                //     .catch(err => console.log(err))
+                            }
+                            window.location.reload();
+                        }}>
+                            {cartIsReady ? <button>Add to Cart</button> : <Link to="/basket">
+                                <button>To Cart</button>
+                            </Link>}
                         </div>
                         <div>
                             <ul>

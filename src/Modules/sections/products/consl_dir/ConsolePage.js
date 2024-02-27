@@ -18,6 +18,7 @@ function ConsolePage() {
         })
             .then(r => r.json())
             .then(resp => {
+                console.log(resp)
                 setDatsAboutGame(resp[0].value);
                 setDatas(Object.values(resp[0].value))
                 setDataIsReady(true);
@@ -49,6 +50,7 @@ function ConsolePage() {
                     </button>
                     <div>{datas[3]}</div>
                     <div>Realise date: {datas[2]}</div>
+                    <div>Price: {datas[7]}</div>
                     <hr/>
                     <div>
                         <h3>Tearms</h3>

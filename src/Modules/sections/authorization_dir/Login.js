@@ -40,17 +40,15 @@ function Login() {
                         },
                         redirect: "follow", // manual, *follow, error
                         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                        body: JSON.stringify({isOnline: true})
+                        body: JSON.stringify({isOnline: true, cart: Object.entries(localStorage)})
                     })
                         .then(res => {
-                            console.log(res)
                             navigate("/psn");
                             window.location.reload();
                         })
                         .catch(err => console.log(err))
 
                 }
-
             })
             .catch(err => {
                 console.log(err);

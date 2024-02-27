@@ -26,6 +26,8 @@ import Friends from "./Modules/sections/network_dir/Friends";
 import AddNewFriend from "./Modules/sections/network_dir/AddNewFriend";
 import MainNet from "./Modules/sections/network_dir/MainNet";
 import ProfileMainPage from "./Modules/sections/network_dir/ProfileMainPage";
+import Basket from "./Modules/sections/order/Basket";
+import Payment from "./Modules/sections/order/Payment";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -101,7 +103,6 @@ const router = createBrowserRouter([
                 ]
             },
             {
-
                 path: "accessories",
                 children: [
                     {
@@ -183,10 +184,23 @@ const router = createBrowserRouter([
                             }
                         ]
 
+                    }
+                ]
+            },
+            {
+                path: "conundrums",
+                element: <Conundrums/>
+            },
+            {
+                path: "basket",
+                children: [
+                    {
+                        path: "",
+                        element: <Basket/>
                     },
                     {
-                        path: "conudurms",
-                        element: <Conundrums/>
+                        path: "payment",
+                        element: <Payment/>
                     }
                 ]
             },
