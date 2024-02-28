@@ -19,7 +19,7 @@ function Payment() {
                             event.preventDefault()
                             const shell = {
                                 ...auth.ownership,
-                                games: [...auth.ownership.games, [...state.prod]]
+                                games: [...auth.ownership.games, ...state.prod]
                             };
                             fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                                 method: "PATCH", // *GET, POST, PUT, DELETE, etc.
@@ -34,7 +34,8 @@ function Payment() {
                                 referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
                                 body: JSON.stringify({
                                     ownership: shell,
-                                    wallet: auth.wallet - state.cost
+                                    wallet: auth.wallet - state.cost,
+                                    cart: []
                                 })
                             })
                                 .then(res => {
@@ -42,7 +43,8 @@ function Payment() {
                                     document.cookie = "_auth_state=" + JSON.stringify({
                                         ...auth,
                                         ownership: shell,
-                                        wallet: auth.wallet - state.cost
+                                        wallet: auth.wallet - state.cost,
+                                        cart: []
                                     })
                                     alert("Congrats with your new purchase")
                                     localStorage.clear();
@@ -55,7 +57,7 @@ function Payment() {
                 }
 
             </div> : <div>
-                <h3><Link to="/authorization/registration">Register</Link> and <Link to="/conundrums">earn our ecosystem
+                <h3><Link to="/authorization/registration">Register</Link> or <Link to="/conundrums">earn our ecosystem
                     coins</Link></h3>
             </div>
             }

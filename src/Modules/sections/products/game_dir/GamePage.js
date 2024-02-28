@@ -116,10 +116,10 @@ function GamePage() {
                                     Price: gameData.Price
                                 }
                             ]
-                        })
+                        }) + ";path=/"
                         alert("Game is added in basket")
                         console.log(res)
-                        navigate("/psn");
+                        // navigate("/psn");
                         window.location.reload();
                     })
                     .catch(err => console.log(err))

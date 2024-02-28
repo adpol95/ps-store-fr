@@ -33,9 +33,9 @@ function Basket() {
                         document.cookie = "_auth_state=" + JSON.stringify({
                             ...auth,
                             cart: deleteGameArr
-                        })
+                        }) + ";path=/"
                         console.log(res, "DELETE")
-                        navigate("/psn");
+                        // navigate("/psn");
                         window.location.reload();
                     })
                     .catch(err => console.log(err))
@@ -45,10 +45,6 @@ function Basket() {
                 window.location.reload();
             }
         } else if (remPlusMinEffect.length > 1) {
-
-
-
-
                 if (isAuth()) {
                     const minOrPlus = remPlusMinEffect[1] === "-" ? remPlusMinEffect[0].amount - 1 : remPlusMinEffect[0].amount + 1;
                     const removedGame = auth.cart.filter(el => el.title !== remPlusMinEffect[0].title);
@@ -72,18 +68,13 @@ function Basket() {
                                     ...remPlusMinEffect[0],
                                     amount: minOrPlus
                                 }] //...auth.cart[auth.cart.indexOf(el2 => el2.title === el.title)]
-                            })
+                            }) + ";path=/"
                             console.log(res)
-                            navigate("/psn");
+                            // navigate("/psn");
                             window.location.reload();
                         })
                         .catch(err => console.log(err))
                 }
-
-
-
-
-
                 else {
                     localStorage.setItem(remPlusMinEffect[0].title, JSON.stringify({
                         ...remPlusMinEffect[0],
