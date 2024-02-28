@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 
 function AcSettings() {
-    const auth = useAuthUser().currentProfile;
+    const auth = useAuthUser();
     const signOut = useSignOut();
     const navigate = useNavigate();
     const [editDisplayState, setEditDisplayState] = useState({state: false, target: ""});

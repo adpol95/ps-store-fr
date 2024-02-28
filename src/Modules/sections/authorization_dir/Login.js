@@ -27,7 +27,7 @@ function Login() {
                         type: 'Bearer',
                     },
                     // refresh: response.refToken,
-                    userState: {currentProfile: {...response.profile, isOnline: true}}
+                    userState: {...response.profile, isOnline: true}
                 })) {
                     fetch(process.env.REACT_APP_STATE1 + "/authorization/" + response.profile["_id"], {
                         method: "PATCH", // *GET, POST, PUT, DELETE, etc.

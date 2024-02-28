@@ -44,7 +44,7 @@ function Registration() {
                             type: 'Bearer',
                         },
                         // refresh: response.refToken,
-                        userState: {currentProfile: {...response.profile, isOnline: true}}
+                        userState: {...response.profile, isOnline: true}
                     })) {
                         fetch(process.env.REACT_APP_STATE1 + "/authorization/" + response.profile["_id"], {
                             method: "PATCH", // *GET, POST, PUT, DELETE, etc.
@@ -61,6 +61,7 @@ function Registration() {
                         })
                             .then(res => {
                                 navigate("/psn");
+                                window.localStorage.clear();
                                 window.location.reload();
                             })
                             .catch(err => console.log(err))

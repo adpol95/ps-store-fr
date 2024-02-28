@@ -6,10 +6,9 @@ import onlineDotRed from "../../../References/bxs-square-rounded-red.png";
 
 function ProfileMainPage() {
     let {state} = useLocation();
-    const authPre = useAuthUser().currentProfile;
+    const authPre = useAuthUser();
     const [auth, setAuth] = useState(state === null ? authPre : state.profile);
     const navigate = useNavigate();
-    console.log(authPre)
 
     useEffect(() => {
         if (state !== null) {
@@ -47,10 +46,8 @@ function ProfileMainPage() {
             .then(res => {
                 console.log(res)
                 document.cookie = "_auth_state=" + JSON.stringify({
-                    currentProfile: {
                         ...authPre,
                         friends: [...authPre.friends.filter(el => el["_id"] !== auth["_id"])],
-                    }
                 })
             })
             .catch(err => console.log(err))

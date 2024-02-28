@@ -8,7 +8,7 @@ function Header() {
     const auth = useAuthUser();
     const [profileClickState, setProfileClickState] = useState(false);
     const [notifState, setNotifState] = useState(true);
-    const amountOfProdInCart = window.localStorage.length
+    const amountOfProdInCart = isAuthenticated() ? auth.cart.length : window.localStorage.length
 
     return (
         <div>
@@ -33,7 +33,7 @@ function Header() {
             {isAuthenticated() ?
                 <div>
                     <div onClick={() => setProfileClickState(!profileClickState)}>
-                        <img src={auth.currentProfile.avatar} alt="" width="100px"/>
+                        <img src={auth.avatar} alt="" width="100px"/>
                     </div>
                     {profileClickState ? <div>
                             <ul>

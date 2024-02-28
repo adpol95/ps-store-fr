@@ -1,44 +1,99 @@
 import {useEffect, useState} from "react";
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import counter from "./counterShipAndTax";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 function Basket() {
     const auth = useAuthUser();
+    const navigate = useNavigate();
     const isAuth = useIsAuthenticated();
-    const [dataCart, setDataCart] = useState(isAuth() ? auth.currentProfile.cart : Object.values(window.localStorage).map(el => JSON.parse(el)));
-    console.log(auth)
-    // const [dataCart, setDataCart] = useState(isAuth() ?
-    //     Object.values(auth.currentProfile.activeGoods) : Object.values(window.localStorage).map(el => JSON.parse(el)));
+    const [dataCart, setDataCart] = useState(isAuth() ? auth.cart : Object.values(window.localStorage).map(el => JSON.parse(el)));
+    const [remPlusMinEffect, setRemPlusMinEffect] = useState([]);
     const [country, setCountry] = useState("Argentina");
     const calculProduct = {
         amount: dataCart.reduce((ac, cu) => ac + cu.amount, 0),
         prodPrice: +dataCart.reduce((ac, cu) => ac + cu.amount * cu.Price, 0).toFixed(2),
-        shipPrice: counter(isAuth() ? auth.currentProfile.country : country)[0],
-        taxPrice: counter(isAuth() ? auth.currentProfile.country : country)[1],
+        shipPrice: counter(isAuth() ? auth.country : country)[0],
+        taxPrice: counter(isAuth() ? auth.country : country)[1],
     }
     useEffect(() => {
-        if (isAuth()) {
-            // fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.currentProfile["_id"], {
-            //     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
-            //     mode: "cors", // no-cors, *cors, same-origin
-            //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            //     credentials: "same-origin", // include, *same-origin, omit
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //         // 'Content-Type': 'application/x-www-form-urlencoded',
-            //     },
-            //     redirect: "follow", // manual, *follow, error
-            //     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            //     body: JSON.stringify({activeGoods: {...window.localStorage}})
-            // })
-            //     .then(res => {
-            //         console.log(res)
-            //     })
-            //     .catch(err => console.log(err))
+        if (remPlusMinEffect.length === 1) {
+            if (isAuth()) {
+                const deleteGameArr = auth.cart.filter(el3 => el3.title !== remPlusMinEffect[0].title);
+                fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
+                    method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+                    headers: {
+                        "Content-Type": "application/json",
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify({cart: deleteGameArr})
+                })
+                    .then(res => {
+                        document.cookie = "_auth_state=" + JSON.stringify({
+                            ...auth,
+                            cart: deleteGameArr
+                        })
+                        console.log(res, "DELETE")
+                        navigate("/psn");
+                        window.location.reload();
+                    })
+                    .catch(err => console.log(err))
+            }
+            else {
+                localStorage.removeItem(remPlusMinEffect[0].title)
+                window.location.reload();
+            }
+        } else if (remPlusMinEffect.length > 1) {
+
+
+
+
+                if (isAuth()) {
+                    const minOrPlus = remPlusMinEffect[1] === "-" ? remPlusMinEffect[0].amount - 1 : remPlusMinEffect[0].amount + 1;
+                    const removedGame = auth.cart.filter(el => el.title !== remPlusMinEffect[0].title);
+                    fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
+                        method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+                        headers: {
+                            "Content-Type": "application/json",
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: JSON.stringify({
+                            cart: [...removedGame, {
+                                ...remPlusMinEffect[0],
+                                amount: minOrPlus
+                            }]
+                        })
+                    })
+                        .then(res => {
+                            document.cookie = "_auth_state=" + JSON.stringify({
+                                ...auth,
+                                cart: [...removedGame, {
+                                    ...remPlusMinEffect[0],
+                                    amount: minOrPlus
+                                }] //...auth.cart[auth.cart.indexOf(el2 => el2.title === el.title)]
+                            })
+                            console.log(res)
+                            navigate("/psn");
+                            window.location.reload();
+                        })
+                        .catch(err => console.log(err))
+                }
+
+
+
+
+
+                else {
+                    localStorage.setItem(remPlusMinEffect[0].title, JSON.stringify({
+                        ...remPlusMinEffect[0],
+                        amount: remPlusMinEffect[1] === "-" ? remPlusMinEffect[0].amount - 1 : remPlusMinEffect[0].amount + 1
+                    }))
+                    window.location.reload();
+                }
         }
-    }, []);
+    }, [remPlusMinEffect]);
+
     return (
         <div>
             <div>
@@ -48,87 +103,13 @@ function Basket() {
                         dataCart.map((el, i) => <li key={Math.floor(Math.random() * 100 - 1) * i}>
                             <img src={el.img} alt="" width="100px"/>
                             <h4>{el.title}</h4>
-                            <button onClick={(event) => {
-                                localStorage.removeItem(el.title);
-                                if (isAuth()) {
-                                    // delete auth.currentProfile.activeGoods[el.title]
-                                    // document.cookie = "_auth_state=" + JSON.stringify({
-                                    //     currentProfile: {
-                                    //         ...auth.currentProfile,
-                                    //     }
-                                    // })
-                                    // fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.currentProfile["_id"], {
-                                    //     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
-                                    //     mode: "cors", // no-cors, *cors, same-origin
-                                    //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                                    //     credentials: "same-origin", // include, *same-origin, omit
-                                    //     headers: {
-                                    //         "Content-Type": "application/json",
-                                    //         // 'Content-Type': 'application/x-www-form-urlencoded',
-                                    //     },
-                                    //     redirect: "follow", // manual, *follow, error
-                                    //     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                                    //     body: JSON.stringify({activeGoods: {...localStorage.getItem(el.title)}})
-                                    // })
-                                    //     .then(res => {
-                                    //         console.log(res)
-                                    //     })
-                                    //     .catch(err => console.log(err))
-                                }
-                                window.location.reload();
-                            }}>Remove
-                            </button>
-                            <div onClick={(event) => {
-                                if (event.target.nodeName === "BUTTON") {
-                                    localStorage.setItem(el.title, JSON.stringify({
-                                        ...el,
-                                        amount: event.target.innerText === "-" ? el.amount - 1 : event.target.innerText === "+" ? el.amount + 1 : ""
-                                    }))
-                                    if (isAuth()) {
-                                        // document.cookie = "_auth_state=" + JSON.stringify({
-                                        //     currentProfile: {
-                                        //         ...auth.currentProfile,
-                                        //         activeGoods: {
-                                        //             ...auth.currentProfile.activeGoods, [el.title]: {
-                                        //                 ...auth.currentProfile.activeGoods[el.title],
-                                        //                 amount: event.target.innerText === "-" ? el.amount - 1 : event.target.innerText === "+" ? el.amount + 1 : ""
-                                        //             }
-                                        //         }
-                                        //     }
-                                        // })
-                                        // fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.currentProfile["_id"], {
-                                        //     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
-                                        //     mode: "cors", // no-cors, *cors, same-origin
-                                        //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                                        //     credentials: "same-origin", // include, *same-origin, omit
-                                        //     headers: {
-                                        //         "Content-Type": "application/json",
-                                        //         // 'Content-Type': 'application/x-www-form-urlencoded',
-                                        //     },
-                                        //     redirect: "follow", // manual, *follow, error
-                                        //     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                                        //     body: JSON.stringify({
-                                        //         activeGoods: {
-                                        //             ...auth.currentProfile.activeGoods, [el.title]: {
-                                        //                 ...auth.currentProfile.activeGoods[el.title],
-                                        //                 amount: event.target.innerText === "-" ? el.amount - 1 : event.target.innerText === "+" ? el.amount + 1 : ""
-                                        //             }
-                                        //         }
-                                        //     })
-                                        // })
-                                        //     .then(res => {
-                                        //         console.log(res)
-                                        //     })
-                                        //     .catch(err => console.log(err))
-                                    }
-                                    window.location.reload();
-                                }
-                            }}>
+                            <button onClick={() => setRemPlusMinEffect([{...el}])}>Remove</button>
+                            <div>
                                 {el.Price}
                                 <b>Quantity: </b>
-                                <button>-</button>
+                                <button onClick={(event) => setRemPlusMinEffect([{...el}, event.target.innerText])}>-</button>
                                 {el.amount}
-                                <button>+</button>
+                                <button onClick={(event) => setRemPlusMinEffect([{...el}, event.target.innerText])}>+</button>
                             </div>
                             <div>
                                 <img src={el.Age.ESRBImg} alt=""/>
@@ -366,7 +347,10 @@ function Basket() {
                 <br/>
                 <b>Total: {(calculProduct.shipPrice + calculProduct.taxPrice + calculProduct.prodPrice).toFixed(2)}</b>
                 {<Link to="payment"
-                       state={{cost: (calculProduct.shipPrice + calculProduct.taxPrice + calculProduct.prodPrice).toFixed(2), prod: dataCart.map(el => el.title)}}>
+                       state={{
+                           cost: (calculProduct.shipPrice + calculProduct.taxPrice + calculProduct.prodPrice).toFixed(2),
+                           prod: dataCart.map(el => el.title)
+                       }}>
                     <button>Checkout</button>
                 </Link>
                 }

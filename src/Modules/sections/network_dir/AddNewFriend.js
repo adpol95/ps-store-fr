@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 function AddNewFriend() {
     const [users, setUsers] = useState([]);
-    const auth = useAuthUser().currentProfile;
+    const auth = useAuthUser();
     const [searchBarValue, setSearchBarValue] = useState("");
     const [preLoader, setPreLoader] = useState(false);
 

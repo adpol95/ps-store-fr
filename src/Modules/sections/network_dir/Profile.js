@@ -10,7 +10,7 @@ function Profile() {
     const [dataIsReady, setDataIsReady] = useState(false);
     const [studios, setStudios] = useState([]);
     const [favStudio, setFavStudio] = useState("");
-    const auth = useAuthUser().currentProfile;
+    const auth = useAuthUser();
 
     useEffect(() => {
         fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/listofnewsOrProducts", {
@@ -61,10 +61,8 @@ function Profile() {
                 })
                     .then(resp => {
                         document.cookie = "_auth_state=" + JSON.stringify({
-                            currentProfile: {
                                 ...auth,
                                 favorite: {...auth.favorite, studios: [...auth.favorite.studios, favStudio]}
-                            }
                         })
                         window.location.reload();
                         alert(favStudio + " has been added to your list of favorite studios");

@@ -11,14 +11,17 @@ function Payment() {
         <div>
             <h3>Total cost: {state.cost}</h3>
             {isAuth() ? <div>
-                Your wallet: {auth.currentProfile.wallet}
+                Your wallet: {auth.wallet}
                 {
-                    auth.currentProfile.wallet < state.cost ?
+                    auth.wallet < state.cost ?
                         <button disabled> You have not enough money for paying this order</button> :
                         <button onClick={(event) => {
                             event.preventDefault()
-                            const shell = {...auth.currentProfile.ownership, games: [...auth.currentProfile.ownership.games, [...state.prod]]};
-                            fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.currentProfile["_id"], {
+                            const shell = {
+                                ...auth.ownership,
+                                games: [...auth.ownership.games, [...state.prod]]
+                            };
+                            fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                                 method: "PATCH", // *GET, POST, PUT, DELETE, etc.
                                 mode: "cors", // no-cors, *cors, same-origin
                                 cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -29,16 +32,17 @@ function Payment() {
                                 },
                                 redirect: "follow", // manual, *follow, error
                                 referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                                body: JSON.stringify({ownership: shell, wallet: auth.currentProfile.wallet - state.cost})
+                                body: JSON.stringify({
+                                    ownership: shell,
+                                    wallet: auth.wallet - state.cost
+                                })
                             })
                                 .then(res => {
                                     console.log(res)
                                     document.cookie = "_auth_state=" + JSON.stringify({
-                                        currentProfile: {
-                                            ...auth.currentProfile,
-                                            ownership: shell,
-                                            wallet: auth.currentProfile.wallet - state.cost
-                                        }
+                                        ...auth,
+                                        ownership: shell,
+                                        wallet: auth.wallet - state.cost
                                     })
                                     alert("Congrats with your new purchase")
                                     localStorage.clear();
@@ -51,7 +55,8 @@ function Payment() {
                 }
 
             </div> : <div>
-                <h3><Link to="/authorization/registration">Register</Link> and <Link to="/conundrums">earn our ecosystem coins</Link></h3>
+                <h3><Link to="/authorization/registration">Register</Link> and <Link to="/conundrums">earn our ecosystem
+                    coins</Link></h3>
             </div>
             }
         </div>

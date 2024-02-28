@@ -5,7 +5,7 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 function Logout() {
     const signOut = useSignOut()
     const navigate = useNavigate();
-    const auth = useAuthUser().currentProfile
+    const auth = useAuthUser()
 
     return (
         <button onClick={() => {

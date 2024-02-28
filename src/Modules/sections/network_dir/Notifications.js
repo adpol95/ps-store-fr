@@ -2,7 +2,7 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import {useState} from "react";
 
 function Notification() {
-    const auth = useAuthUser().currentProfile;
+    const auth = useAuthUser();
     const [notifState, setNotifState] = useState(auth.reqForFriends.userName);
     const [clickState, setClickState] = useState(false);
     const [stateTest] = useState(!!window.document.cookie);
@@ -66,11 +66,9 @@ function Notification() {
                     console.log(res)
                     if (event.target.innerText === "Deny") alert("You deny invite from " + auth.reqForFriends.userName)
                     document.cookie = "_auth_state=" + JSON.stringify({
-                        currentProfile: {
                             ...auth,
                             friends: [...auth.friends, auth.reqForFriends],
                             reqForFriends: {none: ""}
-                        }
                     })
                     window.location.reload();
                 })

@@ -10,13 +10,15 @@ function GamePage() {
     const {state} = useLocation();
     const [gameData, setGameData] = useState("");
     const [dataIsReady, setDataIsReady] = useState(false);
-    const [cartIsReady, setCartIsReady] = useState(!JSON.parse(localStorage.getItem(state.curTitle)));
+    const [cartIsReady, setCartIsReady] = useState(isAuth() ? !auth.cart.some(el => el.title === state.curTitle) : !JSON.parse(localStorage.getItem(state.curTitle)));
     const [favGame, setFavGame] = useState({});
     const navigate = useNavigate();
+    const [addToCart, setAddToCart] = useState(false);
+
     useEffect(() => {
         if (Object.values(favGame).length) {
-            if (auth.currentProfile.favorite.games.every(el => el.title !== favGame.title)) {
-                fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.currentProfile["_id"], {
+            if (auth.favorite.games.every(el => el.title !== favGame.title)) {
+                fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
                     headers: {
                         "Content-Type": "application/json",
@@ -24,19 +26,17 @@ function GamePage() {
                     },
                     body: JSON.stringify({
                         favorite: {
-                            ...auth.currentProfile.favorite,
-                            games: [...auth.currentProfile.favorite.games, favGame]
+                            ...auth.favorite,
+                            games: [...auth.favorite.games, favGame]
                         }
                     })
                 })
                     .then(resp => {
                         document.cookie = "_auth_state=" + JSON.stringify({
-                            currentProfile: {
-                                ...auth.currentProfile,
-                                favorite: {
-                                    ...auth.currentProfile.favorite,
-                                    games: [...auth.currentProfile.favorite.games, favGame]
-                                }
+                            ...auth,
+                            favorite: {
+                                ...auth.favorite,
+                                games: [...auth.favorite.games, favGame]
                             }
                         })
                         alert(favGame.title + " has been added to your list of favorite studios");
@@ -70,6 +70,81 @@ function GamePage() {
             })
 
     }, [])
+    useEffect(() => {
+        if (addToCart) {
+
+
+            if (isAuth()) {
+                fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
+                    method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: "same-origin", // include, *same-origin, omit
+                    headers: {
+                        "Content-Type": "application/json",
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    body: JSON.stringify({
+                        cart: [
+                            ...auth.cart,
+                            {
+                                title: state.curTitle,
+                                img: gameData.img,
+                                amount: 1,
+                                _id: gameData["_id"],
+                                type: "Games",
+                                Age: gameData.Age,
+                                Price: gameData.Price
+                            }
+                        ]
+                    })
+                })
+                    .then(res => {
+                        document.cookie = "_auth_state=" + JSON.stringify({
+                            ...auth,
+                            cart: [
+                                ...auth.cart,
+                                {
+                                    title: state.curTitle,
+                                    img: gameData.img,
+                                    amount: 1,
+                                    _id: gameData["_id"],
+                                    type: "Games",
+                                    Age: gameData.Age,
+                                    Price: gameData.Price
+                                }
+                            ]
+                        })
+                        alert("Game is added in basket")
+                        console.log(res)
+                        navigate("/psn");
+                        window.location.reload();
+                    })
+                    .catch(err => console.log(err))
+            }
+
+
+
+
+
+
+            else {
+                window.localStorage.setItem(state.curTitle, JSON.stringify({
+                    title: state.curTitle,
+                    img: gameData.img,
+                    amount: 1,
+                    _id: gameData["_id"],
+                    type: "Games",
+                    Age: gameData.Age,
+                    Price: gameData.Price
+                }));
+                window.location.reload();
+            }
+
+        }
+    }, [addToCart]);
 
     return (
         <div className={!dataIsReady ? "loader" : ""}>
@@ -91,52 +166,11 @@ function GamePage() {
                         <div>
                             {gameData.Price}
                         </div>
-                        <div onClick={() => {
-
-                            if (isAuth()) {
-                                // document.cookie = "_auth_state=" + JSON.stringify({
-                                //     ...auth,
-                                //     activeGoods: {
-                                //         ...auth.currentProfile.activeGoods,
-                                //         [state.curTitle]: {...gameData, amount: 1}
-                                //     }
-                                // })
-                                // fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth.currentProfile["_id"], {
-                                //     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
-                                //     mode: "cors", // no-cors, *cors, same-origin
-                                //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                                //     credentials: "same-origin", // include, *same-origin, omit
-                                //     headers: {
-                                //         "Content-Type": "application/json",
-                                //         // 'Content-Type': 'application/x-www-form-urlencoded',
-                                //     },
-                                //     redirect: "follow", // manual, *follow, error
-                                //     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                                //     body: JSON.stringify({
-                                //         activeGoods: {
-                                //             ...auth.currentProfile.activeGoods,
-                                //             [state.curTitle]: {...gameData, amount: 1}
-                                //         }
-                                //     })
-                                // })
-                                //     .then(res => {
-                                //         console.log(res)
-                                //     })
-                                //     .catch(err => console.log(err))
-                            } else window.localStorage.setItem(state.curTitle, JSON.stringify({
-                                title: state.curTitle,
-                                img: gameData.img,
-                                amount: 1,
-                                _id: gameData["_id"],
-                                type: "Games",
-                                Age: gameData.Age,
-                                Price: gameData.Price
-                            }));
-                            window.location.reload();
-                        }}>
-                            {cartIsReady ? <button>Add to Cart</button> : <Link to="/basket">
-                                <button>To Cart</button>
-                            </Link>}
+                        <div>
+                            {cartIsReady ? <button onClick={() => setAddToCart(true)}>Add to Cart</button> :
+                                <Link to="/basket">
+                                    <button>To Cart</button>
+                                </Link>}
                         </div>
                         <div>
                             <ul>

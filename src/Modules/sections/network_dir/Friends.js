@@ -2,7 +2,7 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import {Link} from "react-router-dom";
 
 function Friends() {
-    const auth = useAuthUser().currentProfile; //auth.map((el, i) => <li key={i * 23}> {el} </li>)
+    const auth = useAuthUser(); //auth.map((el, i) => <li key={i * 23}> {el} </li>)
     return (
         <div>
             <ul>
