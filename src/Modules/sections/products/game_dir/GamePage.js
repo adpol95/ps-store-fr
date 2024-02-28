@@ -14,6 +14,8 @@ function GamePage() {
     const [favGame, setFavGame] = useState({});
     const navigate = useNavigate();
     const [addToCart, setAddToCart] = useState(false);
+    const isYouHaveIt = auth.ownership.games.some(el => el.name === state.curTitle);
+    console.log(isYouHaveIt)
 
     useEffect(() => {
         if (Object.values(favGame).length) {
@@ -62,6 +64,7 @@ function GamePage() {
         })
             .then(r => r.json())
             .then(resp => {
+                console.log(resp)
                 setGameData(resp[0]);
                 setDataIsReady(true);
             })
@@ -72,8 +75,6 @@ function GamePage() {
     }, [])
     useEffect(() => {
         if (addToCart) {
-
-
             if (isAuth()) {
                 fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
@@ -124,12 +125,6 @@ function GamePage() {
                     })
                     .catch(err => console.log(err))
             }
-
-
-
-
-
-
             else {
                 window.localStorage.setItem(state.curTitle, JSON.stringify({
                     title: state.curTitle,
@@ -142,7 +137,6 @@ function GamePage() {
                 }));
                 window.location.reload();
             }
-
         }
     }, [addToCart]);
 
@@ -167,7 +161,7 @@ function GamePage() {
                             {gameData.Price}
                         </div>
                         <div>
-                            {cartIsReady ? <button onClick={() => setAddToCart(true)}>Add to Cart</button> :
+                            {cartIsReady ? <button onClick={() => setAddToCart(true)} disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
                                 <Link to="/basket">
                                     <button>To Cart</button>
                                 </Link>}

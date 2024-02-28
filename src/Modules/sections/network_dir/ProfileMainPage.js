@@ -9,6 +9,7 @@ function ProfileMainPage() {
     const authPre = useAuthUser();
     const [auth, setAuth] = useState(state === null ? authPre : state.profile);
     const navigate = useNavigate();
+    console.log(auth)
 
     useEffect(() => {
         if (state !== null) {
@@ -82,10 +83,25 @@ function ProfileMainPage() {
             <img src={auth.avatar} alt="Profile pic"/>
             <div>
                 <h2>{auth.userName}</h2>
+                <div>
+                    <h3>Library</h3>
+                    <p><b><i>Games:</i></b></p>
+                    <ul>
+                        {auth.ownership.games.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
+                    </ul>
+                    <p><b><i>Consoles:</i></b></p>
+                    <ul>
+                        {auth.ownership.consoles.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
+                    </ul>
+                    <p><b><i>Accessories:</i></b></p>
+                    <ul>
+                        {auth.ownership.accessories.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
+                    </ul>
+                </div>
                 <p>{auth.country}</p>
                 <p>Birthday: <i>{auth.birthDay.trimEnd().replace(/\s/gi, ".")}</i></p>
                 <p>Amount of friends: {auth.friends.length}</p>
-                <p>Wallet: {}</p>
+                <p>Wallet: {auth.wallet}</p>
             </div>
             <div>
                 Favorite studios:

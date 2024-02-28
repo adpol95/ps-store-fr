@@ -18,8 +18,9 @@ function Payment() {
                         <button onClick={(event) => {
                             event.preventDefault()
                             const shell = {
-                                ...auth.ownership,
-                                games: [...auth.ownership.games, ...state.prod]
+                                games: [...auth.ownership.games, ...state.prod.filter(el => el.type === "Games")],
+                                consoles: [...auth.ownership.consoles, ...state.prod.filter(el => el.type === "Consoles")],
+                                accessories: [...auth.ownership.accessories, ...state.prod.filter(el => el.type === "Accessories")]
                             };
                             fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                                 method: "PATCH", // *GET, POST, PUT, DELETE, etc.
@@ -45,7 +46,7 @@ function Payment() {
                                         ownership: shell,
                                         wallet: auth.wallet - state.cost,
                                         cart: []
-                                    })
+                                    }) + ";path=/"
                                     alert("Congrats with your new purchase")
                                     localStorage.clear();
                                     navigate("/psn");

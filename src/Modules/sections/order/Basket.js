@@ -102,10 +102,13 @@ function Basket() {
                                 {el.amount}
                                 <button onClick={(event) => setRemPlusMinEffect([{...el}, event.target.innerText])}>+</button>
                             </div>
+                            {
+                                el.Age ?
                             <div>
                                 <img src={el.Age.ESRBImg} alt=""/>
                                 <p>{el.Age.TopDescipt}</p>
-                            </div>
+                            </div> : ""
+                            }
                         </li>)
                     }
                 </ul>
@@ -340,7 +343,9 @@ function Basket() {
                 {<Link to="payment"
                        state={{
                            cost: (calculProduct.shipPrice + calculProduct.taxPrice + calculProduct.prodPrice).toFixed(2),
-                           prod: dataCart.map(el => el.title)
+                           prod: dataCart.map(el => {
+                               return {name: el.title, type: el.type}
+                           }),
                        }}>
                     <button>Checkout</button>
                 </Link>
