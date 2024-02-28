@@ -1,8 +1,9 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
 
 function Registration() {
-
+    const signIn = useSignIn()
     const navigate = useNavigate();
     const [input, setInput] = useState({
         userName: "",
@@ -10,6 +11,11 @@ function Registration() {
         country: "",
         avatar: "",
         birthDay: "",
+        cart: Object.values(window.localStorage).map(el => {
+            const {title, img, amount, _id, type, Age, Price} = JSON.parse(el);
+            return {title, img, amount, _id, type, Age, Price}
+
+        })
     });
 
     const submiter = (e) => {
@@ -21,9 +27,50 @@ function Registration() {
             },
             body: JSON.stringify(input)
         }).then((res) => {
-            console.log(res);
-            navigate("/");
             alert("Congratulations!")
+            fetch(process.env.REACT_APP_STATE1 + "/authorization/login", {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({userName: input.userName, password: input.password}), // body data type must match "Content-Type" header
+            })
+                .then(res => res.json())
+                .then(response => {
+                    if (signIn({
+                        auth: {
+                            token: response.token,
+                            type: 'Bearer',
+                        },
+                        // refresh: response.refToken,
+                        userState: {currentProfile: {...response.profile, isOnline: true}}
+                    })) {
+                        fetch(process.env.REACT_APP_STATE1 + "/authorization/" + response.profile["_id"], {
+                            method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+                            mode: "cors", // no-cors, *cors, same-origin
+                            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                            credentials: "same-origin", // include, *same-origin, omit
+                            headers: {
+                                "Content-Type": "application/json",
+                                // 'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            redirect: "follow", // manual, *follow, error
+                            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                            body: JSON.stringify({isOnline: true})
+                        })
+                            .then(res => {
+                                navigate("/psn");
+                                window.location.reload();
+                            })
+                            .catch(err => console.log(err))
+
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    alert("Something goes wrong. Try again later")
+                })
         }).catch((err) => alert(err));
     }
 

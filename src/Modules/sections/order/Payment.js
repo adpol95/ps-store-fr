@@ -51,7 +51,7 @@ function Payment() {
                 }
 
             </div> : <div>
-                <h3><Link to="/authorization">Login</Link> and <Link to="/conundrums">earn our ecosystem coins</Link></h3>
+                <h3><Link to="/authorization/registration">Register</Link> and <Link to="/conundrums">earn our ecosystem coins</Link></h3>
             </div>
             }
         </div>

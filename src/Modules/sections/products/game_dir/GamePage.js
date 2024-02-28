@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
 
+//new Object({title: el[0], ...JSON.parse(el[1])}) Шаблон для отправки на бек
 function GamePage() {
     const auth = useAuthUser();
     const isAuth = useIsAuthenticated();
@@ -91,7 +92,7 @@ function GamePage() {
                             {gameData.Price}
                         </div>
                         <div onClick={() => {
-                            localStorage.setItem(state.curTitle, JSON.stringify({...gameData, amount: 1, type: "Games"}));
+
                             if (isAuth()) {
                                 // document.cookie = "_auth_state=" + JSON.stringify({
                                 //     ...auth,
@@ -122,7 +123,15 @@ function GamePage() {
                                 //         console.log(res)
                                 //     })
                                 //     .catch(err => console.log(err))
-                            }
+                            } else window.localStorage.setItem(state.curTitle, JSON.stringify({
+                                title: state.curTitle,
+                                img: gameData.img,
+                                amount: 1,
+                                _id: gameData["_id"],
+                                type: "Games",
+                                Age: gameData.Age,
+                                Price: gameData.Price
+                            }));
                             window.location.reload();
                         }}>
                             {cartIsReady ? <button>Add to Cart</button> : <Link to="/basket">

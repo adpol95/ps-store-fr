@@ -9,6 +9,7 @@ function ProfileMainPage() {
     const authPre = useAuthUser().currentProfile;
     const [auth, setAuth] = useState(state === null ? authPre : state.profile);
     const navigate = useNavigate();
+    console.log(authPre)
 
     useEffect(() => {
         if (state !== null) {

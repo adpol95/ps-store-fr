@@ -7,7 +7,8 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 function Basket() {
     const auth = useAuthUser();
     const isAuth = useIsAuthenticated();
-    const [dataCart, setDataCart] = useState(Object.values(window.localStorage).map(el => JSON.parse(el)));
+    const [dataCart, setDataCart] = useState(isAuth() ? auth.currentProfile.cart : Object.values(window.localStorage).map(el => JSON.parse(el)));
+    console.log(auth)
     // const [dataCart, setDataCart] = useState(isAuth() ?
     //     Object.values(auth.currentProfile.activeGoods) : Object.values(window.localStorage).map(el => JSON.parse(el)));
     const [country, setCountry] = useState("Argentina");
