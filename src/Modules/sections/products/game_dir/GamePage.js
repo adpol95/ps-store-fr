@@ -117,7 +117,7 @@ function GamePage() {
                                     Price: gameData.Price
                                 }
                             ]
-                        }) + ";path=/" + ";domain=.ps-store-beta.netlify.app"
+                        }) + ";path=/"
                         alert("Game is added in basket")
                         console.log(res)
                         // navigate("/psn");
