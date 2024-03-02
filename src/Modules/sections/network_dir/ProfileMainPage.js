@@ -9,8 +9,6 @@ function ProfileMainPage() {
     const authPre = useAuthUser();
     const [auth, setAuth] = useState(state === null ? authPre : state.profile);
     const navigate = useNavigate();
-    console.log(auth)
-
     useEffect(() => {
         if (state !== null) {
             fetch(process.env.REACT_APP_STATE1 + "/authorization/search", {
@@ -66,9 +64,8 @@ function ProfileMainPage() {
             referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify({friends: [...auth.friends.filter(el => el["_id"] !== authPre["_id"])]})
         })
-            .then(res => {
+            .then(() => {
                 alert("Friend has been deleted");
-                console.log(res)
                 window.location.reload();
                 navigate("/psn");
             })

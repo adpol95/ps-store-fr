@@ -109,7 +109,9 @@ function Profile() {
                 </ul>
             </div>
             <div>
+                <Link to="/conundrums">
                 Earn some money
+                </Link>
             </div>
             <Friends/>
         </div>

@@ -10,12 +10,11 @@ function GamePage() {
     const {state} = useLocation();
     const [gameData, setGameData] = useState("");
     const [dataIsReady, setDataIsReady] = useState(false);
-    const [cartIsReady, setCartIsReady] = useState(isAuth() ? !auth.cart.some(el => el.title === state.curTitle) : !JSON.parse(localStorage.getItem(state.curTitle)));
+    const [cartIsReady] = useState(isAuth() ? !auth.cart.some(el => el.title === state.curTitle) : !JSON.parse(localStorage.getItem(state.curTitle)));
     const [favGame, setFavGame] = useState({});
     const navigate = useNavigate();
     const [addToCart, setAddToCart] = useState(false);
     const isYouHaveIt = auth.ownership.games.some(el => el.name === state.curTitle);
-    console.log(isYouHaveIt)
 
     useEffect(() => {
         if (Object.values(favGame).length) {

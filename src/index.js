@@ -28,6 +28,8 @@ import MainNet from "./Modules/sections/network_dir/MainNet";
 import ProfileMainPage from "./Modules/sections/network_dir/ProfileMainPage";
 import Basket from "./Modules/sections/order/Basket";
 import Payment from "./Modules/sections/order/Payment";
+import SchoolProgram from "./Modules/sections/network_dir/SchoolProgram";
+import Riddles from "./Modules/sections/network_dir/Riddles";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -189,7 +191,20 @@ const router = createBrowserRouter([
             },
             {
                 path: "conundrums",
-                element: <Conundrums/>
+                children: [
+                    {
+                        path: "",
+                        element: <Conundrums/>
+                    },
+                    {
+                        path: "riddles",
+                        element: <Riddles/>
+                    },
+                    {
+                        path: "schoolPrg",
+                        element: <SchoolProgram/>
+                    }
+                ]
             },
             {
                 path: "basket",
