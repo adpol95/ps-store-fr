@@ -1,11 +1,15 @@
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import {useState} from "react";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 function Notification() {
     const auth = useAuthUser();
     const [notifState, setNotifState] = useState(auth.reqForFriends.userName);
     const [clickState, setClickState] = useState(false);
     const [stateTest] = useState(!!window.document.cookie);
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader()
 
     const senders = (event) => {
         event.preventDefault();
@@ -65,12 +69,17 @@ function Notification() {
                 .then(res => {
                     console.log(res)
                     if (event.target.innerText === "Deny") alert("You deny invite from " + auth.reqForFriends.userName)
-                    document.cookie = "_auth_state=" + JSON.stringify({
-                            ...auth,
-                            friends: [...auth.friends, auth.reqForFriends],
+                    signIn({
+                        auth: {
+                            token: authHeader.slice(7),
+                            type: 'Bearer',
+                        },
+                        // refresh: response.refToken,
+                        userState: {
+                            ...auth, friends: [...auth.friends, auth.reqForFriends],
                             reqForFriends: {none: ""}
+                        }
                     })
-                    window.location.reload();
                 })
                 .catch(err => console.log(err))
         }

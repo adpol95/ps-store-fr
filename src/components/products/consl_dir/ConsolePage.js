@@ -2,6 +2,8 @@ import {Link, useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 function ConsolePage() {
     const {state} = useLocation();
@@ -13,7 +15,9 @@ function ConsolePage() {
     const [currentPage, setCurrentPage] = useState(0);
     const [datas, setDatas] = useState([]);
     const [dataIsReady, setDataIsReady] = useState(false);
-    const isYouHaveIt = auth.ownership.consoles.some(el => el.name === state.curTitle);
+    const isYouHaveIt = isAuth() ? auth.ownership.consoles.some(el => el.name === state.curTitle) : "";
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader();
     useEffect(() => {
         fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/page", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -63,21 +67,28 @@ function ConsolePage() {
                     })
                 })
                     .then(res => {
-                        document.cookie = "_auth_state=" + JSON.stringify({
-                            ...auth,
-                            cart: [
-                                ...auth.cart,
-                                {
-                                    title: state.curTitle,
-                                    img: datas.img,
-                                    amount: 1,
-                                    _id: datas["_id"],
-                                    type: "Consoles",
-                                    Age: undefined,
-                                    Price: datas.price
-                                }
-                            ]
-                        }) + ";path=/"
+                        signIn({
+                            auth: {
+                                token: authHeader.slice(7),
+                                type: 'Bearer',
+                            },
+                            // refresh: response.refToken,
+                            userState: {
+                                ...auth,
+                                cart: [
+                                    ...auth.cart,
+                                    {
+                                        title: state.curTitle,
+                                        img: datas.img,
+                                        amount: 1,
+                                        _id: datas["_id"],
+                                        type: "Consoles",
+                                        Age: undefined,
+                                        Price: datas.price
+                                    }
+                                ]
+                            }
+                        })
                         alert("Console is added in basket")
                         console.log(res)
                         // navigate("/psn");

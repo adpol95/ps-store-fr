@@ -1,12 +1,16 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 function Payment() {
     const {state} = useLocation();
     const auth = useAuthUser();
     const isAuth = useIsAuthenticated();
     const navigate = useNavigate();
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader()
     return (
         <div>
             <h3>Total cost: {state.cost}</h3>
@@ -41,12 +45,19 @@ function Payment() {
                             })
                                 .then(res => {
                                     console.log(res)
-                                    document.cookie = "_auth_state=" + JSON.stringify({
-                                        ...auth,
-                                        ownership: shell,
-                                        wallet: auth.wallet - state.cost,
-                                        cart: []
-                                    }) + ";path=/"
+                                    signIn({
+                                        auth: {
+                                            token: authHeader.slice(7),
+                                            type: 'Bearer',
+                                        },
+                                        // refresh: response.refToken,
+                                        userState: {
+                                            ...auth,
+                                            ownership: shell,
+                                            wallet: auth.wallet - state.cost,
+                                            cart: []
+                                        }
+                                    })
                                     alert("Congrats with your new purchase")
                                     localStorage.clear();
                                     navigate("/psn");

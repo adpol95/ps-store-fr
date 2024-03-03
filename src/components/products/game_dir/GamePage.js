@@ -2,6 +2,8 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 //new Object({title: el[0], ...JSON.parse(el[1])}) Шаблон для отправки на бек
 function GamePage() {
@@ -14,7 +16,9 @@ function GamePage() {
     const [favGame, setFavGame] = useState({});
     const navigate = useNavigate();
     const [addToCart, setAddToCart] = useState(false);
-    const isYouHaveIt = auth.ownership.games.some(el => el.name === state.curTitle);
+    const isYouHaveIt = isAuth() ? auth.ownership.games.some(el => el.name === state.curTitle) : "";
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader();
 
     useEffect(() => {
         if (Object.values(favGame).length) {
@@ -33,18 +37,24 @@ function GamePage() {
                     })
                 })
                     .then(resp => {
-                        document.cookie = "_auth_state=" + JSON.stringify({
-                            ...auth,
-                            favorite: {
-                                ...auth.favorite,
-                                games: [...auth.favorite.games, favGame]
+                        signIn({
+                            auth: {
+                                token: authHeader.slice(7),
+                                type: 'Bearer',
+                            },
+                            // refresh: response.refToken,
+                            userState: {
+                                ...auth,
+                                favorite: {
+                                    ...auth.favorite,
+                                    games: [...auth.favorite.games, favGame]
+                                }
                             }
                         })
                         alert(favGame.title + " has been added to your list of favorite studios");
                         console.log(resp);
                         navigate("/psn");
                         window.location.reload();
-
                     })
                     .catch(err => {
                         console.log(err)
@@ -63,7 +73,6 @@ function GamePage() {
         })
             .then(r => r.json())
             .then(resp => {
-                console.log(resp)
                 setGameData(resp[0]);
                 setDataIsReady(true);
             })
@@ -102,29 +111,35 @@ function GamePage() {
                     })
                 })
                     .then(res => {
-                        document.cookie = "_auth_state=" + JSON.stringify({
-                            ...auth,
-                            cart: [
-                                ...auth.cart,
-                                {
-                                    title: state.curTitle,
-                                    img: gameData.img,
-                                    amount: 1,
-                                    _id: gameData["_id"],
-                                    type: "Games",
-                                    Age: gameData.Age,
-                                    Price: gameData.Price
-                                }
-                            ]
-                        }) + ";path=/"
+                        signIn({
+                            auth: {
+                                token: authHeader.slice(7),
+                                type: 'Bearer',
+                            },
+                            // refresh: response.refToken,
+                            userState: {
+                                ...auth,
+                                cart: [
+                                    ...auth.cart,
+                                    {
+                                        title: state.curTitle,
+                                        img: gameData.img,
+                                        amount: 1,
+                                        _id: gameData["_id"],
+                                        type: "Games",
+                                        Age: gameData.Age,
+                                        Price: gameData.Price
+                                    }
+                                ]
+                            }
+                        })
                         alert("Game is added in basket")
                         console.log(res)
                         // navigate("/psn");
                         window.location.reload();
                     })
                     .catch(err => console.log(err))
-            }
-            else {
+            } else {
                 window.localStorage.setItem(state.curTitle, JSON.stringify({
                     title: state.curTitle,
                     img: gameData.img,
@@ -160,7 +175,8 @@ function GamePage() {
                             {gameData.Price}
                         </div>
                         <div>
-                            {cartIsReady ? <button onClick={() => setAddToCart(true)} disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
+                            {cartIsReady ? <button onClick={() => setAddToCart(true)}
+                                                   disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
                                 <Link to="/basket">
                                     <button>To Cart</button>
                                 </Link>}

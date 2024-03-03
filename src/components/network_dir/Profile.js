@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import ProfileMainPage from "./ProfileMainPage";
 import {Link} from "react-router-dom";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 function Profile() {
 
@@ -11,6 +13,9 @@ function Profile() {
     const [studios, setStudios] = useState([]);
     const [favStudio, setFavStudio] = useState("");
     const auth = useAuthUser();
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader()
+
 
     useEffect(() => {
         fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/listofnewsOrProducts", {
@@ -60,13 +65,19 @@ function Profile() {
                     body: JSON.stringify({favorite: {...auth.favorite, studios: [...auth.favorite.studios, favStudio]}})
                 })
                     .then(resp => {
-                        document.cookie = "_auth_state=" + JSON.stringify({
-                                ...auth,
-                                favorite: {...auth.favorite, studios: [...auth.favorite.studios, favStudio]}
+                        signIn({
+                            auth: {
+                                token: authHeader.slice(7),
+                                type: 'Bearer',
+                            },
+                            // refresh: response.refToken,
+                            userState: {
+                                ...auth, favorite: {...auth.favorite, studios: [...auth.favorite.studios, favStudio]}
+                            }
                         })
-                        window.location.reload();
                         alert(favStudio + " has been added to your list of favorite studios");
                         console.log(resp)
+                        window.location.reload();
                     })
                     .catch(err => {
                         console.log(err)

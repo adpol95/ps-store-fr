@@ -3,6 +3,8 @@ import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
 import {Link, useNavigate} from "react-router-dom";
 import counter from "./counterShipAndTax";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 function Basket() {
     const auth = useAuthUser();
@@ -17,6 +19,8 @@ function Basket() {
         shipPrice: counter(isAuth() ? auth.country : country)[0],
         taxPrice: counter(isAuth() ? auth.country : country)[1],
     }
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader()
     useEffect(() => {
         if (remPlusMinEffect.length === 1) {
             if (isAuth()) {
@@ -30,13 +34,20 @@ function Basket() {
                     body: JSON.stringify({cart: deleteGameArr})
                 })
                     .then(res => {
-                        document.cookie = "_auth_state=" + JSON.stringify({
-                            ...auth,
-                            cart: deleteGameArr
-                        }) + ";path=/"
+                        signIn({
+                            auth: {
+                                token: authHeader.slice(7),
+                                type: 'Bearer',
+                            },
+                            // refresh: response.refToken,
+                            userState: {
+                                ...auth,
+                                cart: deleteGameArr
+                            }
+                        })
                         console.log(res, "DELETE")
-                        // navigate("/psn");
                         window.location.reload();
+                        // navigate("/psn");
                     })
                     .catch(err => console.log(err))
             }
@@ -62,13 +73,20 @@ function Basket() {
                         })
                     })
                         .then(res => {
-                            document.cookie = "_auth_state=" + JSON.stringify({
-                                ...auth,
-                                cart: [...removedGame, {
-                                    ...remPlusMinEffect[0],
-                                    amount: minOrPlus
-                                }] //...auth.cart[auth.cart.indexOf(el2 => el2.title === el.title)]
-                            }) + ";path=/"
+                            signIn({
+                                auth: {
+                                    token: authHeader.slice(7),
+                                    type: 'Bearer',
+                                },
+                                // refresh: response.refToken,
+                                userState: {
+                                    ...auth,
+                                    cart: [...removedGame, {
+                                        ...remPlusMinEffect[0],
+                                        amount: minOrPlus
+                                    }]
+                                }
+                            })
                             console.log(res)
                             // navigate("/psn");
                             window.location.reload();

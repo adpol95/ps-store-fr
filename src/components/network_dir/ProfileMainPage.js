@@ -3,12 +3,16 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import onlineDotGreen from "../../references/bxs-square-rounded-green.png";
 import onlineDotRed from "../../references/bxs-square-rounded-red.png";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 function ProfileMainPage() {
     let {state} = useLocation();
     const authPre = useAuthUser();
     const [auth, setAuth] = useState(state === null ? authPre : state.profile);
     const navigate = useNavigate();
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader()
     useEffect(() => {
         if (state !== null) {
             fetch(process.env.REACT_APP_STATE1 + "/authorization/search", {
@@ -44,10 +48,17 @@ function ProfileMainPage() {
         })
             .then(res => {
                 console.log(res)
-                document.cookie = "_auth_state=" + JSON.stringify({
-                        ...authPre,
-                        friends: [...authPre.friends.filter(el => el["_id"] !== auth["_id"])],
+                signIn({
+                    auth: {
+                        token: authHeader.slice(7),
+                        type: 'Bearer',
+                    },
+                    // refresh: response.refToken,
+                    userState: {
+                        ...authPre, friends: [...authPre.friends.filter(el => el["_id"] !== auth["_id"])]
+                    }
                 })
+                window.location.reload();
             })
             .catch(err => console.log(err))
 
@@ -66,7 +77,6 @@ function ProfileMainPage() {
         })
             .then(() => {
                 alert("Friend has been deleted");
-                window.location.reload();
                 navigate("/psn");
             })
             .catch(err => console.log(err))

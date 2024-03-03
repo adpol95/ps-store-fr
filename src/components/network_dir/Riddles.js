@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 function Riddles() {
     const auth = useAuthUser();
@@ -9,6 +11,8 @@ function Riddles() {
     const [currentPage, setCurrentPage] = useState(0);
     const [dataIsReady, setDataIsReady] = useState(false);
     const [inputData, setInputData] = useState("");
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader()
     const reward = {
         easy: 50,
         kids: 75,
@@ -102,17 +106,24 @@ function Riddles() {
                                             })
                                         })
                                             .then(() => {
-                                                document.cookie = "_auth_state=" + JSON.stringify({
-                                                    ...auth,
-                                                    wallet: auth.wallet + reward[whichOne],
-                                                    solved: {
-                                                        ...auth.solved,
-                                                        riddles: {
-                                                            ...auth.solved.riddles,
-                                                            [whichOne]: auth.solved.riddles[whichOne] + refQuestions[whichOne].indexOf(questions[whichOne][currentPage])
+                                                signIn({
+                                                    auth: {
+                                                        token: authHeader.slice(7),
+                                                        type: 'Bearer',
+                                                    },
+                                                    // refresh: response.refToken,
+                                                    userState: {
+                                                        ...auth,
+                                                        wallet: auth.wallet + reward[whichOne],
+                                                        solved: {
+                                                            ...auth.solved,
+                                                            riddles: {
+                                                                ...auth.solved.riddles,
+                                                                [whichOne]: auth.solved.riddles[whichOne] + refQuestions[whichOne].indexOf(questions[whichOne][currentPage])
+                                                            }
                                                         }
                                                     }
-                                                }) + ";path=/"
+                                                })
                                                 alert("Your are right! Congrats! You deserve " + reward[whichOne] + " points. \n Answer: " + questions[whichOne][currentPage][1]);
                                                 window.location.reload();
                                             })

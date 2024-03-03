@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 function SchoolProgram() {
     const auth = useAuthUser();
@@ -8,6 +10,8 @@ function SchoolProgram() {
     const [dataIsReady, setDataIsReady] = useState(false);
     const condLocal = window.localStorage.length ? JSON.parse(window.localStorage.getItem("condition")) : [];
     const dateNow = Math.floor(Date.now() / 1000);
+    const signIn = useSignIn();
+    const authHeader = useAuthHeader()
     useEffect(() => {
         if (!questions) {
             fetch(process.env.REACT_APP_STATE1 + "/conundrums", {
@@ -58,14 +62,21 @@ function SchoolProgram() {
                                 })
                             })
                                 .then(res => {
-                                    document.cookie = "_auth_state=" + JSON.stringify({
-                                        ...auth,
-                                        wallet: auth.wallet + 50,
-                                        solved: {
-                                            ...auth.solved,
-                                            schoolPrg: auth.solved.schoolPrg + refQuestions.indexOf(el)
+                                    signIn({
+                                        auth: {
+                                            token: authHeader.slice(7),
+                                            type: 'Bearer',
+                                        },
+                                        // refresh: response.refToken,
+                                        userState: {
+                                            ...auth,
+                                            wallet: auth.wallet + 50,
+                                            solved: {
+                                                ...auth.solved,
+                                                schoolPrg: auth.solved.schoolPrg + refQuestions.indexOf(el)
+                                            }
                                         }
-                                    }) + ";path=/"
+                                    })
                                     alert("Your are right! Congrats! You deserve 50 points, its going to your wallet");
                                     alert(el[3]);
                                     console.log(res)
