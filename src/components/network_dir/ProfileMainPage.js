@@ -1,8 +1,8 @@
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import onlineDotGreen from "../../../References/bxs-square-rounded-green.png";
-import onlineDotRed from "../../../References/bxs-square-rounded-red.png";
+import onlineDotGreen from "../../../references/";
+import onlineDotRed from "../../../references/bxs-square-rounded-red.png";
 
 function ProfileMainPage() {
     let {state} = useLocation();
