@@ -1,0 +1,19 @@
+@import "loader.scss";
+@import "net.scss";
+@import "header.scss";
+@import "psn.scss";
+@import "varaibles.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $firstBasicColor;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  padding: 8em 1% 1%;
+}

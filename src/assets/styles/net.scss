@@ -1,0 +1,10 @@
+.registration--avatars {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px;
+  column-gap: 5px;
+  row-gap: 5px;
+}
+
+.registration--avatars img {
+  width: 100%;
+}
