@@ -52,15 +52,43 @@ header {
 
   }
 
+  .header__menu-mobile {
+    position: absolute;
+    background: $thirdBasicColor;
+    display: flex;
+    flex-direction: column;
+    top: 5em;
+    left: 0;
+    right: 0;
+    padding: 1em;
+    border-radius: 0 0 2em 2em;
+    align-items: center;
+    justify-content: space-between;
+    height: 15em;
+    animation-name: slideDown;
+    animation-duration: .5s;
+    @keyframes slideDown {
+      from {
+        top: 0;
+      }
+
+      to {
+        top: 5em;
+      }
+    }
+  }
+
   .header__right-side {
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex: .6;
+
     .header__sign-btn {
       background: $fourthBasicColor;
       @include hoverBigger()
     }
+
     @media (min-width: $phoneWide + .2px) {
       flex: 1;
     }
