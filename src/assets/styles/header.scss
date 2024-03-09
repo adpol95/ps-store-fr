@@ -2,7 +2,7 @@
 @import "mixins";
 
 header {
-  background: $thirdBasicColor;
+  background: $backgroundHome top;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,9 +14,27 @@ header {
   z-index: 1000;
   border-bottom-left-radius: 2em;
   border-bottom-right-radius: 2em;
-  padding: .2em 1em;
+  padding: .6em 10% ;
   transition: padding-bottom .5s;
 
+  @keyframes slideDown {
+    from {
+      top: -1em
+    }
+
+    to {
+      top: 0
+    }
+  }
+  @keyframes slideSide {
+    from {
+      left: -100em
+    }
+
+    to {
+      left: 0
+    }
+  }
   .header__menu-mobile {
     position: absolute;
     display: flex;
@@ -36,6 +54,7 @@ header {
     background: rgba(24, 183, 190, 0.41);
     padding: .5em .8em;
     border-radius: 1.5em;
+    box-shadow: $smoothShadow;
   }
 
   @media (min-width: $phoneWide + .2px) {

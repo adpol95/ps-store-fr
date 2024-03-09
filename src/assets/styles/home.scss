@@ -1,0 +1,94 @@
+@import "varaibles";
+@import "mixins";
+
+.home {
+  width: 125%;
+  height: 3000px;
+  display: flex;
+  flex-direction: column;
+
+  .home__top-section {
+    background: $backgroundHome center;
+    height: 33em;
+    border-bottom-left-radius: 12em;
+    border-bottom-right-radius: 12em;
+    background-size: cover;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 14em 10%;
+
+    .home__welcome-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .home__welcome-text--greet {
+        font-size: 1.3em;
+        font-weight: 500;
+      }
+
+      .home__welcome-text--slogan {
+        padding: .3em 0 1.5em 0;
+        font-size: 2em;
+        font-weight: 700;
+      }
+
+      .home__welcome-text--description {
+        font-weight: 400;
+      }
+    }
+
+    .home__welcome-img {
+      display: flex;
+      align-items: start;
+      justify-content: end;
+      flex: 1;
+      position: relative;
+
+      img {
+        width: 25em;
+        height: 29em;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 2em;
+        box-shadow: $smoothShadow;
+      }
+
+      .home__welcome-img--price {
+        position: absolute;
+        top: 1em;
+        right: 1.5em;
+        font-weight: 600;
+        @include circleElements;
+      }
+    }
+
+    .home__bottom-categories {
+      display: flex;
+      position: absolute;
+      bottom: -2em;
+      left: 5%;
+      div {
+        padding: 1em 4em;
+        background: $firstBasicColor;
+        color: $fourthBasicColor;
+        font-weight: 700;
+        font-size: 1.2em;
+        border-radius: 1.5em;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        box-shadow: $smoothShadow;
+        row-gap: 1em;
+
+        img {
+          @include circleElements;
+        }
+
+      }
+    }
+  }
+}

@@ -9,11 +9,13 @@ function Header() {
     const [profileClickState, setProfileClickState] = useState(false);
     const amountOfProdInCart = isAuthenticated() ? auth.cart.length : window.localStorage.length;
     const [sizeWindow, setSizeWindow] = useState(window.innerWidth);
+    const [scrollWindow, setScrollWindow] = useState(window.scrollY);
     const [burgerState, setBurgerState] = useState(true);
     const location = useLocation();
     window.addEventListener("resize", () => setSizeWindow(window.innerWidth));
+    window.addEventListener("scroll", () => setScrollWindow(window.scrollY));
     return (
-        <header style={burgerState ? {borderRadius: "0 0 2em 2em"} : {paddingBottom: "17em"}}>
+        <header style={burgerState ? {borderRadius: scrollWindow > 20 ? "0 0 2em 2em" : "0", background: scrollWindow > 20 ? "rgba(23, 140, 164)" : "rgba(0, 0, 0, 0)", boxShadow: scrollWindow > 20 ? "0 0 .3em rgba(0,0,0,0.5)" : "", animation: scrollWindow > 20 ? "slideDown .7s" : "slideSide .7s"} : {paddingBottom: "17em"}}>
             <div className="header__left-side">
                 <Link to="/">
                     <svg width={sizeWindow > 1200 ? "250" : "200"} viewBox="0 0 320 100.02500534057617"

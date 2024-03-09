@@ -1,6 +1,15 @@
+@import "varaibles";
+
 @mixin hoverBigger() {
   transition: font-size .3s;
   &:hover {
     font-size: 1.3em;
   }
+}
+
+@mixin circleElements() {
+  background: $thirdBasicColor;
+  padding: .5em;
+  border-radius: 3em;
+  box-shadow: $smoothShadow;
 }
