@@ -14,7 +14,23 @@ header {
   z-index: 1000;
   border-bottom-left-radius: 2em;
   border-bottom-right-radius: 2em;
-  padding: 0 1em;
+  padding: .2em 1em;
+  transition: padding-bottom .5s;
+
+  .header__menu-mobile {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 5em;
+    left: 0;
+    right: 0;
+    padding: 1em;
+    border-radius: 0 0 2em 2em;
+    align-items: center;
+    justify-content: space-between;
+    height: 15em;
+    background: rgba(0,0,0,0);
+  }
 
   .header__category-btn--active {
     background: rgba(24, 183, 190, 0.41);
@@ -50,32 +66,6 @@ header {
       @include hoverBigger();
     }
 
-  }
-
-  .header__menu-mobile {
-    position: absolute;
-    background: $thirdBasicColor;
-    display: flex;
-    flex-direction: column;
-    top: 5em;
-    left: 0;
-    right: 0;
-    padding: 1em;
-    border-radius: 0 0 2em 2em;
-    align-items: center;
-    justify-content: space-between;
-    height: 15em;
-    animation-name: slideDown;
-    animation-duration: .5s;
-    @keyframes slideDown {
-      from {
-        top: 0;
-      }
-
-      to {
-        top: 5em;
-      }
-    }
   }
 
   .header__right-side {

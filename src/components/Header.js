@@ -11,23 +11,9 @@ function Header() {
     const [sizeWindow, setSizeWindow] = useState(window.innerWidth);
     const [burgerState, setBurgerState] = useState(true);
     const location = useLocation();
-    const menu = (
-        <div className={sizeWindow > 810 ? "header__center-side" : "header__menu-mobile"}>
-            <Link to="/" className={location.pathname === "/" ? "header__category-btn--active" : ""}> Home </Link>
-            <Link to="games"
-                  className={location.pathname === "/games" ? "header__category-btn--active" : ""}> Games </Link>
-            <Link to="consoles"
-                  className={location.pathname === "/consoles" ? "header__category-btn--active" : ""}> Consoles </Link>
-            <Link to="accessories"
-                  className={location.pathname === "/accessories" ? "header__category-btn--active" : ""}> Accessories </Link>
-            <Link to="news"
-                  className={location.pathname === "/news" ? "header__category-btn--active" : ""}> News </Link>
-            <Link to="psn"
-                  className={location.pathname === "/psn" || location.pathname === "/authorization" ? "header__category-btn--active" : ""}> Network </Link>
-        </div>)
     window.addEventListener("resize", () => setSizeWindow(window.innerWidth));
     return (
-        <header style={{borderRadius: burgerState ? "0 0 2em 2em" : "0"}}>
+        <header style={burgerState ? {borderRadius: "0 0 2em 2em"} : {paddingBottom: "17em"}}>
             <div className="header__left-side">
                 <Link to="/">
                     <svg width={sizeWindow > 1200 ? "250" : "200"} viewBox="0 0 320 100.02500534057617"
@@ -69,23 +55,23 @@ function Header() {
                     </svg>
                 </Link>
             </div>
-            {sizeWindow > 810 ?
-                menu
-                :
-                <div className="header__burger" onClick={() => setBurgerState(!burgerState)}>
-                    <span className={burgerState ? "log1-1" : "log1-2"}>
 
-                    </span>
-                    <span className={burgerState ? "log2-1" : "log2-2"}>
-
-                    </span>
-                    <span className={burgerState ? "log3-1" : "log3-2"}>
-                    </span>
-                </div>
-            }
             {
-                !burgerState ?
-                    menu : ""
+                <div className={sizeWindow > 810 ? "header__center-side" : "header__menu-mobile"} style={!burgerState ? {opacity: sizeWindow <= 810 ? 1 : 0, transition: "opacity .5s"} : {opacity: sizeWindow > 810 ? 1 : 0}
+                } onClick={() =>setBurgerState(true)}>
+                    <Link to="/"
+                          className={location.pathname === "/" ? "header__category-btn--active" : ""}> Home </Link>
+                    <Link to="games"
+                          className={location.pathname === "/games" ? "header__category-btn--active" : ""}> Games </Link>
+                    <Link to="consoles"
+                          className={location.pathname === "/consoles" ? "header__category-btn--active" : ""}> Consoles </Link>
+                    <Link to="accessories"
+                          className={location.pathname === "/accessories" ? "header__category-btn--active" : ""}> Accessories </Link>
+                    <Link to="news"
+                          className={location.pathname === "/news" ? "header__category-btn--active" : ""}> News </Link>
+                    <Link to="psn"
+                          className={location.pathname === "/psn" || location.pathname === "/authorization" ? "header__category-btn--active" : ""}> Network </Link>
+                </div>
             }
             {sizeWindow > 810 ?
                 <div className="header__right-side">
@@ -122,7 +108,16 @@ function Header() {
                         </div>
                     }
                 </div> :
-                ""
+                <div className="header__burger" onClick={() => setBurgerState(!burgerState)}>
+                    <span className={burgerState ? "log1-1" : "log1-2"}>
+
+                    </span>
+                    <span className={burgerState ? "log2-1" : "log2-2"}>
+
+                    </span>
+                    <span className={burgerState ? "log3-1" : "log3-2"}>
+                    </span>
+                </div>
             }
         </header>
     )
