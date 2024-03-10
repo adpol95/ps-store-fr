@@ -1,5 +1,6 @@
 @import "varaibles";
 @import "mixins";
+@import "reused-components";
 
 header {
   background: $backgroundHome top;
@@ -50,12 +51,6 @@ header {
     background: rgba(0,0,0,0);
   }
 
-  .header__category-btn--active {
-    background: rgba(24, 183, 190, 0.41);
-    padding: .5em .8em;
-    border-radius: 1.5em;
-    box-shadow: $smoothShadow;
-  }
 
   @media (min-width: $phoneWide + .2px) {
     font-size: .8em;
@@ -92,11 +87,6 @@ header {
     justify-content: space-around;
     align-items: center;
     flex: .6;
-
-    .header__sign-btn {
-      background: $fourthBasicColor;
-      @include hoverBigger()
-    }
 
     @media (min-width: $phoneWide + .2px) {
       flex: 1;

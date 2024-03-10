@@ -62,17 +62,17 @@ function Header() {
                 <div className={sizeWindow > 810 ? "header__center-side" : "header__menu-mobile"} style={!burgerState ? {opacity: sizeWindow <= 810 ? 1 : 0, transition: "opacity .5s"} : {opacity: sizeWindow > 810 ? 1 : 0}
                 } onClick={() =>setBurgerState(true)}>
                     <Link to="/"
-                          className={location.pathname === "/" ? "header__category-btn--active" : ""}> Home </Link>
+                          className={location.pathname === "/" ? "category-btn__active" : ""}> Home </Link>
                     <Link to="games"
-                          className={location.pathname === "/games" ? "header__category-btn--active" : ""}> Games </Link>
+                          className={location.pathname === "/games" ? "category-btn__active" : ""}> Games </Link>
                     <Link to="consoles"
-                          className={location.pathname === "/consoles" ? "header__category-btn--active" : ""}> Consoles </Link>
+                          className={location.pathname === "/consoles" ? "category-btn__active" : ""}> Consoles </Link>
                     <Link to="accessories"
-                          className={location.pathname === "/accessories" ? "header__category-btn--active" : ""}> Accessories </Link>
+                          className={location.pathname === "/accessories" ? "category-btn__active" : ""}> Accessories </Link>
                     <Link to="news"
-                          className={location.pathname === "/news" ? "header__category-btn--active" : ""}> News </Link>
+                          className={location.pathname === "/news" ? "category-btn__active" : ""}> News </Link>
                     <Link to="psn"
-                          className={location.pathname === "/psn" || location.pathname === "/authorization" ? "header__category-btn--active" : ""}> Network </Link>
+                          className={location.pathname === "/psn" || location.pathname === "/authorization" ? "category-btn__active" : ""}> Network </Link>
                 </div>
             }
             {sizeWindow > 810 ?
@@ -105,7 +105,7 @@ function Header() {
                                 </div> :
                                 ""}
                         </div> :
-                        <div className="header__sign-btn header__category-btn--active">
+                        <div className="focus-btn category-btn__active">
                             <Link to="authorization"> Sign in</Link>
                         </div>
                     }
