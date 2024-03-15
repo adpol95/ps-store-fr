@@ -3,19 +3,10 @@
 @import "reused-components";
 
 header {
-  background: $backgroundHome top;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 5em;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 1000;
-  border-bottom-left-radius: 2em;
+  @include headAndFoot($backgroundHome, fixed, 5em);
   border-bottom-right-radius: 2em;
-  padding: .6em 10% ;
+  border-bottom-left-radius: 2em;
+  top: 0;
   transition: padding-bottom .5s;
 
   @keyframes slideDown {
@@ -57,11 +48,6 @@ header {
   }
   @media (min-width: $tablesWide) {
     font-size: 1.1rem;
-  }
-
-  a {
-    text-decoration: none;
-    color: $firstBasicColor;
   }
 
   .header__left-side {

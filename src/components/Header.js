@@ -59,7 +59,7 @@ function Header() {
             </div>
 
             {
-                <div className={sizeWindow > 810 ? "header__center-side" : "header__menu-mobile"} style={!burgerState ? {opacity: sizeWindow <= 810 ? 1 : 0, transition: "opacity .5s"} : {opacity: sizeWindow > 810 ? 1 : 0}
+                <div className={sizeWindow > 810 ? "header__center-side" : "header__menu-mobile"} style={!burgerState ? {display: sizeWindow <= 810 ? "flex" : "none", transition: "opacity .5s"} : {display: sizeWindow > 810 ? "flex" : "none"}
                 } onClick={() =>setBurgerState(true)}>
                     <Link to="/"
                           className={location.pathname === "/" ? "category-btn__active" : ""}> Home </Link>

@@ -4,9 +4,19 @@
 
 .home {
   width: 125%;
-  height: 3000px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 10em;
+
+  .top-name-description h4 {
+    color: $fourthBasicColor;
+    font-size: 1.2em;
+  }
+
+  .top-name-description h3 {
+    font-size: 2em;
+    color: black;
+  }
 
   a {
     text-decoration: none;
@@ -14,19 +24,7 @@
   }
 
   .top-section {
-    background: $backgroundHome center;
-    height: 33em;
-    border-bottom-left-radius: 12em;
-    border-bottom-right-radius: 12em;
-    background-size: cover;
-    display: flex;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    padding: 14em 10%;
-    justify-content: center;
-    align-items: center;
+    @include backgroundWall($backgroundHome, 33em);
 
     .welcome-text {
       flex: 1;
@@ -77,8 +75,16 @@
     .bottom-categories {
       display: flex;
       position: absolute;
-      bottom: -7em;
+      top: 90%;
       column-gap: 1.5em;
+      row-gap: 1.5em;
+
+      @media (max-width: $phoneWide) {
+        flex-direction: column;
+      }
+      @media (min-width: $phoneWide + .2px) {
+        flex-direction: row;
+      }
 
       .row-list__container {
         flex: 1;
@@ -109,7 +115,11 @@
   }
 
   .middle-section {
-    padding-top: 65em;
+    padding: 68em 0 15em 0;
+
+    @media (max-width: $phoneWide) {
+      padding: 100em 0 15em 0
+    }
 
     .trending-games {
       padding: 0 10%;
@@ -127,31 +137,96 @@
             background: $secondBasicColor;
           }
         }
-
-        .trending-games__head-text--left h4 {
-          color: $fourthBasicColor;
-        }
-
-        .trending-games__head-text--left h3 {
-          font-size: 2em;
-          color: black;
-        }
       }
 
       .trending-games__container {
-
         display: flex;
         flex-direction: column;
         row-gap: 7em;
+        .game-pack {
+          flex: 1
+        }
 
         .trending-games__down-imgs {
           display: flex;
-          flex-direction: row;
+          row-gap: 7em;
           column-gap: 2em;
+
+          @media (max-width: $phoneWide) {
+            flex-direction: column;
+          }
+          @media (min-width: $phoneWide + .2px) {
+            flex-direction: row;
+          }
         }
       }
     }
 
   }
 
+  .bottom-section {
+    display: flex;
+    row-gap: 3em;
+    @media (max-width: $phoneWide) {
+      flex-direction: column;
+      padding: 0 10% 5em 10%;
+    }
+    @media (min-width: $phoneWide + .2px) {
+      flex-direction: row;
+      padding: 15em 10% 5em 10%;
+    }
+    justify-content: space-between;
+    position: relative;
+
+    .bottom-section__block {
+      background: $fifthBasicColor;
+      border-radius: 2em;
+      z-index: 10;
+      max-width: 30em;
+      max-height: 30em;
+      padding: 4em;
+      box-shadow: $smoothShadow;
+
+      span {
+        color: $secondBasicColor;
+      }
+
+      .bottom-section__description {
+        color: black;
+        font-weight: 500;
+      }
+
+      button {
+        font-weight: 500;
+        font-size: 1.1em;
+        border: none;
+        cursor: pointer;
+        transition: background .3s;
+
+        &:hover {
+          background: $secondBasicColor;
+        }
+      }
+    }
+
+    .bottom-section__back-img {
+      position: absolute;
+      top: 0;
+      width: 80%;
+      text-align: center;
+
+      img {
+        width: 40%;
+        border-radius: 2em;
+        box-shadow: $smoothShadow;
+      }
+    }
+  }
+
+  @media (min-width: 0) {
+    font-size: .8em;
+  }
+  @media (min-width: $tablesWide) {
+    font-size: 1.1rem;
+  }
 }

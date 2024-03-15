@@ -6,9 +6,11 @@ import categoryLogo4 from "../assets/images/featured-04.png"
 import {Link} from "react-router-dom";
 
 function Home() {
-    const ranNum = Math.floor(Math.random() * 8) + 1;
+    const ranNum = Math.floor(Math.random() * 19) + 1;
     const [readyGames, setReadyGames] = useState([])
     const [dataIsReady, setDataIsReady] = useState(false);
+    const [sizeWindow, setSizeWindow] = useState(window.innerWidth);
+    window.addEventListener("resize", () => setSizeWindow(window.innerWidth));
     useEffect(() => {
         fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/listofnewsOrProducts", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -20,31 +22,8 @@ function Home() {
         })
             .then(r => r.json())
             .then(resp => {
-                if (readyGames.length < 9) {
-                    for (let c = 0; c < 9; c++) {
-                        fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/page", {
-                            method: "POST", // *GET, POST, PUT, DELETE, etc.
-                            headers: {
-                                "Content-Type": "application/json",
-                                // 'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: JSON.stringify({type: "games", name: resp[c].title})
-                        })
-                            .then(r => r.json())
-                            .then(resp => {
-                                readyGames.push({
-                                    title: resp[0].title,
-                                    img: resp[0].img,
-                                    Price: resp[0].Price,
-                                    Genre: resp[0].Genre
-                                })
-                                if (readyGames.length === 9) setDataIsReady(true)
-                            })
-                            .catch(err => {
-                                console.log(err)
-                            })
-                    }
-                }
+                setReadyGames(resp);
+                setDataIsReady(true);
             })
             .catch(err => {
                 console.log(err)
@@ -65,7 +44,7 @@ function Home() {
                         our app.
                     </div>
                 </div>
-                <div className="welcome-img">
+                <div className="welcome-img" style={{display: sizeWindow > 810 ? "flex" : "none"}}>
                     <div className="welcome-img__price">
                         {readyGames[ranNum].Price}
                     </div>
@@ -101,7 +80,7 @@ function Home() {
             <div className="middle-section">
                 <div className="trending-games">
                     <div className="trending-games__head-text">
-                        <div className="trending-games__head-text--left">
+                        <div className="top-name-description">
                             <h4>TRENDING</h4>
                             <h3>Most selling games</h3>
                         </div>
@@ -110,7 +89,6 @@ function Home() {
                         </div>
                     </div>
                     <div className="trending-games__container">
-
                         <div className="trending-games__down-imgs">
                             <div className="game-pack">
                                 <div className="game-pack__top">
@@ -327,6 +305,37 @@ function Home() {
                     </div>
                 </div>
 
+            </div>
+            <div className="bottom-section">
+                <div className="bottom-section__block">
+                    <div className="top-name-description">
+                        <h4>Consoles</h4>
+                        <h3><span>PLAY</span> LIKE NEVER BEFORE</h3>
+                    </div>
+                    <h4 className="bottom-section__description">
+                        Experience lightning-fast loading with an ultra-high speed SSD, deeper immersion with support
+                        for haptic feedback, adaptive triggers and 3D Audio, and an all-new generation of incredible
+                        PlayStation games.
+                    </h4>
+                    <button className="focus-btn category-btn__active">
+                        Shop now
+                    </button>
+                </div>
+                <div className="bottom-section__back-img" style={{display: sizeWindow > 810 ? "inline-block" : "none"}}>
+                    <img
+                        src="https://media.direct.playstation.com/is/image/sierialto/ps5-slim-minorsection-2?$Minor_Section_Desktop$"
+                        alt="conoles-access-banner"/>
+                </div>
+                <div className="bottom-section__block">
+                    <div className="top-name-description">
+                        <h4>Accessories</h4>
+                        <h3>Build your perfect gaming setup with <span>controllers, headsets
+                            and other</span> </h3>
+                    </div>
+                    <button className="focus-btn category-btn__active">
+                        Shop now
+                    </button>
+                </div>
             </div>
         </div>
     )

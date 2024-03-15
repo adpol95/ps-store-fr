@@ -1,9 +1,11 @@
 @import "loader.scss";
 @import "net.scss";
 @import "header.scss";
+@import "footer.scss";
 @import "psn.scss";
 @import "varaibles.scss";
 @import "home.scss";
+@import "games-list.scss";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 .App {
@@ -17,6 +19,12 @@
   font-style: normal;
   padding: 5.9em 10%;
   color: $firstBasicColor;
+  position: relative;
+
+  a {
+    text-decoration: none;
+    color: $firstBasicColor;
+  }
 
   button {
     font-family: "Montserrat", sans-serif;

@@ -1,0 +1,98 @@
+@import "varaibles";
+@import "mixins";
+@import "reused-components";
+
+.game-list {
+  padding: 30em 0 10em 0;
+
+  .game-list__top {
+    display: flex;
+    flex-direction: column;
+    @include backgroundWall($backgroundOther, 0em);
+
+    h3 {
+      font-size: 3em;
+    }
+  }
+
+  .game-list__filter {
+    position: absolute;
+    top: 18em;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    column-gap: 1em;
+  }
+
+  .game-list__filter--shell {
+    display: flex;
+    row-gap: 1em;
+    flex-direction: column;
+    align-items: center;
+
+
+    .game-list__filter--main-btn {
+      background: $fourthBasicColor;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color .3s;
+
+      &:hover {
+        color: $thirdBasicColor;
+      }
+    }
+
+    .game-list__filter--window {
+
+      ul {
+        padding: 0;
+      }
+
+      li {
+        list-style-type: none;
+      }
+
+      @include circleElements();
+      background: $fifthBasicColor;
+      color: $fourthBasicColor;
+      display: flex;
+      transition: opacity 3s;
+
+
+    }
+  }
+
+  @keyframes slideRightSide {
+    from {
+      margin-right: -150em
+    }
+
+    to {
+      margin: 0
+    }
+  }
+  @keyframes slideCenterSide {
+    from {
+      margin: 0
+    }
+
+    to {
+      margin-right: 150em
+    }
+  }
+
+  .game-list__middle {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 2em;
+    row-gap: 7.5em;
+    justify-content: center;
+    .game-pack {
+      width: 22em;
+    }
+  }
+}
+
+
