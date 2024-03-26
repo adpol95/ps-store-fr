@@ -1,3 +1,188 @@
+.category-btn__active {
+  background: rgba(24, 183, 190, 0.41);
+  padding: 0.5em 0.8em;
+  border-radius: 1.5em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
 
+.focus-btn {
+  background: #072A40;
+  transition: font-size 0.3s;
+}
+.focus-btn:hover {
+  font-size: 125%;
+}
+
+.game-pack {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.game-pack .game-pack__top {
+  flex: 2;
+  z-index: 100;
+}
+.game-pack .game-pack__top img {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2em;
+  width: 100%;
+  height: 13em;
+  object-fit: cover;
+  object-position: 0 25%;
+}
+.game-pack .game-pack__top .game-pack__price {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: #178CA4;
+  padding: 1em;
+  border-radius: 2em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  padding: 0.7em;
+  border-radius: 0.7em;
+  font-weight: 500;
+}
+.game-pack .game-pack__down {
+  padding: 5em 1em 1em 1em;
+  border-bottom-left-radius: 2em;
+  border-bottom-right-radius: 2em;
+  background: #e2e9ec;
+  flex: 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5.5em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+}
+.game-pack .game-pack__down:hover .game-pack__down--left .game-pack__down--title {
+  color: #18B7BE;
+}
+.game-pack .game-pack__down:hover .game-pack__down--right {
+  background: #18B7BE;
+}
+.game-pack .game-pack__down .game-pack__down--left {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3em;
+}
+.game-pack .game-pack__down .game-pack__down--left .game-pack__down--title {
+  color: black;
+  margin: 0;
+  padding: 0 0.5em;
+  transition: color 0.3s;
+}
+.game-pack .game-pack__down .game-pack__down--left .game-pack__down--genre {
+  color: #757575;
+  margin: 0;
+  padding: 0 0.5em;
+  font-weight: 300;
+}
+.game-pack .game-pack__down .game-pack__down--right {
+  background: #178CA4;
+  padding: 1em;
+  border-radius: 2em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  background: #072A40;
+  display: flex;
+  align-items: center;
+  padding: 0.8em;
+  transition: background 0.3s;
+}
+
+.game-list {
+  padding: 30em 0 10em 0;
+}
+.game-list .game-list__top {
+  display: flex;
+  flex-direction: column;
+  background: url("../images/heading-back.png") center;
+  height: 0em;
+  border-bottom-left-radius: 10em;
+  border-bottom-right-radius: 10em;
+  background-size: cover;
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 14em 10%;
+  justify-content: center;
+  align-items: center;
+}
+.game-list .game-list__top h3 {
+  font-size: 3em;
+}
+.game-list .game-list__filter {
+  position: absolute;
+  top: 18em;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  column-gap: 1em;
+}
+.game-list .game-list__filter--shell {
+  display: flex;
+  row-gap: 1em;
+  flex-direction: column;
+  align-items: center;
+}
+.game-list .game-list__filter--shell .game-list__filter--main-btn {
+  background: #072A40;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.game-list .game-list__filter--shell .game-list__filter--main-btn:hover {
+  color: #178CA4;
+}
+.game-list .game-list__filter--shell .game-list__filter--window {
+  background: #178CA4;
+  padding: 1em;
+  border-radius: 2em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  background: #e2e9ec;
+  color: #072A40;
+  display: flex;
+  transition: opacity 3s;
+}
+.game-list .game-list__filter--shell .game-list__filter--window ul {
+  padding: 0;
+}
+.game-list .game-list__filter--shell .game-list__filter--window li {
+  list-style-type: none;
+}
+@keyframes slideRightSide {
+  from {
+    margin-right: -150em;
+  }
+  to {
+    margin: 0;
+  }
+}
+@keyframes slideCenterSide {
+  from {
+    margin: 0;
+  }
+  to {
+    margin-right: 150em;
+  }
+}
+.game-list .game-list__middle {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 2em;
+  row-gap: 7.5em;
+  justify-content: center;
+}
+.game-list .game-list__middle .game-pack {
+  width: 22em;
+}
 
 /*# sourceMappingURL=games-list.css.map */

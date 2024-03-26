@@ -17,18 +17,22 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  box-shadow: $smoothShadow;
+  border-radius: 2em;
+  background: $fifthBasicColor;
 
   .game-pack__top {
-    flex: 2;
-    z-index: 100;
+    height: 13em;
+    background: white;
+    border-radius: 2em;
+
 
     img {
       box-shadow: $smoothShadow;
       border-radius: 2em;
       width: 100%;
       height: 13em;
-      object-fit: cover;
-      object-position: 0 25%;
+      object-fit: contain;
     }
 
     .game-pack__price {
@@ -43,16 +47,10 @@
   }
 
   .game-pack__down {
-    padding: 5em 1em 1em 1em;
+    padding: 2.5em 1em 1.5em 1em;
     border-bottom-left-radius: 2em;
     border-bottom-right-radius: 2em;
     background: $fifthBasicColor;
-    flex: 1;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -5.5em;
-    box-shadow: $smoothShadow;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -71,6 +69,7 @@
       display: flex;
       flex-direction: column;
       row-gap: .3em;
+
       .game-pack__down--title {
         color: black;
         margin: 0;

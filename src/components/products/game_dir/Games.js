@@ -1,10 +1,5 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import categoryLogo1 from "../../../assets/images/featured-01.png";
-import categoryLogo2 from "../../../assets/images/featured-02.png";
-import categoryLogo3 from "../../../assets/images/featured-03.png";
-import categoryLogo4 from "../../../assets/images/featured-04.png";
-import logout from "../../authorization_dir/Logout";
 
 function Games() {
 
@@ -12,7 +7,7 @@ function Games() {
     const [currentPage, setCurrentPage] = useState("1");
     const [dataIsReady, setDataIsReady] = useState(false);
     const [filterOnPrice, setFilterOnPrice] = useState([false, false]);
-    const [filterOnDev, setFilterOnDev] = useState([false, false]);
+    const [filterOnDev  , setFilterOnDev] = useState([false, false]);
     const [filterOnRating, setFilterOnRating] = useState([false, false]);
     const [filterOnPlatform, setFilterOnPlatform] = useState([false, false]);
     const [filterOnGenre, setFilterOnGenre] = useState([false, false]);
@@ -383,7 +378,7 @@ function Games() {
                     const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
                     return <Link to={el["_id"]} state={{curTitle: readyTitle}} className="game-pack">
                         <div className="game-pack__top">
-                            <img src={el.img} alt=""/>
+                            <img src={el.img} alt=""  style={{objectFit: "cover", objectPosition: "0 25%"}}/>
                             <div className="game-pack__price">
                                 {el.Price}
                             </div>
@@ -409,8 +404,6 @@ function Games() {
                     </Link>
                 })}
             </div>
-
-
             <div onClick={(event) => {
                 setDataIsReady(false);
                 setCurrentPage(event.target.innerText);

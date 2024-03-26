@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import Common from "../Common";
 
 function Console() {
     const [mainData, setMainData] = useState("");
@@ -24,31 +24,7 @@ function Console() {
             })
 
     }, [])
-    return (
-        <div className={!dataIsReady ? "loader" : ""}>
-            {
-                dataIsReady ?
-                    <ul>
-                        {mainData.map((el, i) => {
-                            const mainId = i + 1;
-                            const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title
-                            return <li key={mainId}>
-                                <Link to={mainId + ""} state={{curTitle: readyTitle}}>
-                                    {readyTitle}
-                                    <img src={el.img} alt="" style={{width: "100px"}}/>
-                                </Link>
-                            </li>
-                        })}
-                    </ul> :
-                    <div className="lds-ring">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-            }
-        </div>
-    );
+    return <Common mainData={mainData} data={dataIsReady}/>
 }
 
 export default Console;

@@ -4,7 +4,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  background: #e2e9ec;
+  height: 1000px;
 }
 
 .lds-ring {
@@ -79,18 +80,21 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2em;
+  background: #e2e9ec;
 }
 .game-pack .game-pack__top {
-  flex: 2;
-  z-index: 100;
+  height: 13em;
+  background: white;
+  border-radius: 2em;
 }
 .game-pack .game-pack__top img {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   border-radius: 2em;
   width: 100%;
   height: 13em;
-  object-fit: cover;
-  object-position: 0 25%;
+  object-fit: contain;
 }
 .game-pack .game-pack__top .game-pack__price {
   position: absolute;
@@ -105,16 +109,10 @@
   font-weight: 500;
 }
 .game-pack .game-pack__down {
-  padding: 5em 1em 1em 1em;
+  padding: 2.5em 1em 1.5em 1em;
   border-bottom-left-radius: 2em;
   border-bottom-right-radius: 2em;
   background: #e2e9ec;
-  flex: 1;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5.5em;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -454,18 +452,21 @@ footer {
   display: flex;
   flex-direction: column;
   position: relative;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2em;
+  background: #e2e9ec;
 }
 .game-pack .game-pack__top {
-  flex: 2;
-  z-index: 100;
+  height: 13em;
+  background: white;
+  border-radius: 2em;
 }
 .game-pack .game-pack__top img {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   border-radius: 2em;
   width: 100%;
   height: 13em;
-  object-fit: cover;
-  object-position: 0 25%;
+  object-fit: contain;
 }
 .game-pack .game-pack__top .game-pack__price {
   position: absolute;
@@ -480,16 +481,10 @@ footer {
   font-weight: 500;
 }
 .game-pack .game-pack__down {
-  padding: 5em 1em 1em 1em;
+  padding: 2.5em 1em 1.5em 1em;
   border-bottom-left-radius: 2em;
   border-bottom-right-radius: 2em;
   background: #e2e9ec;
-  flex: 1;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5.5em;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -677,6 +672,10 @@ footer {
   flex-direction: column;
   row-gap: 7em;
 }
+.home .middle-section .trending-games .trending-games__container img {
+  object-fit: cover;
+  object-position: 0 25%;
+}
 .home .middle-section .trending-games .trending-games__container .game-pack {
   flex: 1;
 }
@@ -780,18 +779,21 @@ footer {
   display: flex;
   flex-direction: column;
   position: relative;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2em;
+  background: #e2e9ec;
 }
 .game-pack .game-pack__top {
-  flex: 2;
-  z-index: 100;
+  height: 13em;
+  background: white;
+  border-radius: 2em;
 }
 .game-pack .game-pack__top img {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   border-radius: 2em;
   width: 100%;
   height: 13em;
-  object-fit: cover;
-  object-position: 0 25%;
+  object-fit: contain;
 }
 .game-pack .game-pack__top .game-pack__price {
   position: absolute;
@@ -806,16 +808,10 @@ footer {
   font-weight: 500;
 }
 .game-pack .game-pack__down {
-  padding: 5em 1em 1em 1em;
+  padding: 2.5em 1em 1.5em 1em;
   border-bottom-left-radius: 2em;
   border-bottom-right-radius: 2em;
   background: #e2e9ec;
-  flex: 1;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5.5em;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -941,11 +937,37 @@ footer {
   flex-direction: row;
   flex-wrap: wrap;
   column-gap: 2em;
-  row-gap: 7.5em;
+  row-gap: 2em;
   justify-content: center;
 }
 .game-list .game-list__middle .game-pack {
-  width: 22em;
+  width: 20em;
+}
+.game-list .game-list__pages {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5em;
+  justify-content: center;
+  column-gap: 3%;
+}
+.game-list .game-list__pages button {
+  border: none;
+  text-align: center;
+  background: #178CA4;
+  padding: 1em;
+  border-radius: 2em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  background: #e2e9ec;
+  color: black;
+  width: 50px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.game-list .game-list__pages button:hover {
+  background: #18B7BE;
+  color: #e2e9ec;
 }
 
 .App {
@@ -960,6 +982,10 @@ footer {
   padding: 5.9em 10%;
   color: #F9F7F0;
   position: relative;
+  padding-bottom: 10em;
+}
+.App button {
+  color: black;
 }
 .App a {
   text-decoration: none;

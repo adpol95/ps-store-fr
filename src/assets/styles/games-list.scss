@@ -44,7 +44,6 @@
     }
 
     .game-list__filter--window {
-
       ul {
         padding: 0;
       }
@@ -87,10 +86,33 @@
     flex-direction: row;
     flex-wrap: wrap;
     column-gap: 2em;
-    row-gap: 7.5em;
+    row-gap: 2em;
     justify-content: center;
     .game-pack {
-      width: 22em;
+      width: 20em;
+    }
+  }
+  .game-list__pages {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5em;
+    justify-content: center;
+    column-gap: 3%;
+    button {
+      border: none;
+      text-align: center;
+      @include  circleElements();
+      background: $fifthBasicColor;
+      color: black;
+      width: 50px;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background .3s, color .3s;
+      &:hover{
+        background: $secondBasicColor;
+        color: $fifthBasicColor;
+      }
     }
   }
 }
