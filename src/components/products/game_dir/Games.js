@@ -405,7 +405,7 @@ function Games() {
             </div>
             <div onClick={(event) => {
                 setDataIsReady(false);
-                setCurrentPage(event.target.innerText === ">" && currentPage < 2 ? +currentPage + 1 + "" : event.target.innerText === "<" && currentPage > 1 ? +currentPage - 1 + "" : typeof (+event.target.innerText) === "number" ? event.target.innerText : "1");
+                setCurrentPage(event.target.innerText === ">" && currentPage < 4 ? +currentPage + 1 + "" : event.target.innerText === "<" && currentPage > 1 ? +currentPage - 1 + "" : typeof (+event.target.innerText) === "number" ? event.target.innerText : "1");
             }} className="game-list__pages">
                 <button>{"<"}</button>
                 <button style={currentPage === "1" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>1</button>

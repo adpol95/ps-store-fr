@@ -990,6 +990,7 @@ footer {
   border-radius: 2em;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   position: relative;
+  min-width: 30em;
 }
 .game-list .game-list__page-in .game-list__page-in-top--left-side img {
   width: 100%;
