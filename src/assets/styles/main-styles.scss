@@ -6,6 +6,7 @@
 @import "varaibles.scss";
 @import "home.scss";
 @import "games-list.scss";
+@import "product-page.scss";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 .App {
@@ -20,7 +21,11 @@
   padding: 5.9em 10%;
   color: $firstBasicColor;
   position: relative;
-  padding-bottom: 10em;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+  }
   button {
     color: black;
   }

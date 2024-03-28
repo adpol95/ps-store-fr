@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 function Games() {
-
     const [mainData, setMainData] = useState("");
     const [currentPage, setCurrentPage] = useState("1");
     const [dataIsReady, setDataIsReady] = useState(false);
@@ -406,10 +405,14 @@ function Games() {
             </div>
             <div onClick={(event) => {
                 setDataIsReady(false);
-                setCurrentPage(event.target.innerText);
-            }}>
-                <button>1</button>
-                <button>2</button>
+                setCurrentPage(event.target.innerText === ">" && currentPage < 2 ? +currentPage + 1 + "" : event.target.innerText === "<" && currentPage > 1 ? +currentPage - 1 + "" : typeof (+event.target.innerText) === "number" ? event.target.innerText : "1");
+            }} className="game-list__pages">
+                <button>{"<"}</button>
+                <button style={currentPage === "1" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>1</button>
+                <button style={currentPage === "2" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>2</button>
+                <button style={currentPage === "3" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>3</button>
+                <button style={currentPage === "4" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>4</button>
+                <button>{">"}</button>
             </div>
         </div>)
     else return (

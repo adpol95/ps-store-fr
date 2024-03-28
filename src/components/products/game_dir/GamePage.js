@@ -5,7 +5,7 @@ import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
 import useSignIn from "react-auth-kit/hooks/useSignIn";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
-//new Object({title: el[0], ...JSON.parse(el[1])}) Шаблон для отправки на бек
+//new Object({title: el[0], ...JSON.parse(el[1])}) Шаблон для отправки на бэк
 function GamePage() {
     const auth = useAuthUser();
     const isAuth = useIsAuthenticated();
@@ -19,7 +19,6 @@ function GamePage() {
     const isYouHaveIt = isAuth() ? auth.ownership.games.some(el => el.name === state.curTitle) : "";
     const signIn = useSignIn();
     const authHeader = useAuthHeader();
-
     useEffect(() => {
         if (Object.values(favGame).length) {
             if (auth.favorite.games.every(el => el.title !== favGame.title)) {
@@ -154,85 +153,102 @@ function GamePage() {
         }
     }, [addToCart]);
 
-    return (
-        <div className={!dataIsReady ? "loader" : ""}>
-            {dataIsReady ?
+    if (!dataIsReady) return (
+        <div className="loader">
+            <div className="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>)
+
+    else return (
+        <div className="game-list">
+            <div className="game-list__top" style={{backgroundImage: `url(${gameData.BackgroundImg})`}}>
                 <div>
-                    <div>
-                        <img src={gameData.BackgroundImg} alt="background img error" width={"100%"}/>
+                    <h3>{state.curTitle}</h3>
+                </div>
+            </div>
+            <div className="game-list__page-in">
+                <div className="game-list__page-in-top">
+                    <div className="game-list__page-in-top--left-side">
+                        <img src={gameData.Cover} alt=""/>
+                        <div className="game-list__page-in-top--img-platform">
+                            {gameData.Platform}
+                        </div>
                     </div>
-                    <div>
-                        <h1>
-                            {state.curTitle}
-                        </h1>
-                        <div>
+                    <div className="game-list__page-in-top--right-side">
+                        <div className="game-list__page-in-top--developer">
                             {gameData.Developer}
                         </div>
-                        <div>
-                            {gameData.Rating}
+                        <div className="game-list__page-in-top--title"><h1>{state.curTitle}</h1></div>
+                        <div className="game-list__page-in-top--price">{gameData.Price}</div>
+                        <div className="game-list__page-in-top--rating">
+                            Rating: <span>{gameData.Rating + " / 5"}</span>
                         </div>
-                        <div>
-                            {gameData.Price}
-                        </div>
-                        <div>
-                            {cartIsReady ? <button onClick={() => setAddToCart(true)}
-                                                   disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
-                                <Link to="/basket">
-                                    <button>To Cart</button>
-                                </Link>}
-                        </div>
-                        <div>
+                        <div className="game-list__page-in-top--compat">
                             <ul>
                                 {gameData.Compatibility.map((el, i) => <li key={i * 76}>
                                     {el}
                                 </li>)}
                             </ul>
                         </div>
-                        <div>
-                            <img src={gameData.Age.ESRBImg} alt=""/>
-                            <div>
-                                {gameData.Age.TopDescipt}
+                        <div className="game-list__page-in-top--btn-container">
+                            <div className="game-list__page-in-top--add-to-cart">
+                                {cartIsReady ? <button onClick={() => setAddToCart(true)}
+                                                       disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
+                                    <Link to="/basket">
+                                        <button>To Cart</button>
+                                    </Link>}
                             </div>
-                            <div>
-                                {gameData.Age.BottomDescipt}
+                            <div className="game-list__page-in-top--add-to-fav">
+                                <button onClick={() => setFavGame({
+                                    "_id": gameData["_id"],
+                                    img: gameData.img,
+                                    title: state.curTitle
+                                })}>
+                                    &#x2764;
+                                </button>
+                                <div className="game-list__page-in-top--atf-descript">
+                                    Add this product to your favorite
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="game-list__page-in-top--bottom-container">
+                            <div className="game-list__page-in--additional">
+                                <table>
+                                    {
+                                        gameData.AdditionalInfo.keys.map((el, i) => <tr key={(i + 1) * 76}>
+                                            <th>{el}</th>
+                                            <th>{gameData.AdditionalInfo.values[i]}</th>
+                                        </tr>)
+                                    }
+                                </table>
+                            </div>
+                            <div className="game-list__page-in-top--child">
+                                <img src={gameData.Age.ESRBImg} alt=""/>
+                                <div className="game-list__page-in-top--child-descript">
+                                    {gameData.Age.TopDescipt}
+                                </div>
+                                <div className="game-list__page-in-top--child-descript">
+                                    {gameData.Age.BottomDescipt}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <h2>Game info</h2>
-                        <div>
-                            {gameData.GameInfo}
-                        </div>
+                </div>
+
+                <div className="game-list__page-in--decription">
+                    <h3>Description</h3>
+                    <div className="game-list__page-in--decription--text">
+                        {gameData.GameInfo.map(el => <div>{el}</div>)}
                     </div>
-                    <div>
-                        <table>
-                            {
-                                gameData.AdditionalInfo.keys.map((el, i) => <tr key={(i + 1) * 76}>
-                                    <th>{el}</th>
-                                    <th>{gameData.AdditionalInfo.values[i]}</th>
-                                </tr>)
-                            }
-                        </table>
-                    </div>
-                    <div>
-                        <p>Add this game to your favorite</p>
-                        <button onClick={() => setFavGame({
-                            "_id": gameData["_id"],
-                            img: gameData.img,
-                            title: state.curTitle
-                        })}>
-                            Add
-                        </button>
-                    </div>
-                </div> :
-                <div className="lds-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>}
-        </div>
-    )
+                </div>
+            </div>
+        </div>)
+
 }
 
 export default GamePage;
