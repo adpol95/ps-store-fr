@@ -3,11 +3,11 @@
 @import "reused-components";
 
 .products-list__page-in {
-
   .products-list__top {
     display: flex;
     flex-direction: column;
     @include backgroundWall($backgroundOther, 0em);
+    color: black;
 
     h3 {
       font-size: 3em;
@@ -20,6 +20,19 @@
     align-items: center;
     column-gap: 5%;
     padding-bottom: 6em;
+
+    button {
+      border: none;
+      cursor: pointer;
+      transition: background .3s;
+      @include circleElements();
+      font-weight: 700;
+
+      &:hover {
+        background: $fourthBasicColor;
+      }
+    }
+
     @media (max-width: $phoneWide) {
       flex-direction: column;
     }
@@ -34,6 +47,19 @@
     box-shadow: $smoothShadow;
     position: relative;
     min-width: 30em;
+
+    .products-list__page-in-top--btn {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 9%;
+      }
+    }
 
     img {
       width: 100%;
@@ -76,22 +102,16 @@
       font-size: 1.2em;
     }
 
+    .products-list__page-in-top--compat {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1.5em;
+    }
+
     .products-list__page-in-top--btn-container {
       display: flex;
       align-items: center;
       column-gap: 3%;
-
-      button {
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: background .3s;
-        @include circleElements();
-
-        &:hover {
-          background: $fourthBasicColor;
-        }
-      }
 
       .products-list__page-in-top--add-to-fav {
         position: relative;
@@ -134,9 +154,58 @@
     }
   }
 
+  img {
+    border-radius: 2em;
+    box-shadow: $smoothShadow;
+    object-fit: cover;
+    width: 50%;
+  }
+
+  .products-list__page-in-middle {
+    color: black;
+
+    img {
+      @media (max-width: $phoneWide) {
+        display: none;
+      }
+    }
+
+    .products-list__page-in--many-descript {
+
+      display: flex;
+      flex-direction: row;
+      column-gap: 2em;
+      padding: 2em 0;
+      @media (max-width: $phoneWide) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .products-list__page-in-down {
+    color: black;
+    display: flex;
+    justify-content: center;
+    column-gap: 2em;
+
+    img {
+      width: 28%;
+      @media (max-width: $phoneWide) {
+        display: none;
+      }
+    }
+
+    ul {
+      list-style-type: decimal;
+    }
+
+  }
+
   .products-list__page-in--decription {
     display: flex;
     flex-direction: column;
+    text-align: center;
+    justify-content: center;
     color: black;
     box-shadow: $smoothShadow;
     background: $fifthBasicColor;

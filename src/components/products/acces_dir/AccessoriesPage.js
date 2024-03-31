@@ -43,7 +43,7 @@ function AccessoriesPage() {
                     setStateColors(<ul
                         style={{display: "grid", gridTemplateColumns: "85px 85px 85px", columnGap: "5px"}}>
                         {Object.keys(resp.allImgsAndTitles).map((el, i) => <li key={i * 23}
-                                                                                        style={{listStyleType: "none"}}>
+                                                                               style={{listStyleType: "none"}}>
                             <img src={resp.allImgsAndTitles[el][nameTitle.includes("SSD") ? 3 : 0]} alt={el}
                                  style={{
                                      objectFit: "none",
@@ -133,8 +133,7 @@ function AccessoriesPage() {
                         window.location.reload();
                     })
                     .catch(err => console.log(err))
-            }
-            else {
+            } else {
                 window.localStorage.setItem(nameTitle, JSON.stringify({
                     title: isHaveColor,
                     img: currentColor ? datas.allImgsAndTitles[currentColor][0] : datas.img,
@@ -157,62 +156,138 @@ function AccessoriesPage() {
             }
         }} className={!dataIsReady ? "loader" : ""}>
             {dataIsReady ?
-                <div>
-                    <h1>
-                        {isHaveColor}
-                    </h1>
-                    <button>
-                        &lt;
-                    </button>
-                    <img src={currentImgs[currentPage]} alt="" style={{width: "300px"}}/>
-                    <button>
-                        &gt;
-                    </button>
-                    <div onClick={(event) => {
-                        if (event.target.localName === "img") {
-                            setCurrentColor(event.target.alt);
-                        }
-                    }}>
-                        {currentColor ? <div> Color: {currentColor}
-                        </div> : ""}
-                        {stateColors}
+                <div className="products-list">
+                    <div className="products-list__top">
+                        <div>
+                            <h3>{isHaveColor}</h3>
+                        </div>
                     </div>
-                    <div>Realise date: {datas.realiseDate}</div>
-                    <div>Price: {datas.price}</div>
-                    <div>
-                        {cartIsReady ? <button onClick={() => setAddToCart(true)} disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
-                            <Link to="/basket">
-                                <button>To Cart</button>
-                            </Link>}
-                    </div>
-                    <div>{datas.previewText}</div>
-                    <hr/>
-                    <div>
-                        <h3>Tearms</h3>
-                        <ul>
-                            {datas.terms.map((el, i) => <li key={i * 14}>
-                                {el}
-                            </li>)}
-                        </ul>
-                    </div>
-                    <hr/>
-                    <div>
-                        <ul>
-                            {datas.mainText.map((el, i) => <li key={i * 114}>
-                                    <img src={currentImgs[i + 1]} alt="accessories img error"/>
-                                    <h3>
-                                        {el.title}
-                                    </h3>
+                    <div className="products-list__page-in">
+                        <div className="products-list__page-in-top">
+                            <div className="products-list__page-in-top--left-side">
+                                <img src={currentImgs[currentPage]} alt=""/>
+                                <div className="products-list__page-in-top--btn">
+                                    <button>
+                                        &lt;
+                                    </button>
+                                    <button>
+                                        &gt;
+                                    </button>
+                                </div>
+                                <div onClick={(event) => {
+                                    if (event.target.localName === "img") {
+                                        setCurrentColor(event.target.alt);
+                                    }
+                                }}>
+                                    {currentColor ? <div> Color: {currentColor}
+                                    </div> : ""}
+                                    {stateColors}
+                                </div>
+                            </div>
+                            <div className="products-list__page-in-top--right-side">
+                                <div className="products-list__page-in-top--title"><h1>{isHaveColor}</h1></div>
+                                <div className="products-list__page-in-top--price">{datas.price}</div>
+                                <div className="products-list__page-in-top--rating">Realise
+                                    date: <span>{datas.realiseDate}</span></div>
+                                <div>{datas.previewText}</div>
+                                <div>
+                                    {cartIsReady ? <button onClick={() => setAddToCart(true)}
+                                                           disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
+                                        <Link to="/basket">
+                                            <button>To Cart</button>
+                                        </Link>}
+                                </div>
+                                <hr/>
+                                <div className="products-list__page-in-top--compat">
+                                    <h3 style={{margin: "0"}}>Tearms</h3>
                                     <ul>
-                                        {el.descript.map((el, il) => <li key={il * 221}>{el}</li>)}
+                                        {datas.terms.map((el, i) => <li key={i * 14}>{el}</li>)}
                                     </ul>
-                                </li>
-                            )}
-                        </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="products-list__page-in-middle">
+                            <ul>
+                                {datas.mainText.map((el, i) => <li key={i * 114}>
+                                        <h3>
+                                            {el.title}
+                                        </h3>
+                                        <ul>
+                                            {el.descript.map((el1, il) => <li key={il * 221}>
+                                                {il % 2 !== 1 ? <div className="products-list__page-in--many-descript">
+                                                    <img src={currentImgs[il + 1]} alt=""/>
+                                                    <div className="products-list__page-in--decription">{el1}</div>
+                                                </div> : <div className="products-list__page-in--many-descript">
+                                                    <div className="products-list__page-in--decription">{el1}</div>
+                                                    <img src={currentImgs[il + 1]} alt=""/>
+                                                </div>}
+
+                                            </li>)}
+                                        </ul>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+
                     </div>
-                    <hr/>
-                    {inBox}
-                </div> :
+                </div>
+                // <div>
+                //     <h1>
+                //         {isHaveColor}
+                //     </h1>
+                //     <button>
+                //         &lt;
+                //     </button>
+                //     <img src={currentImgs[currentPage]} alt="" style={{width: "300px"}}/>
+                //     <button>
+                //         &gt;
+                //     </button>
+                //     <div onClick={(event) => {
+                //         if (event.target.localName === "img") {
+                //             setCurrentColor(event.target.alt);
+                //         }
+                //     }}>
+                //         {currentColor ? <div> Color: {currentColor}
+                //         </div> : ""}
+                //         {stateColors}
+                //     </div>
+                //     <div>Realise date: {datas.realiseDate}</div>
+                //     <div>Price: {datas.price}</div>
+                //     <div>
+                //         {cartIsReady ? <button onClick={() => setAddToCart(true)} disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
+                //             <Link to="/basket">
+                //                 <button>To Cart</button>
+                //             </Link>}
+                //     </div>
+                //     <div>{datas.previewText}</div>
+                //     <hr/>
+                //     <div>
+                //         <h3>Tearms</h3>
+                //         <ul>
+                //             {datas.terms.map((el, i) => <li key={i * 14}>
+                //                 {el}
+                //             </li>)}
+                //         </ul>
+                //     </div>
+                //     <hr/>
+                //     <div>
+                //         <ul>
+                //             {datas.mainText.map((el, i) => <li key={i * 114}>
+                //                     <img src={currentImgs[i + 1]} alt="accessories img error"/>
+                //                     <h3>
+                //                         {el.title}
+                //                     </h3>
+                //                     <ul>
+                //                         {el.descript.map((el, il) => <li key={il * 221}>{el}</li>)}
+                //                     </ul>
+                //                 </li>
+                //             )}
+                //         </ul>
+                //     </div>
+                //     <hr/>
+                //     {inBox}
+                // </div>
+                :
                 <div className="lds-ring">
                     <div></div>
                     <div></div>
@@ -220,6 +295,7 @@ function AccessoriesPage() {
                     <div></div>
                 </div>
             }
+
         </div>
     )
 

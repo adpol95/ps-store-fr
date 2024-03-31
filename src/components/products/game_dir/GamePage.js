@@ -232,7 +232,7 @@ function GamePage() {
                                 <div className="products-list__page-in-top--child-descript">
                                     {gameData.Age.TopDescipt}
                                 </div>
-                                <div className="products-list__page-in-top--child-descript">
+                                <div className="products-list__p=-0з987ge-in-top--child-descript">
                                     {gameData.Age.BottomDescipt}
                                 </div>
                             </div>

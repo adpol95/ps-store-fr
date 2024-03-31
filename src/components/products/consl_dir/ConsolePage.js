@@ -126,54 +126,74 @@ function ConsolePage() {
                     </div>
                     <div className="products-list__page-in">
                         <div className="products-list__page-in-top">
-                            <button>
-                                &lt;
-                            </button>
-                            <img src={datas.descriptionImgs[currentPage]} alt="" style={{width: "300px"}}/>
-                            <button>
-                                &gt;
-                            </button>
-                            <div>{datas.previewText}</div>
-                            <div>Realise date: {datas.realiseDate}</div>
-                            <div>Price: {datas.price}</div>
-                            <div>
-                                {cartIsReady ? <button onClick={() => setAddToCart(true)}
-                                                       disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
-                                    <Link to="/basket">
-                                        <button>To Cart</button>
-                                    </Link>}
+                            <div className="products-list__page-in-top--left-side">
+                                <img src={datas.descriptionImgs[currentPage]} alt=""/>
+                                <div className="products-list__page-in-top--btn">
+                                    <button>
+                                        &lt;
+                                    </button>
+                                    <button>
+                                        &gt;
+                                    </button>
+                                </div>
                             </div>
-                            <hr/>
-                            <div>
-                                <h3>Tearms</h3>
-                                <ul>
-                                    {datas.terms.map((el, i) => <li key={i * 14}>{el}</li>)}
-                                </ul>
+                            <div className="products-list__page-in-top--right-side">
+                                <div className="products-list__page-in-top--title"><h1>{state.curTitle}</h1></div>
+                                <div className="products-list__page-in-top--price">{datas.price}</div>
+                                <div className="products-list__page-in-top--rating">Realise
+                                    date: <span>{datas.realiseDate}</span></div>
+                                <div>{datas.previewText}</div>
+                                <div>
+                                    {cartIsReady ? <button onClick={() => setAddToCart(true)}
+                                                           disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
+                                        <Link to="/basket">
+                                            <button>To Cart</button>
+                                        </Link>}
+                                </div>
+                                <hr/>
+                                <div className="products-list__page-in-top--compat">
+                                    <h3 style={{margin: "0"}}>Tearms</h3>
+                                    <ul>
+                                        {datas.terms.map((el, i) => <li key={i * 14}>{el}</li>)}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div className="products-list__page-in-middle">
                             <ul>
                                 {datas.mainText ? datas.mainText.map((el, i) => <li key={i * 114}>
-                                        <img src={datas.descriptionImgs[i + 1]} alt="console img error"/>
                                         <h3>
                                             {el.title}
                                         </h3>
-                                        <ul>fF
-                                            {el.descript.map((el, il) => <li key={il * 221}>{el}</li>)}
+                                        <ul>
+                                            {el.descript.map((el1, il) => <li key={il * 221}>
+                                                {il % 2 !== 1 ? <div className="products-list__page-in--many-descript">
+                                                    <img src={el.img[il]} alt=""/>
+                                                    <div className="products-list__page-in--decription">{el1}</div>
+                                                </div> : <div className="products-list__page-in--many-descript">
+                                                    <div className="products-list__page-in--decription">{el1}</div>
+                                                    <img src={el.img[il]} alt=""/>
+                                                </div>}
+
+                                            </li>)}
                                         </ul>
                                     </li>
                                 ) : ""}
                             </ul>
                         </div>
-                        <div className="products-list__page-in-down">
-                            <h3>
-                                {datas.whatInTheBox ? 'What in the box' : ''}
-                            </h3>
-                            <ul>
-                                {datas.whatInTheBox ? datas.whatInTheBox.map((el, i) => <li
-                                    key={i * 25}> {el}</li>) : ""}
-                            </ul>
-                        </div>
+                        {datas.whatInTheBox ? <div className="products-list__page-in-down">
+                            <div>
+                                <h3>
+                                    {datas.whatInTheBox ? 'What in the box' : ''}
+                                </h3>
+                                <ul>
+                                    {datas.whatInTheBox ? datas.whatInTheBox.slice(1).map((el, i) => <li
+                                        key={i * 25}> {el}</li>) : ""}
+                                </ul>
+                            </div>
+                            <img src={datas.whatInTheBox[0]} alt=""/>
+                        </div> : ""}
+
                     </div>
                 </div> :
                 <div className="lds-ring">
