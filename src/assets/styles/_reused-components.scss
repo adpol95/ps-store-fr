@@ -21,6 +21,16 @@
   border-radius: 2em;
   background: $fifthBasicColor;
 
+  @media (max-width: $phoneWide) {
+    width: 100%;
+  }
+  @media (min-width: $phoneWide + .2px) {
+    width: 22.5%;
+  }
+  @media (min-width: $tablesWide) {
+    width: 23.2%;
+  }
+
   .game-pack__top {
     height: 13em;
     background: white;

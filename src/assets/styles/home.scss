@@ -6,7 +6,7 @@
   width: 125%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 10em;
+  padding-bottom: 5em;
 
   .top-name-description h4 {
     color: $fourthBasicColor;
@@ -76,7 +76,7 @@
       display: flex;
       position: absolute;
       top: 90%;
-      column-gap: 1.5em;
+      column-gap: 3em;
       row-gap: 1.5em;
 
       @media (max-width: $phoneWide) {
@@ -114,60 +114,50 @@
     }
   }
 
-  .middle-section {
-    padding: 68em 0 15em 0;
+
+  .trending-games {
+    padding: 68em 10% 15em 10%;
 
     @media (max-width: $phoneWide) {
-      padding: 100em 0 15em 0
+      padding: 100em 10% 7em 10%
     }
 
-    .trending-games {
-      padding: 0 10%;
+    .trending-games__head-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      .trending-games__head-text {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      a {
+        font-size: 1.3em;
+        transition: background .3s;
+        margin: 0;
 
-        a {
-          font-size: 1.3em;
-          transition: background .3s;
-
-          &:hover {
-            background: $secondBasicColor;
-          }
+        &:hover {
+          background: $secondBasicColor;
         }
       }
+    }
 
-      .trending-games__container {
-        display: flex;
+    .trending-games__container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 2em;
+      column-gap: 2em;
+
+      img {
+        object-fit: cover;
+        object-position: 0 25%;
+      }
+
+      @media (max-width: $phoneWide) {
         flex-direction: column;
-        row-gap: 7em;
-
-        img {
-          object-fit: cover;
-          object-position: 0 25%;
-        }
-
-        .game-pack {
-          flex: 1
-        }
-
-        .trending-games__down-imgs {
-          display: flex;
-          row-gap: 7em;
-          column-gap: 2em;
-
-          @media (max-width: $phoneWide) {
-            flex-direction: column;
-          }
-          @media (min-width: $phoneWide + .2px) {
-            flex-direction: row;
-          }
-        }
+      }
+      @media (min-width: $phoneWide + .2px) {
+        flex-direction: row;
       }
     }
-
   }
 
   .bottom-section {

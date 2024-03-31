@@ -77,234 +77,47 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <div className="middle-section">
-                <div className="trending-games">
-                    <div className="trending-games__head-text">
-                        <div className="top-name-description">
-                            <h4>TRENDING</h4>
-                            <h3>Most selling games</h3>
-                        </div>
-                        <div className="trending-games__head-text--right">
-                            <Link to="" className="focus-btn category-btn__active">View all</Link>
-                        </div>
+            <div className="trending-games">
+                <div className="trending-games__head-text">
+                    <div className="top-name-description">
+                        <h4>TRENDING</h4>
+                        <h3>Most selling games</h3>
                     </div>
-                    <div className="trending-games__container">
-                        <div className="trending-games__down-imgs">
-                            <div className="game-pack">
-                                <div className="game-pack__top">
-                                    <img src={readyGames[0].img} alt=""/>
-                                    <div className="game-pack__price">
-                                        {readyGames[0].Price}
-                                    </div>
-                                </div>
-                                <div className="game-pack__down">
-                                    <div className="game-pack__down--left">
-                                        <h4 className="game-pack__down--genre">
-                                            {readyGames[0].Genre}
-                                        </h4>
-                                        <h4 className="game-pack__down--title">
-                                            {readyGames[0].title}
-                                        </h4>
-                                    </div>
-                                    <div className="game-pack__down--right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="#F9F7F0">
-                                            <path
-                                                d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="game-pack">
-                                <div className="game-pack__top">
-                                    <img src={readyGames[1].img} alt=""/>
-                                    <div className="game-pack__price">
-                                        {readyGames[1].Price}
-                                    </div>
-                                </div>
-                                <div className="game-pack__down">
-                                    <div className="game-pack__down--left">
-                                        <h4 className="game-pack__down--genre">
-                                            {readyGames[1].Genre}
-                                        </h4>
-                                        <h4 className="game-pack__down--title">
-                                            {readyGames[1].title}
-                                        </h4>
-                                    </div>
-                                    <div className="game-pack__down--right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="#F9F7F0">
-                                            <path
-                                                d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="game-pack">
-                                <div className="game-pack__top">
-                                    <img src={readyGames[2].img} alt=""/>
-                                    <div className="game-pack__price">
-                                        {readyGames[2].Price}
-                                    </div>
-                                </div>
-                                <div className="game-pack__down">
-                                    <div className="game-pack__down--left">
-                                        <h4 className="game-pack__down--genre">
-                                            {readyGames[2].Genre}
-                                        </h4>
-                                        <h4 className="game-pack__down--title">
-                                            {readyGames[2].title}
-                                        </h4>
-                                    </div>
-                                    <div className="game-pack__down--right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="#F9F7F0">
-                                            <path
-                                                d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="game-pack">
-                                <div className="game-pack__top">
-                                    <img src={readyGames[3].img} alt=""/>
-                                    <div className="game-pack__price">
-                                        {readyGames[3].Price}
-                                    </div>
-                                </div>
-                                <div className="game-pack__down">
-                                    <div className="game-pack__down--left">
-                                        <h4 className="game-pack__down--genre">
-                                            {readyGames[3].Genre}
-                                        </h4>
-                                        <h4 className="game-pack__down--title">
-                                            {readyGames[3].title}
-                                        </h4>
-                                    </div>
-                                    <div className="game-pack__down--right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="#F9F7F0">
-                                            <path
-                                                d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="trending-games__down-imgs">
-                            <div className="game-pack">
-                                <div className="game-pack__top">
-                                    <img src={readyGames[4].img} alt=""/>
-                                    <div className="game-pack__price">
-                                        {readyGames[4].Price}
-                                    </div>
-                                </div>
-                                <div className="game-pack__down">
-                                    <div className="game-pack__down--left">
-                                        <h4 className="game-pack__down--genre">
-                                            {readyGames[4].Genre}
-                                        </h4>
-                                        <h4 className="game-pack__down--title">
-                                            {readyGames[4].title}
-                                        </h4>
-                                    </div>
-                                    <div className="game-pack__down--right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="#F9F7F0">
-                                            <path
-                                                d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="game-pack">
-                                <div className="game-pack__top">
-                                    <img src={readyGames[5].img} alt=""/>
-                                    <div className="game-pack__price">
-                                        {readyGames[5].Price}
-                                    </div>
-                                </div>
-                                <div className="game-pack__down">
-                                    <div className="game-pack__down--left">
-                                        <h4 className="game-pack__down--genre">
-                                            {readyGames[5].Genre}
-                                        </h4>
-                                        <h4 className="game-pack__down--title">
-                                            {readyGames[5].title}
-                                        </h4>
-                                    </div>
-                                    <div className="game-pack__down--right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="#F9F7F0">
-                                            <path
-                                                d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="game-pack">
-                                <div className="game-pack__top">
-                                    <img src={readyGames[6].img} alt=""/>
-                                    <div className="game-pack__price">
-                                        {readyGames[6].Price}
-                                    </div>
-                                </div>
-                                <div className="game-pack__down">
-                                    <div className="game-pack__down--left">
-                                        <h4 className="game-pack__down--genre">
-                                            {readyGames[6].Genre}
-                                        </h4>
-                                        <h4 className="game-pack__down--title">
-                                            {readyGames[6].title}
-                                        </h4>
-                                    </div>
-                                    <div className="game-pack__down--right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="#F9F7F0">
-                                            <path
-                                                d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="game-pack">
-                                <div className="game-pack__top">
-                                    <img src={readyGames[7].img} alt=""/>
-                                    <div className="game-pack__price">
-                                        {readyGames[7].Price}
-                                    </div>
-                                </div>
-                                <div className="game-pack__down">
-                                    <div className="game-pack__down--left">
-                                        <h4 className="game-pack__down--genre">
-                                            {readyGames[7].Genre}
-                                        </h4>
-                                        <h4 className="game-pack__down--title">
-                                            {readyGames[7].title}
-                                        </h4>
-                                    </div>
-                                    <div className="game-pack__down--right">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="#F9F7F0">
-                                            <path
-                                                d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div className="trending-games__head-text--right">
+                        <Link to="" className="focus-btn category-btn__active">View all</Link>
                     </div>
                 </div>
-
+                <div className="trending-games__container">
+                    {readyGames.slice(0, 8).map((el, i) => {
+                        const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
+                        return <Link to={el["_id"]} state={{curTitle: readyTitle}} className="game-pack">
+                            <div className="game-pack__top">
+                                <img src={el.img} alt="" style={{objectFit: "cover", objectPosition: "0 25%"}}/>
+                                <div className="game-pack__price">
+                                    {el.Price}
+                                </div>
+                            </div>
+                            <div className="game-pack__down">
+                                <div className="game-pack__down--left">
+                                    <h4 className="game-pack__down--genre">
+                                        {el.Genre}
+                                    </h4>
+                                    <h4 className="game-pack__down--title">
+                                        {readyTitle}
+                                    </h4>
+                                </div>
+                                <div className="game-pack__down--right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24"
+                                         fill="#F9F7F0">
+                                        <path
+                                            d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </Link>
+                    })}
+                </div>
             </div>
             <div className="bottom-section">
                 <div className="bottom-section__block">
@@ -330,7 +143,7 @@ function Home() {
                     <div className="top-name-description">
                         <h4>Accessories</h4>
                         <h3>Build your perfect gaming setup with <span>controllers, headsets
-                            and other</span> </h3>
+                            and other</span></h3>
                     </div>
                     <button className="focus-btn category-btn__active">
                         Shop now

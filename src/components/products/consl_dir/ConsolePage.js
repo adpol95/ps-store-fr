@@ -25,7 +25,7 @@ function ConsolePage() {
                 "Content-Type": "application/json",
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify({type: "consoles",name: state.curTitle})
+            body: JSON.stringify({type: "consoles", name: state.curTitle})
         })
             .then(r => r.json())
             .then(resp => {
@@ -95,8 +95,7 @@ function ConsolePage() {
                         window.location.reload();
                     })
                     .catch(err => console.log(err))
-            }
-            else {
+            } else {
                 window.localStorage.setItem(state.curTitle, JSON.stringify({
                     title: state.curTitle,
                     img: datas.img,
@@ -119,55 +118,62 @@ function ConsolePage() {
             }
         }} className={!dataIsReady ? "loader" : ""}>
             {dataIsReady ?
-                <div>
-                    <h1>
-                        {state.curTitle}
-                    </h1>
-                    <button>
-                        &lt;
-                    </button>
-                    <img src={datas.descriptionImgs[currentPage]} alt="" style={{width: "300px"}}/>
-                    <button>
-                        &gt;
-                    </button>
-                    <div>{datas.previewText}</div>
-                    <div>Realise date: {datas.realiseDate}</div>
-                    <div>Price: {datas.price}</div>
-                    <div>
-                        {cartIsReady ? <button onClick={() => setAddToCart(true)} disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
-                            <Link to="/basket">
-                                <button>To Cart</button>
-                            </Link>}
+                <div className="game-list">
+                    <div className="game-list__top">
+                        <div>
+                            <h3>{state.curTitle}</h3>
+                        </div>
                     </div>
-                    <hr/>
-                    <div>
-                        <h3>Tearms</h3>
-                        <ul>
-                            {datas.terms.map((el, i) => <li key={i * 14}>{el}</li>)}
-                        </ul>
-                    </div>
-                    <div>
-                        <ul>
-                            {datas.mainText ? datas.mainText.map((el, i) => <li key={i * 114}>
-                                    <img src={datas.descriptionImgs[i + 1]} alt="console img error"/>
-                                    <h3>
-                                        {el.title}
-                                    </h3>
-                                    <ul>
-                                        {el.descript.map((el, il) => <li key={il * 221}>{el}</li>)}
-                                    </ul>
-                                </li>
-                            ) : ""}
-                        </ul>
-                    </div>
-                    <div>
-
-                        <h3>
-                            {datas.whatInTheBox ? 'What in the box' : ''}
-                        </h3>
-                        <ul>
-                            {datas.whatInTheBox ? datas.whatInTheBox.map((el, i) => <li key={i * 25}> {el}</li>) : ""}
-                        </ul>
+                    <div className="game-list__page-in">
+                        <div className="game-list__page-in-top">
+                            <button>
+                                &lt;
+                            </button>
+                            <img src={datas.descriptionImgs[currentPage]} alt="" style={{width: "300px"}}/>
+                            <button>
+                                &gt;
+                            </button>
+                            <div>{datas.previewText}</div>
+                            <div>Realise date: {datas.realiseDate}</div>
+                            <div>Price: {datas.price}</div>
+                            <div>
+                                {cartIsReady ? <button onClick={() => setAddToCart(true)}
+                                                       disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
+                                    <Link to="/basket">
+                                        <button>To Cart</button>
+                                    </Link>}
+                            </div>
+                            <hr/>
+                            <div>
+                                <h3>Tearms</h3>
+                                <ul>
+                                    {datas.terms.map((el, i) => <li key={i * 14}>{el}</li>)}
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="game-list__page-in-middle">
+                            <ul>
+                                {datas.mainText ? datas.mainText.map((el, i) => <li key={i * 114}>
+                                        <img src={datas.descriptionImgs[i + 1]} alt="console img error"/>
+                                        <h3>
+                                            {el.title}
+                                        </h3>
+                                        <ul>fF
+                                            {el.descript.map((el, il) => <li key={il * 221}>{el}</li>)}
+                                        </ul>
+                                    </li>
+                                ) : ""}
+                            </ul>
+                        </div>
+                        <div className="game-list__page-in-down">
+                            <h3>
+                                {datas.whatInTheBox ? 'What in the box' : ''}
+                            </h3>
+                            <ul>
+                                {datas.whatInTheBox ? datas.whatInTheBox.map((el, i) => <li
+                                    key={i * 25}> {el}</li>) : ""}
+                            </ul>
+                        </div>
                     </div>
                 </div> :
                 <div className="lds-ring">
