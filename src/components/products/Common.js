@@ -2,13 +2,13 @@ import {Link} from "react-router-dom";
 
 function Common(props) {
     return (
-        props.data ? <div className="game-list">
-                <div className="game-list__top">
+        props.data ? <div className="products-list">
+                <div className="products-list__top">
                     <div>
                         <h3>Accessories</h3>
                     </div>
                 </div>
-                <div className="game-list__middle">
+                <div className="products-list__middle">
                     {props.mainData.map(el => {
                         const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title
                         return <Link to={el["_id"]} state={{curTitle: readyTitle}} className="game-pack">

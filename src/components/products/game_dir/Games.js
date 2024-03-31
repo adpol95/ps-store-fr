@@ -60,19 +60,19 @@ function Games() {
         }
     }, [currentPage, currentFilter])
     if (dataIsReady) return (
-        <div className="game-list">
-            <div className="game-list__top">
+        <div className="products-list">
+            <div className="products-list__top">
                 <div>
                     <h3>GAMES</h3>
                 </div>
-                <div className="game-list__filter">
-                    <div className="game-list__filter--shell">
+                <div className="products-list__filter">
+                    <div className="products-list__filter--shell">
                         <div onClick={() => {
                             setFilterOnPlatform([!filterOnPlatform[0], true]);
                             setCategoryBox([...categoryBox, "Platform"]);
-                        }} className="category-btn__active game-list__filter--main-btn">Platform
+                        }} className="category-btn__active products-list__filter--main-btn">Platform
                         </div>
-                        <div className="game-list__filter--window" style={{
+                        <div className="products-list__filter--window" style={{
                             animation: filterOnPlatform[0] && filterOnPlatform[1] ? "slideRightSide .7s" : !filterOnPlatform[0] && filterOnPlatform[1] ? "slideCenterSide .7s " : "",
                             display: filterOnPlatform[0] ? "flex" : "none",
                         }}>
@@ -108,13 +108,13 @@ function Games() {
                             </ul>
                         </div>
                     </div>
-                    <div className="game-list__filter--shell">
+                    <div className="products-list__filter--shell">
                         <div onClick={() => {
                             setFilterOnGenre([!filterOnGenre[0], true]);
                             setCategoryBox([...categoryBox, "Genre"]);
-                        }} className="category-btn__active game-list__filter--main-btn">Genre
+                        }} className="category-btn__active products-list__filter--main-btn">Genre
                         </div>
-                        <div className="game-list__filter--window" style={{
+                        <div className="products-list__filter--window" style={{
                             animation: filterOnGenre[0] && filterOnGenre[1] ? "slideRightSide .7s" : !filterOnGenre[0] && filterOnGenre[1] ? "slideCenterSide .7s " : "",
                             display: filterOnGenre[0] ? "flex" : "none",
                         }}>
@@ -174,13 +174,13 @@ function Games() {
                             </ul>
                         </div>
                     </div>
-                    <div className="game-list__filter--shell">
+                    <div className="products-list__filter--shell">
                         <div onClick={() => {
                             setFilterOnDev([!filterOnDev[0], true]);
                             setCategoryBox([...categoryBox, "Developer"]);
-                        }} className="category-btn__active game-list__filter--main-btn">Developer
+                        }} className="category-btn__active products-list__filter--main-btn">Developer
                         </div>
-                        <div className="game-list__filter--window" style={{
+                        <div className="products-list__filter--window" style={{
                             animation: filterOnDev[0] && filterOnDev[1] ? "slideRightSide .7s" : !filterOnDev[0] && filterOnDev[1] ? "slideCenterSide .7s " : "",
                             display: filterOnDev[0] ? "flex" : "none",
                         }}>
@@ -253,13 +253,13 @@ function Games() {
                             </ul>
                         </div>
                     </div>
-                    <div className="game-list__filter--shell">
+                    <div className="products-list__filter--shell">
                         <div onClick={() => {
                             setFilterOnPrice([!filterOnPrice[0], true]);
                             setCategoryBox([...categoryBox, "Price"]);
-                        }} className="category-btn__active game-list__filter--main-btn">Price
+                        }} className="category-btn__active products-list__filter--main-btn">Price
                         </div>
-                        <div className="game-list__filter--window" style={{
+                        <div className="products-list__filter--window" style={{
                             animation: filterOnPrice[0] && filterOnPrice[1] ? "slideRightSide .7s" : !filterOnPrice[0] && filterOnPrice[1] ? "slideCenterSide .7s " : "",
                             display: filterOnPrice[0] ? "flex" : "none"
                         }}>
@@ -314,13 +314,13 @@ function Games() {
                             </ul>
                         </div>
                     </div>
-                    <div className="game-list__filter--shell">
+                    <div className="products-list__filter--shell">
                         <div onClick={() => {
                             setFilterOnRating([!filterOnRating[0], true]);
                             setCategoryBox([...categoryBox, "Rating"]);
-                        }} className="category-btn__active game-list__filter--main-btn">Rating
+                        }} className="category-btn__active products-list__filter--main-btn">Rating
                         </div>
-                        <div className="game-list__filter--window" style={{
+                        <div className="products-list__filter--window" style={{
                             animation: filterOnRating[0] && filterOnRating[1] ? "slideRightSide .7s" : !filterOnRating[0] && filterOnRating[1] ? "slideCenterSide .7s " : "",
                             display: filterOnRating[0] ? "flex" : "none",
                         }}>
@@ -372,7 +372,7 @@ function Games() {
                     </div>
                 </div>
             </div>
-            <div className="game-list__middle">
+            <div className="products-list__middle">
                 {mainData.map((el, i) => {
                     const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
                     return <Link to={el["_id"]} state={{curTitle: readyTitle}} className="game-pack">
@@ -406,7 +406,7 @@ function Games() {
             <div onClick={(event) => {
                 setDataIsReady(false);
                 setCurrentPage(event.target.innerText === ">" && currentPage < 4 ? +currentPage + 1 + "" : event.target.innerText === "<" && currentPage > 1 ? +currentPage - 1 + "" : typeof (+event.target.innerText) === "number" ? event.target.innerText : "1");
-            }} className="game-list__pages">
+            }} className="products-list__pages">
                 <button>{"<"}</button>
                 <button style={currentPage === "1" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>1</button>
                 <button style={currentPage === "2" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>2</button>

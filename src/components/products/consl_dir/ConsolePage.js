@@ -118,14 +118,14 @@ function ConsolePage() {
             }
         }} className={!dataIsReady ? "loader" : ""}>
             {dataIsReady ?
-                <div className="game-list">
-                    <div className="game-list__top">
+                <div className="products-list">
+                    <div className="products-list__top">
                         <div>
                             <h3>{state.curTitle}</h3>
                         </div>
                     </div>
-                    <div className="game-list__page-in">
-                        <div className="game-list__page-in-top">
+                    <div className="products-list__page-in">
+                        <div className="products-list__page-in-top">
                             <button>
                                 &lt;
                             </button>
@@ -151,7 +151,7 @@ function ConsolePage() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="game-list__page-in-middle">
+                        <div className="products-list__page-in-middle">
                             <ul>
                                 {datas.mainText ? datas.mainText.map((el, i) => <li key={i * 114}>
                                         <img src={datas.descriptionImgs[i + 1]} alt="console img error"/>
@@ -165,7 +165,7 @@ function ConsolePage() {
                                 ) : ""}
                             </ul>
                         </div>
-                        <div className="game-list__page-in-down">
+                        <div className="products-list__page-in-down">
                             <h3>
                                 {datas.whatInTheBox ? 'What in the box' : ''}
                             </h3>

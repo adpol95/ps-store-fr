@@ -164,45 +164,45 @@ function GamePage() {
         </div>)
 
     else return (
-        <div className="game-list">
-            <div className="game-list__top" style={{backgroundImage: `url(${gameData.BackgroundImg})`}}>
+        <div className="products-list">
+            <div className="products-list__top" style={{backgroundImage: `url(${gameData.BackgroundImg})`}}>
                 <div>
                     <h3>{state.curTitle}</h3>
                 </div>
             </div>
-            <div className="game-list__page-in">
-                <div className="game-list__page-in-top">
-                    <div className="game-list__page-in-top--left-side">
+            <div className="products-list__page-in">
+                <div className="products-list__page-in-top">
+                    <div className="products-list__page-in-top--left-side">
                         <img src={gameData.Cover} alt=""/>
-                        <div className="game-list__page-in-top--img-platform">
+                        <div className="products-list__page-in-top--img-platform">
                             {gameData.Platform}
                         </div>
                     </div>
-                    <div className="game-list__page-in-top--right-side">
-                        <div className="game-list__page-in-top--developer">
+                    <div className="products-list__page-in-top--right-side">
+                        <div className="products-list__page-in-top--developer">
                             {gameData.Developer}
                         </div>
-                        <div className="game-list__page-in-top--title"><h1>{state.curTitle}</h1></div>
-                        <div className="game-list__page-in-top--price">{gameData.Price}</div>
-                        <div className="game-list__page-in-top--rating">
+                        <div className="products-list__page-in-top--title"><h1>{state.curTitle}</h1></div>
+                        <div className="products-list__page-in-top--price">{gameData.Price}</div>
+                        <div className="products-list__page-in-top--rating">
                             Rating: <span>{gameData.Rating + " / 5"}</span>
                         </div>
-                        <div className="game-list__page-in-top--compat">
+                        <div className="products-list__page-in-top--compat">
                             <ul>
                                 {gameData.Compatibility.map((el, i) => <li key={i * 76}>
                                     {el}
                                 </li>)}
                             </ul>
                         </div>
-                        <div className="game-list__page-in-top--btn-container">
-                            <div className="game-list__page-in-top--add-to-cart">
+                        <div className="products-list__page-in-top--btn-container">
+                            <div className="products-list__page-in-top--add-to-cart">
                                 {cartIsReady ? <button onClick={() => setAddToCart(true)}
                                                        disabled={isYouHaveIt}>{isYouHaveIt ? "You already have this product" : "Add to Cart"}</button> :
                                     <Link to="/basket">
                                         <button>To Cart</button>
                                     </Link>}
                             </div>
-                            <div className="game-list__page-in-top--add-to-fav">
+                            <div className="products-list__page-in-top--add-to-fav">
                                 <button onClick={() => setFavGame({
                                     "_id": gameData["_id"],
                                     img: gameData.img,
@@ -210,14 +210,14 @@ function GamePage() {
                                 })}>
                                     &#x2764;
                                 </button>
-                                <div className="game-list__page-in-top--atf-descript">
+                                <div className="products-list__page-in-top--atf-descript">
                                     Add this product to your favorite
                                 </div>
                             </div>
                         </div>
 
-                        <div className="game-list__page-in-top--bottom-container">
-                            <div className="game-list__page-in--additional">
+                        <div className="products-list__page-in-top--bottom-container">
+                            <div className="products-list__page-in--additional">
                                 <table>
                                     {
                                         gameData.AdditionalInfo.keys.map((el, i) => <tr key={(i + 1) * 76}>
@@ -227,12 +227,12 @@ function GamePage() {
                                     }
                                 </table>
                             </div>
-                            <div className="game-list__page-in-top--child">
+                            <div className="products-list__page-in-top--child">
                                 <img src={gameData.Age.ESRBImg} alt=""/>
-                                <div className="game-list__page-in-top--child-descript">
+                                <div className="products-list__page-in-top--child-descript">
                                     {gameData.Age.TopDescipt}
                                 </div>
-                                <div className="game-list__page-in-top--child-descript">
+                                <div className="products-list__page-in-top--child-descript">
                                     {gameData.Age.BottomDescipt}
                                 </div>
                             </div>
@@ -240,9 +240,9 @@ function GamePage() {
                     </div>
                 </div>
 
-                <div className="game-list__page-in--decription">
+                <div className="products-list__page-in--decription">
                     <h3>Description</h3>
-                    <div className="game-list__page-in--decription--text">
+                    <div className="products-list__page-in--decription--text">
                         {gameData.GameInfo.map(el => <div>{el}</div>)}
                     </div>
                 </div>

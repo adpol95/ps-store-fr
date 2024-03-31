@@ -17,18 +17,36 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2em;
+  background: #e2e9ec;
+}
+@media (max-width: 810px) {
+  .game-pack {
+    width: 100%;
+  }
+}
+@media (min-width: 810.2px) {
+  .game-pack {
+    width: 22.5%;
+  }
+}
+@media (min-width: 1200px) {
+  .game-pack {
+    width: 23.2%;
+  }
 }
 .game-pack .game-pack__top {
-  flex: 2;
-  z-index: 100;
+  height: 13em;
+  background: white;
+  border-radius: 2em;
 }
 .game-pack .game-pack__top img {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   border-radius: 2em;
   width: 100%;
   height: 13em;
-  object-fit: cover;
-  object-position: 0 25%;
+  object-fit: contain;
 }
 .game-pack .game-pack__top .game-pack__price {
   position: absolute;
@@ -43,16 +61,10 @@
   font-weight: 500;
 }
 .game-pack .game-pack__down {
-  padding: 5em 1em 1em 1em;
+  padding: 2.5em 1em 1.5em 1em;
   border-bottom-left-radius: 2em;
   border-bottom-right-radius: 2em;
   background: #e2e9ec;
-  flex: 1;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5.5em;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -94,10 +106,10 @@
   transition: background 0.3s;
 }
 
-.game-list {
+.products-list {
   padding: 30em 0 10em 0;
 }
-.game-list .game-list__top {
+.products-list .products-list__top {
   display: flex;
   flex-direction: column;
   background: url("../images/heading-back.png") center;
@@ -114,34 +126,39 @@
   justify-content: center;
   align-items: center;
 }
-.game-list .game-list__top h3 {
+.products-list .products-list__top h3 {
   font-size: 3em;
 }
-.game-list .game-list__filter {
+.products-list .products-list__filter {
   position: absolute;
-  top: 18em;
+  top: 300px;
   left: 0;
   right: 0;
   display: flex;
   justify-content: center;
   column-gap: 1em;
 }
-.game-list .game-list__filter--shell {
+@media (max-width: 810px) {
+  .products-list .products-list__filter {
+    font-size: 0.8em;
+  }
+}
+.products-list .products-list__filter--shell {
   display: flex;
   row-gap: 1em;
   flex-direction: column;
   align-items: center;
 }
-.game-list .game-list__filter--shell .game-list__filter--main-btn {
+.products-list .products-list__filter--shell .products-list__filter--main-btn {
   background: #072A40;
   font-weight: 500;
   cursor: pointer;
   transition: color 0.3s;
 }
-.game-list .game-list__filter--shell .game-list__filter--main-btn:hover {
+.products-list .products-list__filter--shell .products-list__filter--main-btn:hover {
   color: #178CA4;
 }
-.game-list .game-list__filter--shell .game-list__filter--window {
+.products-list .products-list__filter--shell .products-list__filter--window {
   background: #178CA4;
   padding: 1em;
   border-radius: 2em;
@@ -151,10 +168,10 @@
   display: flex;
   transition: opacity 3s;
 }
-.game-list .game-list__filter--shell .game-list__filter--window ul {
+.products-list .products-list__filter--shell .products-list__filter--window ul {
   padding: 0;
 }
-.game-list .game-list__filter--shell .game-list__filter--window li {
+.products-list .products-list__filter--shell .products-list__filter--window li {
   list-style-type: none;
 }
 @keyframes slideRightSide {
@@ -173,16 +190,39 @@
     margin-right: 150em;
   }
 }
-.game-list .game-list__middle {
+.products-list .products-list__middle {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  row-gap: 2em;
   column-gap: 2em;
-  row-gap: 7.5em;
   justify-content: center;
 }
-.game-list .game-list__middle .game-pack {
-  width: 22em;
+.products-list .products-list__pages {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5em;
+  justify-content: center;
+  column-gap: 2em;
+}
+.products-list .products-list__pages button {
+  border: none;
+  text-align: center;
+  background: #178CA4;
+  padding: 1em;
+  border-radius: 2em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  background: #e2e9ec;
+  color: black;
+  width: 50px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.products-list .products-list__pages button:hover {
+  background: #18B7BE;
+  color: #e2e9ec;
 }
 
-/*# sourceMappingURL=games-list.css.map */
+/*# sourceMappingURL=products-list.css.map */

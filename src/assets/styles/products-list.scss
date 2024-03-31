@@ -2,10 +2,10 @@
 @import "mixins";
 @import "reused-components";
 
-.game-list {
+.products-list {
   padding: 30em 0 10em 0;
 
-  .game-list__top {
+  .products-list__top {
     display: flex;
     flex-direction: column;
     @include backgroundWall($backgroundOther, 0em);
@@ -15,7 +15,7 @@
     }
   }
 
-  .game-list__filter {
+  .products-list__filter {
     position: absolute;
     top: 300px;
     left: 0;
@@ -28,14 +28,14 @@
     }
   }
 
-  .game-list__filter--shell {
+  .products-list__filter--shell {
     display: flex;
     row-gap: 1em;
     flex-direction: column;
     align-items: center;
 
 
-    .game-list__filter--main-btn {
+    .products-list__filter--main-btn {
       background: $fourthBasicColor;
       font-weight: 500;
       cursor: pointer;
@@ -46,7 +46,7 @@
       }
     }
 
-    .game-list__filter--window {
+    .products-list__filter--window {
       ul {
         padding: 0;
       }
@@ -84,7 +84,7 @@
     }
   }
 
-  .game-list__middle {
+  .products-list__middle {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -93,7 +93,7 @@
     justify-content: center;
   }
 
-  .game-list__pages {
+  .products-list__pages {
     display: flex;
     flex-direction: row;
     padding-top: 5em;
