@@ -24,7 +24,7 @@ function Console() {
             })
 
     }, [])
-    return <Common mainData={mainData} data={dataIsReady}/>
+    return <Common mainData={mainData} data={dataIsReady} type={"Consoles"}/>
 }
 
 export default Console;

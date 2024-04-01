@@ -17,7 +17,7 @@ function NewsPage() {
         })
             .then(r => r.json())
             .then(resp => {
-                setMainData(resp[0].value);
+                setMainData(resp);
                 setDataIsReady(true);
             })
             .catch(err => {
@@ -25,24 +25,31 @@ function NewsPage() {
             })
     }, []);
     return (
-        <div>
-            {dataIsReady ?
-                <div>
+        dataIsReady ?
+            <div className="products-list news-page">
+                <div className="products-list__top" style={{backgroundImage: `url(${state.image})`}}>
                     <div>
-                        <p>
-                            {mainData.dataTime}
-                        </p>
-                        <h1>{mainData.titleTop}</h1>
-                        <img src={mainData.topImg} alt=""/>
+                        <h3>{mainData.headerTitle}</h3>
                     </div>
-                    <div>
+                </div>
+                <div className="news-page__middle-sec">
+                    <div className="news-page__middle-sec--header">
+                        <div>
+                            {mainData.dataTime}
+                        </div>
+                        <h1>{mainData.titleTop}</h1>
+                        <div className="news-page__header--author-section">
+                            <img src={mainData.topImg} alt="" className="news-page__header--avatar"/>
+                            <div className="news-page__header--author--right">
+                                <div> <span>{mainData.authorName}</span></div>
+                                <div>{mainData.authorDescription}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="news-page__middle-sec--main">
                         <h3>
                             {mainData.headerTitle}
                         </h3>
-                        <div>
-                            <p>{mainData.authorName}</p>
-                            <p>{mainData.authorDescription}</p>
-                        </div>
                         <div>
                             {mainData.mainText.map((el) => {
                                 if (el[0] === "P") {
@@ -64,21 +71,21 @@ function NewsPage() {
                                     )
                                 } else return (
                                     <h2>
-                                        Video is here
+                                        Video here
                                     </h2>
                                 )
                             })}
                         </div>
                     </div>
-                </div> :
-                <div className="lds-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
                 </div>
-            }
-        </div>
+
+            </div> :
+            <div className="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
     )
 }
 

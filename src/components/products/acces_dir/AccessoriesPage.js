@@ -12,12 +12,11 @@ function AccessoriesPage() {
     const nameTitle = state.curTitle
     const [cartIsReady, setCartIsReady] = useState(isAuth() ? !auth.cart.some(el => el.title === nameTitle) : !JSON.parse(localStorage.getItem(nameTitle)));
     const [addToCart, setAddToCart] = useState(false);
-
     const [datas, setDatas] = useState("");
     const [currentPage, setCurrentPage] = useState(0);
     const [currentColor, setCurrentColor] = useState(nameTitle.includes("NVMe") ?
         "1TB" : nameTitle.includes("DUALSHOCK") ? "Jet Black" : nameTitle.includes("Covers") ?
-            "Midnight Black" : nameTitle.includes("Wireless")
+            "Midnight Black" : nameTitle.includes("slim") ? "Midnight Black" : nameTitle.includes("Wireless")
                 ? "White" : false);
     const [currentImgs, setCurrentImgs] = useState("");
     const [stateColors, setStateColors] = useState("");
@@ -27,6 +26,7 @@ function AccessoriesPage() {
     const isYouHaveIt = isAuth() ? auth.ownership.accessories.some(el => el.name === isHaveColor) : "";
     const signIn = useSignIn();
     const authHeader = useAuthHeader();
+    console.log(currentColor)
     useEffect(() => {
         fetch(process.env.REACT_APP_STATE1 + "/newsAndProducts/page", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -41,14 +41,11 @@ function AccessoriesPage() {
                 setDatas(resp);
                 if (currentColor) {
                     setStateColors(<ul
-                        style={{display: "grid", gridTemplateColumns: "85px 85px 85px", columnGap: "5px"}}>
-                        {Object.keys(resp.allImgsAndTitles).map((el, i) => <li key={i * 23}
-                                                                               style={{listStyleType: "none"}}>
+                        className="products-list__page-in-top--clr-list">
+                        {Object.keys(resp.allImgsAndTitles).map((el, i) => <li key={i * 23} >
                             <img src={resp.allImgsAndTitles[el][nameTitle.includes("SSD") ? 3 : 0]} alt={el}
                                  style={{
-                                     objectFit: "none",
-                                     width: "100%",
-                                     objectPosition: nameTitle.includes("Covers") ? "63% 10%" : nameTitle.includes("DUALSHOCK") ? "12% 65%" : nameTitle.includes("SSD") ? "27% 44%" : "50% 27%"
+                                     objectPosition: nameTitle.includes("slim") ? "75% 60%" : nameTitle.includes("Covers") ? "57% 91%"  : nameTitle.includes("DUALSHOCK") ? "12% 65%" : nameTitle.includes("SSD") ? "25% 41%" : "50% 27%"
                                  }}
                             />
                         </li>)}
@@ -178,15 +175,16 @@ function AccessoriesPage() {
                                     if (event.target.localName === "img") {
                                         setCurrentColor(event.target.alt);
                                     }
-                                }}>
-                                    {currentColor ? <div> Color: {currentColor}
-                                    </div> : ""}
+                                }} className="products-list__page-in-top--color">
+                                    {currentColor ?
+                                        <div className="products-list__page-in-top--clr-title"> {currentColor}
+                                        </div> : ""}
                                     {stateColors}
                                 </div>
                             </div>
                             <div className="products-list__page-in-top--right-side">
                                 <div className="products-list__page-in-top--title"><h1>{isHaveColor}</h1></div>
-                                <div className="products-list__page-in-top--price">{datas.price}</div>
+                                <div className="products-list__page-in-top--price">{currentColor === "1TB" ? datas.price[0] : currentColor === "2TB" ? datas.price[1] : currentColor === "4TB" ? datas.price[2] : datas.price}</div>
                                 <div className="products-list__page-in-top--rating">Realise
                                     date: <span>{datas.realiseDate}</span></div>
                                 <div>{datas.previewText}</div>
@@ -214,12 +212,12 @@ function AccessoriesPage() {
                                         </h3>
                                         <ul>
                                             {el.descript.map((el1, il) => <li key={il * 221}>
-                                                {il % 2 !== 1 ? <div className="products-list__page-in--many-descript">
-                                                    <img src={currentImgs[il + 1]} alt=""/>
+                                                {i % 2 !== 1 ? <div className="products-list__page-in--many-descript">
+                                                    <img src={currentImgs[i]} alt=""/>
                                                     <div className="products-list__page-in--decription">{el1}</div>
                                                 </div> : <div className="products-list__page-in--many-descript">
                                                     <div className="products-list__page-in--decription">{el1}</div>
-                                                    <img src={currentImgs[il + 1]} alt=""/>
+                                                    <img src={currentImgs[i]} alt=""/>
                                                 </div>}
 
                                             </li>)}

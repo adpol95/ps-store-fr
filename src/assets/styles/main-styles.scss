@@ -5,8 +5,9 @@
 @import "psn.scss";
 @import "varaibles.scss";
 @import "home.scss";
-@import "products-list";
+@import "products-list.scss";
 @import "product-page.scss";
+@import "news-page.scss";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 .App {
@@ -26,10 +27,6 @@
     margin: 0;
     padding-left: 0;
   }
-  button {
-    color: black;
-  }
-
 
   a {
     text-decoration: none;

@@ -5,7 +5,7 @@ function Common(props) {
         props.data ? <div className="products-list">
                 <div className="products-list__top">
                     <div>
-                        <h3>Accessories</h3>
+                        <h3>{props.type}</h3>
                     </div>
                 </div>
                 <div className="products-list__middle">

@@ -23,7 +23,7 @@ function Accessories() {
             })
 
     }, [])
-    return <Common mainData={mainData} data={dataIsReady}/>
+    return <Common mainData={mainData} data={dataIsReady} type={"Accessories"}/>
 }
 
 export default Accessories;

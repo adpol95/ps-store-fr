@@ -36,30 +36,28 @@ function News() {
         <div className={!dataIsReady ? "loader" : ""}>
             {
                 dataIsReady ?
-                    <div>
-                        <h1>Latest Posts</h1>
-                        <div onClick={(event) => {
-                            setDataIsReady(false);
-                            setTypeOfPage(event.target.innerText.toLowerCase().replace(/\s/gi, "-"));
-                        }}>
-                            <button>PS5</button>
-                            <button>PS-VR2</button>
-                            <button>PS4</button>
-                            <button>PS-Store</button>
-                            <button>PS-Plus</button>
+                    <div className="products-list news-list" >
+                        <div className="products-list__top">
+                            <div>
+                                <h3>NEWS</h3>
+                            </div>
+                            <div className="products-list__filter" onClick={(event) => {
+                                setDataIsReady(false);
+                                setTypeOfPage(event.target.innerText.toLowerCase().replace(/\s/gi, "-"));
+                            }}>
+                                <div className="category-btn__active products-list__filter--main-btn">PS5</div>
+                                <div className="category-btn__active products-list__filter--main-btn">PS-VR2</div>
+                                <div className="category-btn__active products-list__filter--main-btn">PS4</div>
+                                <div className="category-btn__active products-list__filter--main-btn">PS-Store</div>
+                                <div className="category-btn__active products-list__filter--main-btn">PS-Plus</div>
+                            </div>
                         </div>
-                        <div onClick={(event) => {
-                            setDataIsReady(false);
-                            setCurrentPage(event.target.innerText);
-                        }}>
-                            <button>1</button>
-                            <button>2</button>
-                        </div>
-                        <ul>
-                            {mainData.map((el, i) => <li key={i * 54}>
-                                <Link to={i + 1 + ""} state={{typePage: typeOfPage, curTitle: el.title}}>
-                                    <img src={el.img} alt=""/>
-                                    <p>{el.title}</p>
+                        <h1 style={{color: "black"}}>Latest Posts</h1>
+                        <ul style={{display: "flex", flexDirection: "column", rowGap: "2em", width: "100%"}}>
+                            {mainData.map((el, i) => <li key={i * 54} className="products-list__filter--window">
+                                <Link to={i + 1 + ""} state={{image: el.img, typePage: typeOfPage, curTitle: el.title}} style={{color: "black"}}>
+                                    <h3>{el.title}</h3>
+                                    <img src={el.img} alt="" style={{borderRadius: "2em", width: "100%"}}/>
                                 </Link>
                             </li>)}
                         </ul>
@@ -68,6 +66,21 @@ function News() {
                         {/*        {el}*/}
                         {/*    </li>)}*/}
                         {/*</ul>*/}
+                        <div onClick={(event) => {
+                            setDataIsReady(false);
+                            setCurrentPage(event.target.innerText);
+                        }} className="products-list__pages">
+                            <button>{"<"}</button>
+                            <button style={currentPage === "1" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>1
+                            </button>
+                            <button style={currentPage === "2" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>2
+                            </button>
+                            <button style={currentPage === "3" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>3
+                            </button>
+                            <button style={currentPage === "4" ? {background: "#18B7BEFF", color: "#E2E9ECFF"} : {}}>4
+                            </button>
+                            <button>{">"}</button>
+                        </div>
                     </div> :
                     <div className="lds-ring">
                         <div></div>

@@ -2,7 +2,7 @@
 @import "mixins";
 footer {
   @include headAndFoot($backgroundFooter, absolute, 8em);
-  bottom: 0;
+  bottom: -0px;
   border-top-left-radius: 2em;
   border-top-right-radius: 2em;
   text-align: center;

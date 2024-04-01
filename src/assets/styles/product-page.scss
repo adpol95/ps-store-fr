@@ -2,18 +2,18 @@
 @import "mixins";
 @import "reused-components";
 
+//.products-list__top {
+//  display: flex;
+//  flex-direction: column;
+//  @include backgroundWall($backgroundOther, 0em);
+//  color: black;
+//
+//  h3 {
+//    font-size: 3em;
+//  }
+//}
+
 .products-list__page-in {
-  .products-list__top {
-    display: flex;
-    flex-direction: column;
-    @include backgroundWall($backgroundOther, 0em);
-    color: black;
-
-    h3 {
-      font-size: 3em;
-    }
-  }
-
   .products-list__page-in-top {
     display: flex;
     justify-content: start;
@@ -47,6 +47,7 @@
     box-shadow: $smoothShadow;
     position: relative;
     min-width: 30em;
+    max-width: 30em;
 
     .products-list__page-in-top--btn {
       position: absolute;
@@ -58,6 +59,39 @@
 
       button {
         width: 9%;
+      }
+    }
+
+    .products-list__page-in-top--color {
+      color: black;
+      display: flex;
+      flex-direction: column;
+
+      .products-list__page-in-top--clr-title {
+        font-weight: 700;
+      }
+
+      .products-list__page-in-top--clr-list {
+        display: flex;
+        flex-direction: row;
+        column-gap: .5em;
+
+        li {
+          width: 10%;
+          height: 10%;
+          cursor: pointer;
+          border-radius: 5em;
+        }
+
+        img {
+          box-shadow: $smoothShadow;
+          object-fit: none;
+          width: 100%;
+
+          &:active {
+            border: 2px solid $secondBasicColor;
+          }
+        }
       }
     }
 
@@ -149,17 +183,12 @@
       }
 
       .products-list__page-in-top--child-descript {
-        max-width: 20em;
+        max-width: 50em;
       }
     }
   }
 
-  img {
-    border-radius: 2em;
-    box-shadow: $smoothShadow;
-    object-fit: cover;
-    width: 50%;
-  }
+
 
   .products-list__page-in-middle {
     color: black;
@@ -171,11 +200,11 @@
     }
 
     .products-list__page-in--many-descript {
-
       display: flex;
       flex-direction: row;
       column-gap: 2em;
       padding: 2em 0;
+      align-items: center;
       @media (max-width: $phoneWide) {
         flex-direction: column;
       }
@@ -204,7 +233,6 @@
   .products-list__page-in--decription {
     display: flex;
     flex-direction: column;
-    text-align: center;
     justify-content: center;
     color: black;
     box-shadow: $smoothShadow;
