@@ -2,20 +2,23 @@ import {Link} from "react-router-dom";
 
 function Conundrums() {
     return (
-        <div>
-            <div>
-                <h3>
+        <div className="products-list profile conundrums">
+            <div className="products-list__top">
+                <div>
+                    <h3>CHOOSE TYPE</h3>
+                </div>
+            </div>
+            <div className="conundrums__main">
+                <button>
                     <Link to="riddles">
                         Riddles
                     </Link>
-                </h3>
-            </div>
-            <div>
-                <h3>
+                </button>
+                <button>
                     <Link to="schoolPrg">
                         School program
                     </Link>
-                </h3>
+                </button>
             </div>
         </div>
     )

@@ -57,46 +57,55 @@ function AddNewFriend() {
             .catch(err => console.log(err))
     }, []);
     return (
-        <div className={preLoader ? "loader" : ""}>
-            {!preLoader ?
+        <div className={preLoader ? "loader" : "products-list add-friends"}>
+            <div className="products-list__top">
                 <div>
-                    <p>Search for new friends</p>
-                    <input value={searchBarValue} onChange={(event) => setSearchBarValue(event.target.value)}/>
-                    <button onClick={(event) => {
-                        setPreLoader(true);
-                        return findFriend(event)
-                    }}>Find
-                    </button>
-                </div> :
-                <div className="lds-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <h3>ADD NEW FRIENDS</h3>
                 </div>
-            }
-            <h3>All users</h3>
-            {
-                users.length ?
-                    <ul>
-                        {users.map((el, i) => {
-                            return <li key={i * 23 + ""}>
-                                <div>
-                                    <Link to={"/psn/friends/" + el["_id"]} state={{ profile: el }}>
-                                        <img src={el.avatar} alt="" width="150px"/>
-                                        <p>{el.userName}</p>
-                                        <button onClick={(event) => sendReq(event, el["_id"])}>Send request for
-                                            friendship
-                                        </button>
-                                    </Link>
-                                </div>
-                            </li>
-                        })}
-                    </ul> :
-                    <div>
-                        User with this nickname does not exist
+            </div>
+            <div className="add-friends__main">
+                {!preLoader ?
+                    <div className="add-friends__main--search">
+                        <p>Search for new friends</p>
+                        <div className="add-friends__main--search-bottom">
+                            <input value={searchBarValue} onChange={(event) => setSearchBarValue(event.target.value)}/>
+                            <button onClick={(event) => {
+                                setPreLoader(true);
+                                return findFriend(event)
+                            }}>Find
+                            </button>
+                        </div>
+                    </div> :
+                    <div className="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
-            }
+                }
+                <h3>All users</h3>
+                {
+                    users.length ?
+                        <ul>
+                            {users.map((el, i) => {
+                                return <li key={i * 23 + ""}>
+                                    <div>
+                                        <Link to={"/psn/friends/" + el["_id"]} state={{profile: el}}>
+                                            <img src={el.avatar} alt="" width="150px"/>
+                                            <p>{el.userName}</p>
+                                            <button onClick={(event) => sendReq(event, el["_id"])}>Send request for
+                                                friendship
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </li>
+                            })}
+                        </ul> :
+                        <div>
+                            User with this nickname does not exist
+                        </div>
+                }
+            </div>
         </div>
     )
 }

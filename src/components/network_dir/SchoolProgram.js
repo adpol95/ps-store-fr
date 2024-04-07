@@ -41,9 +41,13 @@ function SchoolProgram() {
         }
     }, [])
     return (
-        <div>
-            <h3>School Program</h3>
-            {dataIsReady ? <div>
+        <div className="products-list profile school">
+            <div className="products-list__top">
+                <div>
+                    <h3>SCHOOL PROGRAM</h3>
+                </div>
+            </div>
+            {dataIsReady ? <div className="school__main">
                 <ol>
                     {questions.map((el, i) => <li key={Math.random() * 100 - 1} onClick={(event) => {
                         if (event.target.innerText === el[2] && event.target.nodeName === "BUTTON") {
@@ -92,8 +96,8 @@ function SchoolProgram() {
                             window.location.reload();
                         }
                     }}>
-                        <div style={{textDecorationLine: condLocal[i] ? "line-through" : ""}}>
-                            {el[0]}
+                        <div style={{textDecorationLine: condLocal[i] ? "line-through" : ""}} className="school__main--question">
+                            <b>{el[0]}</b>
                             <button disabled={condLocal[i]}>{el[1][0]}</button>
                             <button disabled={condLocal[i]}>{el[1][1]}</button>
                             <button disabled={condLocal[i]}>{el[1][2]}</button>

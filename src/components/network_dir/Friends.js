@@ -9,13 +9,13 @@ function Friends() {
             <ul>
                 {auth.friends.map(el => <Link to={"friends/" + el["_id"]} state={{profile: el}}>
                         <li key={Math.floor(Math.random() * 100 - 1)}>
-                            {el.userName}
+                            <p>{el.userName}</p>
                             <img src={el.avatar} alt=""/>
                         </li>
                     </Link>
                 )}
             </ul>
-            <Link to="friends/add"> Add new friends</Link>
+            <Link to="friends/add" className="profile__down--adder"> Add new friends</Link>
         </div>
     )
 }

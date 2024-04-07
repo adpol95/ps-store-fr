@@ -79,6 +79,7 @@
     flex-direction: column;
     align-items: center;
     color: black;
+
     .profile-main__favorite-main {
       display: flex;
       column-gap: 1em;
@@ -105,10 +106,12 @@
   .profile__mid {
     display: flex;
     column-gap: 2em;
+
     h3 {
       font-size: 2.5em;
       color: $secondBasicColor;
     }
+
     button {
       cursor: pointer;
       background: $fourthBasicColor;
@@ -117,6 +120,7 @@
       transition: background .3s;
       border: none;
       padding: 1px 7px;
+
       &:hover {
         background: $thirdBasicColor;
       }
@@ -148,6 +152,7 @@
 
   .profile__popular-studios {
     text-align: center;
+
     ul {
       display: flex;
       flex-direction: column;
@@ -165,27 +170,37 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    row-gap: 2em;
+
     h3 {
       font-size: 2.5em;
       color: $secondBasicColor;
     }
+
     ul {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
       font-size: 1em;
       max-height: 60em;
+      text-align: center;
+
+      p {
+        color: $secondBasicColor;
+      }
     }
 
     li,
     a {
       color: black;
     }
+
     img {
       width: 5em;
       border-radius: 10em;
     }
-    a {
+
+    .profile__down--adder {
       background: $fifthBasicColor;
       padding: 1em 2em;
       border-radius: 2em;
@@ -193,6 +208,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: background .3s, color .3s;
+
       &:hover {
         background: $fourthBasicColor;
         color: $fifthBasicColor;
@@ -204,15 +220,145 @@
 .profile__conundrums {
   position: fixed;
   z-index: 1500;
+
   a {
     background: $fourthBasicColor;
     padding: 1em;
     border-radius: 10em;
     transition: background .3s;
+
     &:hover {
       background: $secondBasicColor;
     }
   }
+
   bottom: 60px;
   right: 20px;
+}
+
+.account-settings__main {
+  @extend .basket__main;
+
+  img {
+    border-radius: 30em;
+    box-shadow: $smoothShadow;
+  }
+
+  i {
+    color: $secondBasicColor;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+  }
+}
+
+.add-friends__main {
+  @extend .account-settings__main;
+
+  p {
+    color: black;
+  }
+
+  .add-friends__main--search-bottom {
+    display: flex;
+    column-gap: 1em;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      font-size: 1.1em;
+      text-align: center;
+      box-shadow: $smoothShadow;
+      border: none;
+      border-radius: .5em;
+    }
+  }
+}
+
+.notification {
+  position: fixed;
+  cursor: pointer;
+  top: 5em;
+  right: 11em;
+  z-index: 1000;
+
+  .notification__main--logo {
+    text-align: end;
+  }
+
+
+  .notification__details {
+    @extend .account-settings__main;
+
+    span {
+      color: $secondBasicColor;
+    }
+  }
+}
+
+.conundrums__main {
+  @extend .account-settings__main;
+
+  button {
+    font-size: 1.5em;
+  }
+}
+
+.school__main,
+.riddles__main {
+  @extend .account-settings__main;
+
+  ol {
+    list-style-type: none;
+  }
+
+  button {
+    font-size: 1.2em;
+  }
+
+  .riddles__main--type,
+  .riddles__main--input {
+    display: flex;
+    column-gap: .5em;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      font-size: 1.1em;
+      text-align: center;
+      box-shadow: $smoothShadow;
+      border: none;
+      border-radius: .5em;
+    }
+  }
+
+  p {
+    font-size: 1.7em;
+    color: $secondBasicColor;
+    font-weight: 600;
+  }
+
+  .riddles__main--bottom {
+    padding-top: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .school__main--question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: .5em;
+    b {
+      font-size: 1.7em;
+      color: $secondBasicColor;
+    }
+  }
+  li {
+    padding: 1em;
+  }
 }

@@ -86,10 +86,10 @@ function Notification() {
     }
 
     return (
-        <div>
+        <div className="notification">
             {stateTest ?
-                <div>
-                    <div onClick={() => setClickState(!clickState)}>
+                <div className="notification__main">
+                    <div onClick={() => setClickState(!clickState)} className="notification__main--logo">
                         <img
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAARdJREFUSEvVle0NwjAMRK+bwCYwCTAJMAlsApvAJsCLclUIDW1aFQn/iUTte/aRj0YzRzOzvroAW0nnDvBK0knSXdIurnnaIdaSEyIHXCQhdHx9JNkBFHEHAuRcE5Bz3mpTAIL7WLCOKzCg32IZcxcxl7WFGMCPt6iCOJ0NETcYy7A1nTSADXD3CAMgHhUbAMs8NVYCClMYYO/dvYEVjNYWTx6aNcDd5sAagKe33Uy1LAFq7Emb+ND7GSC3YuoErV7pqvhvQHroanYRuT7VRYsQ56Cwl8dEeuBCfemyGyPumvQ2+ACM/XPzhtrG8wm48LBpSnydYIpwZ+3QJ7Pr8ssfpUkAioFsooXc/bwBvTF0gl6hUsLsgCeagEQZ9+f34QAAAABJRU5ErkJggg=="
                             alt=""
@@ -97,12 +97,12 @@ function Notification() {
                         />
                     </div>
                     {clickState ?
-                        <div>
+                        <div className="notification__details">
                             New
                             <ul>
                                 {notifState ?
                                     <li key={2342}>
-                                        <p>{auth.reqForFriends.userName} invite you to be friends.</p>
+                                        <p><span>{auth.reqForFriends.userName}</span> invite you to be friends.</p>
                                         <div onClick={senders}>
                                             <button>Accept</button>
                                             <button>Deny</button>
