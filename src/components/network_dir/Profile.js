@@ -86,12 +86,7 @@ function Profile() {
         }
     }, [favStudio])
     return (
-        <div className="products-list profile">
-            <div className="products-list__top">
-                <div>
-                    <h3>PROFILE</h3>
-                </div>
-            </div>
+        <div className="profile">
             <ProfileMainPage/>
             {dataIsReady ?
                 <div className="profile__mid">
