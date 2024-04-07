@@ -86,22 +86,38 @@ function Profile() {
         }
     }, [favStudio])
     return (
-        <div>
+        <div className="products-list profile">
+            <div className="products-list__top">
+                <div>
+                    <h3>PROFILE</h3>
+                </div>
+            </div>
             <ProfileMainPage/>
             {dataIsReady ?
-                <div>
-                    Most selling games
-                    <ol>
-                        {mainData.map((el, i) => {
-                            const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
-                            return <Link to={"/games/" + el["_id"]} state={{curTitle: readyTitle}}>
-                                <li key={(i + 1) * 54}>
-                                    <img src={el.img} alt="" width="50px"/>
-                                    {readyTitle}
-                                </li>
-                            </Link>
-                        })}
-                    </ol>
+                <div className="profile__mid">
+                    <div className="profile__popular-games">
+                        <h3>Most selling games</h3>
+                        <ol>
+                            {mainData.map((el, i) => {
+                                const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
+                                return <Link to={"/games/" + el["_id"]} state={{curTitle: readyTitle}}>
+                                    <li key={(i + 1) * 54}>
+                                        <img src={el.img} alt=""/>
+                                        <h4>{readyTitle}</h4>
+                                    </li>
+                                </Link>
+                            })}
+                        </ol>
+                    </div>
+                    <div className="profile__popular-studios">
+                        <h3>Famous studios:</h3>
+                        <ul onClick={(event) => setFavStudio(event.target.value)}>
+                            {studios.map(el => <li key={Math.random() * 100 - 1}>
+                                <p>{el}</p>
+                                <button value={el}>Add to favorite</button>
+                            </li>)}
+                        </ul>
+                    </div>
                 </div> :
                 <div className="lds-ring" style={{height: "500px"}}>
                     <div></div>
@@ -110,21 +126,12 @@ function Profile() {
                     <div></div>
                 </div>
             }
-            <div>
-                Famous studios:
-                <ul onClick={(event) => setFavStudio(event.target.value)}>
-                    {studios.map(el => <li key={Math.random() * 100 - 1}>
-                        <p>{el}</p>
-                        <button value={el}>Add</button>
-                    </li>)}
-                </ul>
-            </div>
-            <div>
+            <Friends/>
+            <div className="profile__conundrums">
                 <Link to="/conundrums">
-                Earn some money
+                    Earn some money
                 </Link>
             </div>
-            <Friends/>
         </div>
     )
 }

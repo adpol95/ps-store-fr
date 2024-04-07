@@ -58,33 +58,39 @@ function Login() {
 
 
     return (
-        <div>
-            <h2>Sign in</h2>
-            <form onSubmit={submiter}>
+        <div className="products-list news-list sign-in">
+            <div className="products-list__top">
                 <div>
-                    <label>
-                        <input
-                            type="text"
-                            value={loginIn}
-                            onChange={(event) => setLoginIn(event.target.value)}
-                            placeholder="User name"
-                        />
-                    </label>
+                    <h3>SIGN IN</h3>
                 </div>
-                <div>
-                    <label>
-                        <input
-                            type="password"
-                            value={passwordIn}
-                            onChange={(event) => setPasswordIn(event.target.value)}
-                            placeholder="Password"
-                        />
-                    </label>
+            </div>
+            <form onSubmit={submiter} className="sign-in__form">
+                <div className="sign-in__container">
+                    <div className="sign-in__nick">
+                        <label>
+                            <input
+                                type="text"
+                                value={loginIn}
+                                onChange={(event) => setLoginIn(event.target.value)}
+                                placeholder="User name"
+                            />
+                        </label>
+                    </div>
+                    <div className="sign-in__password">
+                        <label>
+                            <input
+                                type="password"
+                                value={passwordIn}
+                                onChange={(event) => setPasswordIn(event.target.value)}
+                                placeholder="Password"
+                            />
+                        </label>
+                    </div>
                 </div>
-                <button type="submit">
+                <button type="submit" className="sign-in__accept-btn">
                     Submit
                 </button>
-                <h2>Don't have an a account ? <Link to="registration"> Register!</Link></h2>
+                <h3>Don't have an a account ? <Link to="registration"> Register!</Link></h3>
             </form>
         </div>
     )

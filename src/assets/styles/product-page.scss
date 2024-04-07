@@ -229,28 +229,27 @@
     }
 
   }
+}
+.products-list__page-in--decription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
+  box-shadow: $smoothShadow;
+  background: $fifthBasicColor;
+  border-radius: 2em;
+  padding: 3em;
+  row-gap: 2em;
 
-  .products-list__page-in--decription {
+  h3 {
+    margin: 0;
+    color: $secondBasicColor;
+  }
+
+  .products-list__page-in--decription--text {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    color: black;
-    box-shadow: $smoothShadow;
-    background: $fifthBasicColor;
-    border-radius: 2em;
-    padding: 3em;
-    row-gap: 2em;
-
-    h3 {
-      margin: 0;
-      color: $secondBasicColor;
-    }
-
-    .products-list__page-in--decription--text {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      row-gap: 1em;
-    }
+    justify-content: start;
+    row-gap: 1em;
   }
 }

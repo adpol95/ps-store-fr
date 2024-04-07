@@ -1,0 +1,218 @@
+.sign-in__form {
+  @extend .products-list__page-in--decription;
+  align-items: center;
+  row-gap: 1em;
+
+  .sign-in__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: .2em;
+  }
+
+  input {
+    font-size: 1.1em;
+    text-align: center;
+    box-shadow: $smoothShadow;
+    border: none;
+    border-radius: .5em;
+  }
+
+  button {
+    @extend .focus-btn;
+    @extend .category-btn__active;
+    cursor: pointer;
+  }
+
+  h3 {
+    padding-top: 2em;
+
+    a {
+      color: $fourthBasicColor;
+    }
+  }
+}
+
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3em;
+
+  .profile-main__head {
+    @extend .products-list__page-in--decription;
+    display: flex;
+    flex-direction: row;
+    column-gap: 2em;
+
+
+    .profile-main__left {
+      flex: .6;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .profile-main__status {
+        position: absolute;
+        top: 0;
+      }
+
+      .profile-main__avatar {
+
+        img {
+          width: 100%;
+          border-radius: 15em;
+        }
+      }
+    }
+
+    .profile-main__right {
+      flex: 1;
+
+      span {
+        font-weight: 600;
+        color: $fourthBasicColor;
+      }
+    }
+  }
+
+  .profile-main__mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    .profile-main__favorite-main {
+      display: flex;
+      column-gap: 1em;
+
+      div {
+        width: 50%;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        img {
+          border-radius: 2em;
+          box-shadow: $smoothShadow;
+        }
+      }
+    }
+  }
+}
+
+.profile {
+  .profile__mid {
+    display: flex;
+    column-gap: 2em;
+    h3 {
+      font-size: 2.5em;
+      color: $secondBasicColor;
+    }
+    button {
+      cursor: pointer;
+      background: $fourthBasicColor;
+      border-radius: 2em;
+      box-shadow: $smoothShadow;
+      transition: background .3s;
+      border: none;
+      padding: 1px 7px;
+      &:hover {
+        background: $thirdBasicColor;
+      }
+    }
+  }
+
+  .profile__popular-games {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ol {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1em;
+    }
+
+    li {
+      color: black;
+      display: flex;
+      column-gap: .3em;
+
+      img {
+        width: 5em;
+        border-radius: 10em;
+      }
+    }
+  }
+
+  .profile__popular-studios {
+    text-align: center;
+    ul {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      font-size: 1em;
+      max-height: 60em;
+    }
+
+    li {
+      color: black;
+    }
+  }
+
+  .profile__down {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    h3 {
+      font-size: 2.5em;
+      color: $secondBasicColor;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      font-size: 1em;
+      max-height: 60em;
+    }
+
+    li,
+    a {
+      color: black;
+    }
+    img {
+      width: 5em;
+      border-radius: 10em;
+    }
+    a {
+      background: $fifthBasicColor;
+      padding: 1em 2em;
+      border-radius: 2em;
+      box-shadow: $smoothShadow;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .3s, color .3s;
+      &:hover {
+        background: $fourthBasicColor;
+        color: $fifthBasicColor;
+      }
+    }
+  }
+}
+
+.profile__conundrums {
+  position: fixed;
+  z-index: 1500;
+  a {
+    background: $fourthBasicColor;
+    padding: 1em;
+    border-radius: 10em;
+    transition: background .3s;
+    &:hover {
+      background: $secondBasicColor;
+    }
+  }
+  bottom: 60px;
+  right: 20px;
+}

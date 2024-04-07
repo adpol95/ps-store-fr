@@ -82,58 +82,72 @@ function ProfileMainPage() {
             .catch(err => console.log(err))
     }
     return (
-        <div>
-            <div>Status:</div>
-            <div className="onlineDot">
-                <img src={auth.isOnline ? onlineDotGreen : onlineDotRed} alt=""/>
-            </div>
-            <img src={auth.avatar} alt="Profile pic"/>
-            <div>
-                <h2>{auth.userName}</h2>
-                <div>
-                    <h3>Library</h3>
-                    <p><b><i>Games:</i></b></p>
-                    <ul>
-                        {auth.ownership.games.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
-                    </ul>
-                    <p><b><i>Consoles:</i></b></p>
-                    <ul>
-                        {auth.ownership.consoles.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
-                    </ul>
-                    <p><b><i>Accessories:</i></b></p>
-                    <ul>
-                        {auth.ownership.accessories.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
-                    </ul>
+        <div className="profile-main">
+            <div className="profile-main__head">
+                <div className="profile-main__left">
+                    <div className="profile-main__status">
+                        <div className="onlineDot">
+                            <img src={auth.isOnline ? onlineDotGreen : onlineDotRed} alt=""/>
+                        </div>
+                    </div>
+                    <div className="profile-main__avatar">
+                        <img src={auth.avatar} alt="Profile pic"/>
+                    </div>
                 </div>
-                <p>{auth.country}</p>
-                <p>Birthday: <i>{auth.birthDay.trimEnd().replace(/\s/gi, ".")}</i></p>
-                <p>Amount of friends: {auth.friends.length}</p>
-                <p>Wallet: {auth.wallet}</p>
+                <div className="profile-main__right">
+                    <h2>{auth.userName}</h2>
+                    <p><span>{auth.country}</span></p>
+                    <p>Birthday: <span><i>{auth.birthDay.trimEnd().replace(/\s/gi, ".")}</i></span></p>
+                    <p>Amount of friends: <span>{auth.friends.length}</span></p>
+                    <p>Wallet: <span>{auth.wallet}</span></p>
+                    <div>
+                        <h3>Library</h3>
+                        <p><b><i>Games:</i></b></p>
+                        <ul>
+                            {auth.ownership.games.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
+                        </ul>
+                        <p><b><i>Consoles:</i></b></p>
+                        <ul>
+                            {auth.ownership.consoles.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
+                        </ul>
+                        <p><b><i>Accessories:</i></b></p>
+                        <ul>
+                            {auth.ownership.accessories.map(el => <li key={Math.random() * 100 - 1}> {el.name} </li>)}
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div>
-                Favorite studios:
-                <ul>
-                    {
-                        auth.favorite.studios.map(el => <li key={Math.random() * 100 - 1}>
-                            {el}
-                        </li>)
-                    }
-                </ul>
-                Favorite games:
-                <ul>
-                    {
-                        auth.favorite.games.map(el => <li key={Math.random() * 100 - 1}>
-                            <img src={el.img} alt="" width="50px"/>
-                        </li>)
-                    }
-                </ul>
+            <div className="profile-main__mid">
+                <div className="profile-main__favorite-main">
+                    <div className="profile-main__favorite-main--studios">
+                        <h3>Favorite studios:</h3>
+                        <ul>
+                            {
+                                auth.favorite.studios.map((el, i) => <li key={Math.random() * 100 - 1}>
+                                    {el}
+                                    {i !== auth.favorite.studios.length - 1 ? "," : ""}
+                                </li>)
+                            }
+                        </ul>
+                    </div>
+                    <div className="profile-main__favorite-main--games">
+                        <h3>Favorite games:</h3>
+                        <ul>
+                            {
+                                auth.favorite.games.map(el => <li key={Math.random() * 100 - 1}>
+                                    <img src={el.img} alt="" width="50px"/>
+                                </li>)
+                            }
+                        </ul>
+                    </div>
+                </div>
+                {state !== null ?
+                    <div>
+                        <p>Delete this friend</p>
+                        <button onClick={deleter}>Delete</button>
+                    </div> : ""
+                }
             </div>
-            {state !== null ?
-                <div>
-                    <p>Delete this friend</p>
-                    <button onClick={deleter}>Delete</button>
-                </div> : ""
-            }
         </div>
     )
 }
