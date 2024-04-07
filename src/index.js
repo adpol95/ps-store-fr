@@ -18,7 +18,6 @@ import Registration from "./components/authorization_dir/Registration";
 import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit";
 import RequireAuth from "@auth-kit/react-router/RequireAuth";
-import Logout from "./components/authorization_dir/Logout";
 import Profile from "./components/network_dir/Profile";
 import Conundrums from "./components/network_dir/Conundrums";
 import AcSettings from "./components/authorization_dir/AcSettings";
@@ -136,10 +135,6 @@ const router = createBrowserRouter([
                     {
                         path: "",
                         element: <Login/>
-                    },
-                    {
-                        path: "logout",
-                        element: <Logout/>
                     },
                     {
                         path: "registration",

@@ -1,9 +1,12 @@
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
+import useSignOut from "react-auth-kit/hooks/useSignOut";
 
 function Header() {
+    const signOut = useSignOut()
+    const navigate = useNavigate();
     const isAuthenticated = useIsAuthenticated()
     const auth = useAuthUser();
     const [profileClickState, setProfileClickState] = useState(false);
@@ -15,7 +18,12 @@ function Header() {
     window.addEventListener("resize", () => setSizeWindow(window.innerWidth));
     window.addEventListener("scroll", () => setScrollWindow(window.scrollY));
     return (
-        <header style={burgerState ? {borderRadius: scrollWindow > 20 ? "0 0 2em 2em" : "0", background: scrollWindow > 20 ? "rgba(23, 140, 164)" : "rgba(0, 0, 0, 0)", boxShadow: scrollWindow > 20 ? "0 0 .3em rgba(0,0,0,0.5)" : "", animation: scrollWindow > 20 ? "slideDown .7s" : "slideSide .7s"} : {paddingBottom: "17em"}}>
+        <header style={burgerState ? {
+            borderRadius: scrollWindow > 20 ? "0 0 2em 2em" : "0",
+            background: scrollWindow > 20 ? "rgba(23, 140, 164)" : "rgba(0, 0, 0, 0)",
+            boxShadow: scrollWindow > 20 ? "0 0 .3em rgba(0,0,0,0.5)" : "",
+            animation: scrollWindow > 20 ? "slideDown .7s" : "slideSide .7s"
+        } : {paddingBottom: "17em"}}>
             <div className="header__left-side">
                 <Link to="/">
                     <svg width={sizeWindow > 1200 ? "250" : "200"} viewBox="0 0 320 100.02500534057617"
@@ -59,8 +67,12 @@ function Header() {
             </div>
 
             {
-                <div className={sizeWindow > 810 ? "header__center-side" : "header__menu-mobile"} style={!burgerState ? {display: sizeWindow <= 810 ? "flex" : "none", transition: "opacity .5s"} : {display: sizeWindow > 810 ? "flex" : "none"}
-                } onClick={() =>setBurgerState(true)}>
+                <div className={sizeWindow > 810 ? "header__center-side" : "header__menu-mobile"}
+                     style={!burgerState ? {
+                         display: sizeWindow <= 810 ? "flex" : "none",
+                         transition: "opacity .5s"
+                     } : {display: sizeWindow > 810 ? "flex" : "none"}
+                     } onClick={() => setBurgerState(true)}>
                     <Link to="/"
                           className={location.pathname === "/" ? "category-btn__active" : ""}> Home </Link>
                     <Link to="games"
@@ -93,14 +105,40 @@ function Header() {
                     </Link>
                     {isAuthenticated() ?
                         <div className="header__auth-section">
-                            <div onClick={() => setProfileClickState(!profileClickState)}>
-                                <img src={auth.avatar} alt="" width="100px"/>
+                            <div onClick={() => setProfileClickState(!profileClickState)}
+                                 className="header__auth-section--avatar">
+                                <img src={auth.avatar} alt=""/>
                             </div>
                             {profileClickState ?
-                                <div>
+                                <div className="header__auth-section--settings">
                                     <ul>
                                         <li><Link to="authorization/account-setting">Account settings</Link></li>
-                                        <li><Link to="authorization/logout">Sign out</Link></li>
+                                        <li>
+                                            <div onClick={() => {
+                                                signOut();
+                                                localStorage.clear();
+                                                fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
+                                                    method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+                                                    mode: "cors", // no-cors, *cors, same-origin
+                                                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                                                    credentials: "same-origin", // include, *same-origin, omit
+                                                    headers: {
+                                                        "Content-Type": "application/json",
+                                                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                                                    },
+                                                    redirect: "follow", // manual, *follow, error
+                                                    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                                                    body: JSON.stringify({isOnline: false})
+                                                })
+                                                    .then(res => {
+                                                        console.log(res)
+                                                    })
+                                                    .catch(err => console.log(err))
+                                                navigate("/");
+                                                window.location.reload();
+                                            }}>Sign Out
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div> :
                                 ""}

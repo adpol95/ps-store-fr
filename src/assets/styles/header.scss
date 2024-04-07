@@ -27,6 +27,7 @@ header {
       left: 0
     }
   }
+
   .header__menu-mobile {
     position: absolute;
     display: flex;
@@ -39,7 +40,7 @@ header {
     align-items: center;
     justify-content: space-between;
     height: 15em;
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
   }
 
 
@@ -70,8 +71,8 @@ header {
 
   .header__right-side {
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    column-gap: 1em;
     flex: .6;
 
     @media (min-width: $phoneWide + .2px) {
@@ -231,3 +232,43 @@ header {
     transform: rotate(0);
   }
 }
+
+.header__auth-section {
+  display: flex;
+  column-gap: 2em;
+
+  .header__auth-section--avatar {
+    display: flex;
+    justify-content: end;
+
+    img {
+      width: 50%;
+      border-radius: 6em;
+      cursor: pointer;
+    }
+  }
+
+  .header__auth-section--settings {
+    position: absolute;
+    top: 7em;
+    right: 7em;
+    background: $fifthBasicColor;
+    text-align: center;
+
+    li,
+    a {
+      color: black;
+      transition: color .3s;
+      cursor: pointer;
+
+      &:hover {
+        color: $secondBasicColor;
+      }
+    }
+
+    padding: 1.5em;
+    box-shadow: $smoothShadow;
+    border-radius: 2em;
+  }
+}
+

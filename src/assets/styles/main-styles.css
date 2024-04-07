@@ -61,7 +61,7 @@
   width: 100%;
 }
 
-.category-btn__active, .sign-in__form button {
+.category-btn__active, .basket__main button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -244,8 +244,8 @@ header .header__center-side a:hover {
 }
 header .header__right-side {
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  column-gap: 1em;
   flex: 0.6;
 }
 @media (min-width: 810.2px) {
@@ -401,6 +401,40 @@ header .log3-2 {
     transform: rotate(0);
   }
 }
+.header__auth-section {
+  display: flex;
+  column-gap: 2em;
+}
+.header__auth-section .header__auth-section--avatar {
+  display: flex;
+  justify-content: end;
+}
+.header__auth-section .header__auth-section--avatar img {
+  width: 50%;
+  border-radius: 6em;
+  cursor: pointer;
+}
+.header__auth-section .header__auth-section--settings {
+  position: absolute;
+  top: 7em;
+  right: 7em;
+  background: #e2e9ec;
+  text-align: center;
+  padding: 1.5em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2em;
+}
+.header__auth-section .header__auth-section--settings li,
+.header__auth-section .header__auth-section--settings a {
+  color: black;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.header__auth-section .header__auth-section--settings li:hover,
+.header__auth-section .header__auth-section--settings a:hover {
+  color: rgb(24, 183, 190);
+}
+
 footer {
   background: url("../images/footer-back-all.png") top;
   display: flex;
@@ -448,7 +482,7 @@ footer {
     opacity: 0.99;
   }
 }
-.category-btn__active, .sign-in__form button {
+.category-btn__active, .basket__main button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -783,7 +817,7 @@ footer {
   }
 }
 
-.category-btn__active, .sign-in__form button {
+.category-btn__active, .basket__main button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -1021,7 +1055,7 @@ footer {
   color: #e2e9ec;
 }
 
-.category-btn__active, .sign-in__form button {
+.category-btn__active, .basket__main button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -1342,7 +1376,7 @@ footer {
   row-gap: 1em;
 }
 
-.category-btn__active, .sign-in__form button {
+.category-btn__active, .basket__main button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -1662,6 +1696,59 @@ footer {
 }
 .profile__conundrums a:hover {
   background: rgb(24, 183, 190);
+}
+
+.basket__main {
+  text-align: center;
+  background: #e2e9ec;
+  border-radius: 2em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  padding: 2em 3em;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+.basket__main h3 {
+  color: rgb(24, 183, 190);
+}
+.basket__main b {
+  font-size: 1.5em;
+}
+.basket__main img {
+  width: 30%;
+}
+.basket__main button {
+  border: none;
+  cursor: pointer;
+  background: #072A40;
+  transition: background 0.3s;
+}
+.basket__main button:hover {
+  background: rgb(24, 183, 190);
+}
+.basket__main .basket__main--position {
+  position: relative;
+}
+.basket__main .basket__main--remove-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.basket__main .basket__main--quantity {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+}
+.basket__main .basket__main--amount {
+  display: flex;
+  column-gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+.basket__main i {
+  font-size: 1.4em;
+  color: rgb(24, 183, 190);
 }
 
 .App {
