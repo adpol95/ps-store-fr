@@ -79,6 +79,7 @@
     flex-direction: column;
     align-items: center;
     color: black;
+    row-gap: 3em;
 
     .profile-main__favorite-main {
       display: flex;
@@ -106,6 +107,9 @@
   .profile__mid {
     display: flex;
     column-gap: 2em;
+    @media (max-width: $phoneWide) {
+      flex-direction: column;
+    }
 
     h3 {
       font-size: 2.5em;
@@ -151,7 +155,9 @@
   }
 
   .profile__popular-studios {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     ul {
       display: flex;
@@ -284,7 +290,10 @@
   top: 5em;
   right: 11em;
   z-index: 1000;
-
+  @media (max-width: $phoneWide) {
+    right: 2em;
+    top: 1em;
+  }
   .notification__main--logo {
     text-align: end;
   }
@@ -361,4 +370,8 @@
   li {
     padding: 1em;
   }
+}
+.profile__delete-friend {
+  @extend .account-settings__main;
+  padding-top: 3em;
 }

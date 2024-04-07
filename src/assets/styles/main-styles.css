@@ -62,7 +62,7 @@
 }
 
 .category-btn__active, .basket__main button, .account-settings__main button, .add-friends__main button, .notification .notification__details button, .conundrums__main button, .school__main button,
-.riddles__main button, .sign-in__form button {
+.riddles__main button, .profile__delete-friend button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -484,7 +484,7 @@ footer {
   }
 }
 .category-btn__active, .basket__main button, .account-settings__main button, .add-friends__main button, .notification .notification__details button, .conundrums__main button, .school__main button,
-.riddles__main button, .sign-in__form button {
+.riddles__main button, .profile__delete-friend button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -820,7 +820,7 @@ footer {
 }
 
 .category-btn__active, .basket__main button, .account-settings__main button, .add-friends__main button, .notification .notification__details button, .conundrums__main button, .school__main button,
-.riddles__main button, .sign-in__form button {
+.riddles__main button, .profile__delete-friend button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -1059,7 +1059,7 @@ footer {
 }
 
 .category-btn__active, .basket__main button, .account-settings__main button, .add-friends__main button, .notification .notification__details button, .conundrums__main button, .school__main button,
-.riddles__main button, .sign-in__form button {
+.riddles__main button, .profile__delete-friend button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -1381,7 +1381,7 @@ footer {
 }
 
 .category-btn__active, .basket__main button, .account-settings__main button, .add-friends__main button, .notification .notification__details button, .conundrums__main button, .school__main button,
-.riddles__main button, .sign-in__form button {
+.riddles__main button, .profile__delete-friend button, .sign-in__form button {
   background: rgba(24, 183, 190, 0.41);
   padding: 0.5em 0.8em;
   border-radius: 1.5em;
@@ -1579,6 +1579,7 @@ footer {
   flex-direction: column;
   align-items: center;
   color: black;
+  row-gap: 3em;
 }
 .profile-main .profile-main__mid .profile-main__favorite-main {
   display: flex;
@@ -1600,6 +1601,11 @@ footer {
 .profile .profile__mid {
   display: flex;
   column-gap: 2em;
+}
+@media (max-width: 810px) {
+  .profile .profile__mid {
+    flex-direction: column;
+  }
 }
 .profile .profile__mid h3 {
   font-size: 2.5em;
@@ -1637,7 +1643,9 @@ footer {
   border-radius: 10em;
 }
 .profile .profile__popular-studios {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .profile .profile__popular-studios ul {
   display: flex;
@@ -1708,16 +1716,16 @@ footer {
   background: rgb(24, 183, 190);
 }
 
-.account-settings__main img, .school__main img,
+.account-settings__main img, .profile__delete-friend img, .school__main img,
 .riddles__main img, .conundrums__main img, .notification .notification__details img, .add-friends__main img {
   border-radius: 30em;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-.account-settings__main i, .school__main i,
+.account-settings__main i, .profile__delete-friend i, .school__main i,
 .riddles__main i, .conundrums__main i, .notification .notification__details i, .add-friends__main i {
   color: rgb(24, 183, 190);
 }
-.account-settings__main ul, .school__main ul,
+.account-settings__main ul, .profile__delete-friend ul, .school__main ul,
 .riddles__main ul, .conundrums__main ul, .notification .notification__details ul, .add-friends__main ul {
   display: flex;
   flex-direction: column;
@@ -1747,6 +1755,12 @@ footer {
   top: 5em;
   right: 11em;
   z-index: 1000;
+}
+@media (max-width: 810px) {
+  .notification {
+    right: 2em;
+    top: 1em;
+  }
 }
 .notification .notification__main--logo {
   text-align: end;
@@ -1816,8 +1830,12 @@ footer {
   padding: 1em;
 }
 
+.profile__delete-friend {
+  padding-top: 3em;
+}
+
 .basket__main, .account-settings__main, .add-friends__main, .notification .notification__details, .conundrums__main, .school__main,
-.riddles__main {
+.riddles__main, .profile__delete-friend {
   text-align: center;
   background: #e2e9ec;
   border-radius: 2em;
@@ -1829,53 +1847,53 @@ footer {
   row-gap: 1em;
 }
 .basket__main h3, .account-settings__main h3, .add-friends__main h3, .notification .notification__details h3, .conundrums__main h3, .school__main h3,
-.riddles__main h3 {
+.riddles__main h3, .profile__delete-friend h3 {
   color: rgb(24, 183, 190);
 }
 .basket__main b, .account-settings__main b, .add-friends__main b, .notification .notification__details b, .conundrums__main b, .school__main b,
-.riddles__main b {
+.riddles__main b, .profile__delete-friend b {
   font-size: 1.5em;
 }
 .basket__main img, .account-settings__main img, .add-friends__main img, .notification .notification__details img, .conundrums__main img, .school__main img,
-.riddles__main img {
+.riddles__main img, .profile__delete-friend img {
   width: 30%;
 }
 .basket__main button, .account-settings__main button, .add-friends__main button, .notification .notification__details button, .conundrums__main button, .school__main button,
-.riddles__main button {
+.riddles__main button, .profile__delete-friend button {
   border: none;
   cursor: pointer;
   background: #072A40;
   transition: background 0.3s;
 }
 .basket__main button:hover, .account-settings__main button:hover, .add-friends__main button:hover, .notification .notification__details button:hover, .conundrums__main button:hover, .school__main button:hover,
-.riddles__main button:hover {
+.riddles__main button:hover, .profile__delete-friend button:hover {
   background: rgb(24, 183, 190);
 }
 .basket__main .basket__main--position, .account-settings__main .basket__main--position, .add-friends__main .basket__main--position, .notification .notification__details .basket__main--position, .conundrums__main .basket__main--position, .school__main .basket__main--position,
-.riddles__main .basket__main--position {
+.riddles__main .basket__main--position, .profile__delete-friend .basket__main--position {
   position: relative;
 }
 .basket__main .basket__main--remove-btn, .account-settings__main .basket__main--remove-btn, .add-friends__main .basket__main--remove-btn, .notification .notification__details .basket__main--remove-btn, .conundrums__main .basket__main--remove-btn, .school__main .basket__main--remove-btn,
-.riddles__main .basket__main--remove-btn {
+.riddles__main .basket__main--remove-btn, .profile__delete-friend .basket__main--remove-btn {
   position: absolute;
   top: 0;
   right: 0;
 }
 .basket__main .basket__main--quantity, .account-settings__main .basket__main--quantity, .add-friends__main .basket__main--quantity, .notification .notification__details .basket__main--quantity, .conundrums__main .basket__main--quantity, .school__main .basket__main--quantity,
-.riddles__main .basket__main--quantity {
+.riddles__main .basket__main--quantity, .profile__delete-friend .basket__main--quantity {
   display: flex;
   flex-direction: column;
   row-gap: 0.5em;
 }
 .basket__main .basket__main--amount, .account-settings__main .basket__main--amount, .add-friends__main .basket__main--amount, .notification .notification__details .basket__main--amount, .conundrums__main .basket__main--amount, .school__main .basket__main--amount,
-.riddles__main .basket__main--amount {
+.riddles__main .basket__main--amount, .profile__delete-friend .basket__main--amount {
   display: flex;
   column-gap: 1em;
   justify-content: center;
   align-items: center;
 }
 .basket__main i, .account-settings__main i, .add-friends__main i, .notification .notification__details i, .conundrums__main i, .school__main i,
-.riddles__main i {
+.riddles__main i, .profile__delete-friend i {
   font-size: 1.4em;
   color: rgb(24, 183, 190);
 }

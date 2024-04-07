@@ -82,7 +82,12 @@ function ProfileMainPage() {
             .catch(err => console.log(err))
     }
     return (
-        <div className="profile-main">
+        <div className="products-list profile-main">
+            <div className="products-list__top">
+                <div>
+                    <h3>{auth.userName}</h3>
+                </div>
+            </div>
             <div className="profile-main__head">
                 <div className="profile-main__left">
                     <div className="profile-main__status">
@@ -142,7 +147,7 @@ function ProfileMainPage() {
                     </div>
                 </div>
                 {state !== null ?
-                    <div>
+                    <div className="profile__delete-friend">
                         <p>Delete this friend</p>
                         <button onClick={deleter}>Delete</button>
                     </div> : ""
