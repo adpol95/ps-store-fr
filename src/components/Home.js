@@ -88,9 +88,9 @@ function Home() {
                     </div>
                 </div>
                 <div className="trending-games__container">
-                    {readyGames.slice(0, 8).map((el, i) => {
+                    {readyGames.slice(0, 8).map(el => {
                         const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
-                        return <Link to={el["_id"]} state={{curTitle: readyTitle}} className="game-pack">
+                        return <Link to={"/games/" + el["_id"]} state={{curTitle: readyTitle}} className="game-pack">
                             <div className="game-pack__top">
                                 <img src={el.img} alt="" style={{objectFit: "cover", objectPosition: "0 25%"}}/>
                                 <div className="game-pack__price">
