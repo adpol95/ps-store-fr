@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a complete app, here we have functions like: authorization, in-store currency, find new friends, create orders and the own it, solve riddles, read last news, games, consoles and more in our app!
 
 ## Available Scripts
 
