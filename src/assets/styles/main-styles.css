@@ -455,7 +455,7 @@ footer {
 }
 @media (max-width: 810px) {
   footer {
-    font-size: 0.6em;
+    font-size: 0.8em;
   }
 }
 @media (min-width: 1200px) {
@@ -929,10 +929,11 @@ footer {
 }
 
 .products-list {
-  padding: 30em 0 10em 0;
+  padding: 30em 0 5em 0;
 }
 .products-list .products-list__top {
   display: flex;
+  text-align: center;
   flex-direction: column;
   background: url("../images/heading-back.png") center;
   height: 0em;
@@ -949,8 +950,17 @@ footer {
   align-items: center;
 }
 .products-list .products-list__top h3 {
-  font-size: 3em;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+@media (max-width: 810px) {
+  .products-list .products-list__top h3 {
+    font-size: 2em;
+  }
+}
+@media (min-width: 810.2px) {
+  .products-list .products-list__top h3 {
+    font-size: 3em;
+  }
 }
 .products-list .products-list__top .products-list__filter--main-btn {
   background: #072A40;
@@ -999,6 +1009,7 @@ footer {
 @media (max-width: 810px) {
   .products-list .products-list__filter {
     font-size: 0.8em;
+    top: 230px;
   }
 }
 .products-list .products-list__filter--shell {
@@ -1047,7 +1058,7 @@ footer {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   background: #e2e9ec;
   color: black;
-  width: 50px;
+  width: 3em;
   font-weight: bold;
   font-size: 1em;
   cursor: pointer;
@@ -1172,6 +1183,7 @@ footer {
   justify-content: start;
   align-items: center;
   column-gap: 5%;
+  row-gap: 5em;
   padding-bottom: 6em;
 }
 .products-list__page-in .products-list__page-in-top button {
@@ -1228,6 +1240,7 @@ footer {
   display: flex;
   flex-direction: row;
   column-gap: 0.5em;
+  padding-top: 0.5em;
 }
 .products-list__page-in .products-list__page-in-top--left-side .products-list__page-in-top--color .products-list__page-in-top--clr-list li {
   width: 10%;
@@ -1956,6 +1969,32 @@ footer {
   padding: 5.9em 10%;
   color: #F9F7F0;
   position: relative;
+}
+@media (max-width: 810px) {
+  .App {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 810.2px) {
+  .App {
+    font-size: 1em;
+  }
+}
+@media (max-width: 810px) {
+  .App ul,
+  .App a,
+  .App button,
+  .App input {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 810.2px) {
+  .App ul,
+  .App a,
+  .App button,
+  .App input {
+    font-size: 1em;
+  }
 }
 .App ul {
   list-style-type: none;

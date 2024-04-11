@@ -24,6 +24,23 @@
   padding: 5.9em 10%;
   color: $firstBasicColor;
   position: relative;
+  @media (max-width: $phoneWide) {
+    font-size: .8em;
+  }
+  @media (min-width: $phoneWide + .2px) {
+    font-size: 1em;
+  }
+  ul,
+  a,
+  button,
+  input {
+    @media (max-width: $phoneWide) {
+      font-size: .8em;
+    }
+    @media (min-width: $phoneWide + .2px) {
+      font-size: 1em;
+    }
+  }
   ul {
     list-style-type: none;
     margin: 0;
