@@ -9,16 +9,18 @@
   flex-direction: column;
   row-gap: 1em;
 
+  .basket__main--cover-img {
+    width: 20%;
+    border-radius: 50em;
+    box-shadow: $smoothShadow;
+  }
+
   h3 {
     color: $secondBasicColor;
   }
 
   b {
     font-size: 1.5em;
-  }
-
-  img {
-    width: 30%;
   }
 
   button {

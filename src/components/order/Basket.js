@@ -114,7 +114,7 @@ function Basket() {
                         {
                             dataCart.map((el, i) => <li key={Math.floor(Math.random() * 100 - 1) * i}
                                                         className="basket__main--position">
-                                <img src={el.img} alt=""/>
+                                <img src={el.img} alt="" className="basket__main--cover-img"/>
                                 <h4>{el.title}</h4>
                                 <button onClick={() => setRemPlusMinEffect([{...el}])}
                                         className="basket__main--remove-btn">X
@@ -135,7 +135,7 @@ function Basket() {
                                 {
                                     el.Age ?
                                         <div>
-                                            <img src={el.Age.ESRBImg} alt=""/>
+                                            <img src={el.Age.ESRBImg} alt="" style={{width: "10%"}}/>
                                             <p>{el.Age.TopDescipt}</p>
                                         </div> : ""
                                 }
