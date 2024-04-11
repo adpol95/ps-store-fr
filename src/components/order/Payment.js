@@ -12,12 +12,17 @@ function Payment() {
     const signIn = useSignIn();
     const authHeader = useAuthHeader()
     return (
-        <div>
-            <h3>Total cost: {state.cost}</h3>
-            {isAuth() ? <div>
-                Your wallet: {auth.wallet}
-                {
-                    auth.wallet < state.cost ?
+        <div className="products-list payment">
+            <div className="products-list__top">
+                <div>
+                    <h3>PAYMENT</h3>
+                </div>
+            </div>
+            <div className="payment__main">
+                <h3>Total cost: {state.cost}</h3>
+                {isAuth() ? <div>
+                    <div style={{paddingBottom: "1em"}}>Your wallet: {auth.wallet}</div>
+                    {auth.wallet < state.cost ?
                         <button disabled> You have not enough money for paying this order</button> :
                         <button onClick={(event) => {
                             event.preventDefault()
@@ -64,15 +69,14 @@ function Payment() {
                                     window.location.reload();
                                 })
                                 .catch(err => console.log(err))
-                        }}>Finish your order and pay</button>
+                        }}>Finish your order and pay</button>}
 
-                }
 
-            </div> : <div>
-                <h3><Link to="/authorization/registration">Register</Link> or <Link to="/conundrums">earn our ecosystem
-                    coins</Link></h3>
-            </div>
-            }
+                </div> : <div>
+                    <h3 style={{color: "black"}}>To make a payment you have to <Link to="/authorization/registration">register</Link>, <Link to="/authorization"  >login</Link> or <Link to="/conundrums">earn our
+                        ecosystem coins.</Link></h3>
+                </div>
+                }</div>
         </div>
     )
 }

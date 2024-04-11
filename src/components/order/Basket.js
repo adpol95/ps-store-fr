@@ -377,11 +377,11 @@ function Basket() {
                                    return {name: el.title, type: el.type}
                                }),
                            }}>
+                        <div style={{paddingTop: "1em"}}>
+                            <button>Checkout</button>
+                        </div>
                     </Link>
                     }
-                </div>
-                <div>
-                    <button>Checkout</button>
                 </div>
             </div>
         </div>
