@@ -1,4 +1,4 @@
-@import "varaibles";
+@import "variables";
 @import "mixins";
 footer {
   @include headAndFoot($backgroundFooter, absolute, 8em);
