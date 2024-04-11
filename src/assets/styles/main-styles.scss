@@ -1,15 +1,15 @@
-@import "loader.scss";
-@import "net.scss";
-@import "header.scss";
-@import "footer.scss";
-@import "psn.scss";
-@import "varaibles.scss";
-@import "home.scss";
-@import "products-list.scss";
-@import "product-page.scss";
-@import "news-page.scss";
-@import "network.scss";
-@import "basket.scss";
+@import "loader";
+@import "net";
+@import "header";
+@import "footer";
+@import "other";
+@import "varaibles";
+@import "home";
+@import "products-list";
+@import "product-page";
+@import "news-page";
+@import "network";
+@import "basket";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 .App {

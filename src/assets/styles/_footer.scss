@@ -2,14 +2,14 @@
 @import "mixins";
 footer {
   @include headAndFoot($backgroundFooter, absolute, 8em);
-  bottom: -0px;
+  bottom: 0;
   border-top-left-radius: 2em;
   border-top-right-radius: 2em;
   text-align: center;
   padding: 0 1em;
 
-  @media (min-width: 0px) {
-    font-size: .8em;
+  @media (max-width: $phoneWide) {
+    font-size: .6em;
   }
   @media (min-width: $tablesWide) {
     font-size: 1.1rem;

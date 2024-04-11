@@ -107,6 +107,7 @@
   .profile__mid {
     display: flex;
     column-gap: 2em;
+    height: 100%;
     @media (max-width: $phoneWide) {
       flex-direction: column;
     }
@@ -164,7 +165,14 @@
       flex-direction: column;
       flex-wrap: wrap;
       font-size: 1em;
-      max-height: 60em;
+
+      @media (max-width: $phoneWide) {
+        flex-wrap: unset;
+      }
+      @media (min-width: $phoneWide + .2px) {
+        flex-wrap: wrap;
+        max-height: 60em;
+      }
     }
 
     li {
@@ -294,6 +302,7 @@
     right: 2em;
     top: 1em;
   }
+
   .notification__main--logo {
     text-align: end;
   }
@@ -362,15 +371,18 @@
     flex-direction: column;
     align-items: center;
     row-gap: .5em;
+
     b {
       font-size: 1.7em;
       color: $secondBasicColor;
     }
   }
+
   li {
     padding: 1em;
   }
 }
+
 .profile__delete-friend {
   @extend .account-settings__main;
   padding-top: 3em;
