@@ -387,3 +387,26 @@
   @extend .account-settings__main;
   padding-top: 3em;
 }
+
+.registration__main {
+  @extend .basket__main;
+  text-align: start;
+  input {
+    font-size: 1.1em;
+    text-align: center;
+    box-shadow: $smoothShadow;
+    border: none;
+    border-radius: .5em;
+  }
+  img {
+    border-radius: 10em;
+    box-shadow: $smoothShadow;
+    cursor: pointer;
+  }
+  .registration__main--mid {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding-bottom: 2em;
+  }
+}
