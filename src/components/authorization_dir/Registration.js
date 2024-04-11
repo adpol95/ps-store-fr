@@ -307,7 +307,6 @@ function Registration() {
                         </div>
                         <div>
                             <div>
-
                                 Make sure you enter your date of birth correctly. It may be necessary later for security
                                 purposes. Other players won't be able to see it.
                             </div>

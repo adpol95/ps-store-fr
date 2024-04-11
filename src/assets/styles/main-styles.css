@@ -1906,6 +1906,9 @@ footer {
 .basket__main .basket__main--position, .account-settings__main .basket__main--position, .add-friends__main .basket__main--position, .notification .notification__details .basket__main--position, .conundrums__main .basket__main--position, .school__main .basket__main--position,
 .riddles__main .basket__main--position, .profile__delete-friend .basket__main--position, .registration__main .basket__main--position {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
 }
 .basket__main .basket__main--remove-btn, .account-settings__main .basket__main--remove-btn, .add-friends__main .basket__main--remove-btn, .notification .notification__details .basket__main--remove-btn, .conundrums__main .basket__main--remove-btn, .school__main .basket__main--remove-btn,
 .riddles__main .basket__main--remove-btn, .profile__delete-friend .basket__main--remove-btn, .registration__main .basket__main--remove-btn {
@@ -1923,7 +1926,7 @@ footer {
 .riddles__main .basket__main--amount, .profile__delete-friend .basket__main--amount, .registration__main .basket__main--amount {
   display: flex;
   column-gap: 1em;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 .basket__main i, .account-settings__main i, .add-friends__main i, .notification .notification__details i, .conundrums__main i, .school__main i,

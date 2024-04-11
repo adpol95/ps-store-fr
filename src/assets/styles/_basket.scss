@@ -36,6 +36,9 @@
 
   .basket__main--position {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
   }
   .basket__main--remove-btn {
     position: absolute;
@@ -52,7 +55,7 @@
   .basket__main--amount {
     display: flex;
     column-gap: 1em;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
   }
   i {
