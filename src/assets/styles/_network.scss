@@ -21,14 +21,19 @@
     @extend .focus-btn;
     @extend .category-btn__active;
     cursor: pointer;
+    border: none;
   }
 
   h3 {
     padding-top: 2em;
 
-    a {
+    .sign-in__form--register {
       color: $fourthBasicColor;
+      &:hover {
+        color: $fifthBasicColor;
+      }
     }
+
   }
 }
 

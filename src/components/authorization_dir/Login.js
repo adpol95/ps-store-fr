@@ -90,7 +90,7 @@ function Login() {
                 <button type="submit" className="sign-in__accept-btn">
                     Submit
                 </button>
-                <h3>Don't have an a account ? <Link to="registration"> Register!</Link></h3>
+                <h3>Don't have an a account ? <Link to="registration" className="sign-in__form--register"> Register!</Link></h3>
             </form>
         </div>
     )

@@ -84,7 +84,7 @@ function Home() {
                         <h3>Most selling games</h3>
                     </div>
                     <div className="trending-games__head-text--right">
-                        <Link to="" className="focus-btn category-btn__active">View all</Link>
+                        <Link to="/games" className="focus-btn category-btn__active">View all</Link>
                     </div>
                 </div>
                 <div className="trending-games__container">
@@ -130,9 +130,11 @@ function Home() {
                         for haptic feedback, adaptive triggers and 3D Audio, and an all-new generation of incredible
                         PlayStation games.
                     </h4>
+                    <Link to="/consoles">
                     <button className="focus-btn category-btn__active">
                         Shop now
                     </button>
+                    </Link>
                 </div>
                 <div className="bottom-section__back-img" style={{display: sizeWindow > 810 ? "inline-block" : "none"}}>
                     <img
@@ -145,9 +147,11 @@ function Home() {
                         <h3>Build your perfect gaming setup with <span>controllers, headsets
                             and other</span></h3>
                     </div>
+                    <Link to="/accessories">
                     <button className="focus-btn category-btn__active">
                         Shop now
                     </button>
+                    </Link>
                 </div>
             </div>
         </div>
