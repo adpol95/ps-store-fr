@@ -128,7 +128,7 @@ function ProfileMainPage() {
                         <h3>Favorite studios:</h3>
                         <ul>
                             {
-                                auth.favorite.studios.map((el, i) => <li key={Math.random() * 100 - 1}>
+                                auth?.favorite.studios.map((el, i) => <li key={Math.random() * 100 - 1}>
                                     {el}
                                     {i !== auth.favorite.studios.length - 1 ? "," : ""}
                                 </li>)
@@ -139,7 +139,7 @@ function ProfileMainPage() {
                         <h3>Favorite games:</h3>
                         <ul>
                             {
-                                auth.favorite.games.map(el => <li key={Math.random() * 100 - 1}>
+                                auth?.favorite.games.map(el => <li key={Math.random() * 100 - 1}>
                                     <img src={el.img} alt="" width="50px"/>
                                 </li>)
                             }

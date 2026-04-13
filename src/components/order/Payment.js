@@ -64,7 +64,7 @@ function Payment() {
                                         }
                                     })
                                     alert("Congrats with your new purchase")
-                                    localStorage.clear();
+                                    // localStorage.clear();
                                     navigate("/psn");
                                     window.location.reload();
                                 })

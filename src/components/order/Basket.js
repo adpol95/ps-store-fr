@@ -135,7 +135,7 @@ function Basket() {
                                 {
                                     el.Age ?
                                         <div>
-                                            <img src={el.Age.ESRBImg} alt="" style={{width: "10%"}}/>
+                                            <img src={el.Age?.ESRBImg} alt="" style={{width: "10%"}}/>
                                             <p>{el.Age.TopDescipt}</p>
                                         </div> : ""
                                 }

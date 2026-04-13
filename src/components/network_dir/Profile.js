@@ -55,14 +55,14 @@ function Profile() {
     }, [])
     useEffect(() => {
         if (favStudio) {
-            if (auth.favorite.studios.every(el => el !== favStudio)) {
+            if (auth?.favorite.studios.every(el => el !== favStudio)) {
                 fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
                     headers: {
                         "Content-Type": "application/json",
                         // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: JSON.stringify({favorite: {...auth.favorite, studios: [...auth.favorite.studios, favStudio]}})
+                    body: JSON.stringify({favorite: {...auth?.favorite, studios: [...auth.favorite.studios, favStudio]}})
                 })
                     .then(resp => {
                         signIn({
@@ -72,7 +72,7 @@ function Profile() {
                             },
                             // refresh: response.refToken,
                             userState: {
-                                ...auth, favorite: {...auth.favorite, studios: [...auth.favorite.studios, favStudio]}
+                                ...auth, favorite: {...auth?.favorite, studios: [...auth.favorite.studios, favStudio]}
                             }
                         })
                         alert(favStudio + " has been added to your list of favorite studios");

@@ -62,7 +62,7 @@ function Registration() {
                         })
                             .then(res => {
                                 navigate("/psn");
-                                window.localStorage.clear();
+                                // window.localStorage.clear();
                                 window.location.reload();
                             })
                             .catch(err => console.log(err))

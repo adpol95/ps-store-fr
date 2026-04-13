@@ -21,7 +21,7 @@ function GamePage() {
     const authHeader = useAuthHeader();
     useEffect(() => {
         if (Object.values(favGame).length) {
-            if (auth.favorite.games.every(el => el.title !== favGame.title)) {
+            if (auth?.favorite.games.every(el => el.title !== favGame.title)) {
                 fetch(process.env.REACT_APP_STATE1 + "/authorization/" + auth["_id"], {
                     method: "PATCH", // *GET, POST, PUT, DELETE, etc.
                     headers: {
@@ -30,8 +30,8 @@ function GamePage() {
                     },
                     body: JSON.stringify({
                         favorite: {
-                            ...auth.favorite,
-                            games: [...auth.favorite.games, favGame]
+                            ...auth?.favorite,
+                            games: [...auth?.favorite.games, favGame]
                         }
                     })
                 })
@@ -45,8 +45,8 @@ function GamePage() {
                             userState: {
                                 ...auth,
                                 favorite: {
-                                    ...auth.favorite,
-                                    games: [...auth.favorite.games, favGame]
+                                    ...auth?.favorite,
+                                    games: [...auth?.favorite.games, favGame]
                                 }
                             }
                         })
@@ -228,12 +228,12 @@ function GamePage() {
                                 </table>
                             </div>
                             <div className="products-list__page-in-top--child">
-                                <img src={gameData.Age.ESRBImg} alt=""/>
+                                <img src={gameData.Age?.ESRBImg} alt=""/>
                                 <div className="products-list__page-in-top--child-descript">
-                                    {gameData.Age.TopDescipt}
+                                    {gameData.Age?.TopDescipt}
                                 </div>
                                 <div className="products-list__p=-0з987ge-in-top--child-descript">
-                                    {gameData.Age.BottomDescipt}
+                                    {gameData.Age?.BottomDescipt}
                                 </div>
                             </div>
                         </div>
