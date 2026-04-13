@@ -15,7 +15,7 @@ function Basket() {
     const [country, setCountry] = useState("Argentina");
     const calculProduct = {
         amount: dataCart.reduce((ac, cu) => ac + cu.amount, 0),
-        prodPrice: +dataCart.reduce((ac, cu) => ac + cu.amount * cu.Price, 0).toFixed(2),
+        prodPrice: +dataCart.reduce((ac, cu) => ac + cu?.amount * cu?.Price, 0).toFixed(2),
         shipPrice: counter(isAuth() ? auth.country : country)[0],
         taxPrice: counter(isAuth() ? auth.country : country)[1],
     }

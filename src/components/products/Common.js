@@ -15,7 +15,7 @@ function Common(props) {
                             <div className="game-pack__top">
                                 <img src={el.img} alt=""/>
                                 <div className="game-pack__price">
-                                    {el.Price}
+                                    {el?.Price}
                                 </div>
                             </div>
                             <div className="game-pack__down">

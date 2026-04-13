@@ -46,9 +46,9 @@ function Home() {
                 </div>
                 <div className="welcome-img" style={{display: sizeWindow > 810 ? "flex" : "none"}}>
                     <div className="welcome-img__price">
-                        {readyGames[ranNum].Price}
+                        {readyGames[ranNum]?.Price}
                     </div>
-                    <img src={readyGames[ranNum].img} alt="top-img"/>
+                    <img src={readyGames[ranNum]?.img} alt="top-img"/>
                 </div>
                 <div className="bottom-categories">
                     <div className="row-list__container">
@@ -92,9 +92,9 @@ function Home() {
                         const readyTitle = el.title.includes('&#x27;') ? el.title.replace(/&#x27;/g, `'`) : el.title;
                         return <Link to={"/games/" + el["_id"]} state={{curTitle: readyTitle}} className="game-pack">
                             <div className="game-pack__top">
-                                <img src={el.img} alt="" style={{objectFit: "cover", objectPosition: "0 25%"}}/>
+                                <img src={el?.img} alt="" style={{objectFit: "cover", objectPosition: "0 25%"}}/>
                                 <div className="game-pack__price">
-                                    {el.Price}
+                                    {el?.Price}
                                 </div>
                             </div>
                             <div className="game-pack__down">
